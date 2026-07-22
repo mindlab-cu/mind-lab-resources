@@ -21,6 +21,7 @@
     --gold:#C98A2E;
     --blue:#2E6E8E;
     --clay:#B85C4A;
+    --plum:#6E5A87;
     --shadow: 0 1px 2px rgba(18,40,33,0.04), 0 12px 28px -14px rgba(18,40,33,0.18);
   }
 
@@ -362,10 +363,22 @@
   .kiosk-ring.d3{animation-delay:1.4s;}
   .kiosk-dot{animation:dot-pulse 2.2s ease-in-out infinite;}
 
+  /* classroom: growing bars + smile arc drawing in */
+  .cls-bar{transform-origin:bottom;transform-box:fill-box;animation:bar-grow 1.8s ease-in-out infinite;}
+  .cls-bar.c2{animation-delay:0.15s;}
+  .cls-bar.c3{animation-delay:0.3s;}
+  @keyframes smile-draw{
+    0%,10%{stroke-dashoffset:70;opacity:0;}
+    30%,75%{stroke-dashoffset:0;opacity:1;}
+    92%,100%{stroke-dashoffset:70;opacity:0;}
+  }
+  .cls-smile{stroke-dasharray:70;stroke-dashoffset:70;animation:smile-draw 3.2s ease-in-out infinite;}
+
   .card.workbooks{--accent:var(--gold);}
   .card.explorers{--accent:var(--teal);}
   .card.softwares{--accent:var(--blue);}
   .card.kiosk{--accent:var(--clay);}
+  .card.classroom{--accent:var(--plum);}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -562,6 +575,31 @@
         <p>An interactive touch station with a set of guided activities visitors can complete on the spot, to explore their own mind and well-being — no researcher required.</p>
         <p><em>For better performance, right-click/ long-press here and select <strong>"Open link in Incognito/ Inprivate/ Secret window"</strong>.</em></p>
         <span class="format">Touchscreen · Walk-in</span>
+      </div>
+    </a>
+
+    <!-- TODO: replace href="#" below with the live Teaching Toolkit URL -->
+    <a class="card classroom" href="#" target="_blank" rel="noopener noreferrer">
+      <div class="card-visual">
+        <svg viewBox="0 0 400 140" fill="none">
+          <line x1="70" y1="112" x2="330" y2="112" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+          <g fill="currentColor">
+            <rect class="cls-bar c1" x="96" y="66" width="20" height="46" rx="4"/>
+            <rect class="cls-bar c2" x="132" y="48" width="20" height="64" rx="4"/>
+            <rect class="cls-bar c3" x="168" y="58" width="20" height="54" rx="4"/>
+          </g>
+          <path class="cls-smile" d="M240 58c14 22 46 22 60 0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="238" cy="46" r="3" fill="currentColor" opacity="0.7"/>
+          <circle cx="302" cy="46" r="3" fill="currentColor" opacity="0.7"/>
+        </svg>
+        <div class="go-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="tag">Classroom-ready</div>
+        <h3>Teaching Toolkit</h3>
+        <p>Ready-to-run classroom activities that bring the Science of Happiness into the curriculum — structured group exercises, discussion prompts, and reflection tools teachers can lead without any special equipment.</p>
+        <p><em>For better performance, right-click/ long-press here and select <strong>"Open link in Incognito/ Inprivate/ Secret window"</strong>.</em></p>
+        <span class="format">Classroom · Guided activities</span>
       </div>
     </a>
 
