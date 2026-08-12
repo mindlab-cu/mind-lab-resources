@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feel First — MIND Lab</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Karla:wght@300..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F8FC; --card:#FFFFFF;
+  --ink:#16233F; --ink-2:#3E4E6E; --ink-soft:#657798; --ink-faint:#9AA8C0;
+  --rule:#C6A96B; --rule-soft:#E4D6B6;
+  --blue:#1560BD; --teal:#1595AF; --coral:#D0343A; --gold:#EFB61E; --green:#3F9E6A; --violet:#8579BE;
+  --line:#DCE5F0;
+  --shadow:0 1px 2px rgba(22,35,63,.05),0 8px 24px -12px rgba(22,35,63,.14);
+  --d:'Fraunces',Georgia,serif; --b:'Karla',system-ui,sans-serif; --m:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--b);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+/* header */
+.masthead{background:#fff;border-bottom:1px solid var(--rule)}
+.masthead-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:grid;grid-template-columns:64px 1fr 132px;align-items:center;gap:16px}
+.masthead img.ml{width:52px;height:52px;display:block;border-radius:50%}
+.masthead img.rk{width:132px;display:block}
+.wordmark{text-align:center;font-family:var(--d);font-weight:600;font-size:clamp(14px,2.2vw,21px);letter-spacing:.34em;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:.7em}
+.wordmark::before,.wordmark::after{content:"";height:1px;width:clamp(14px,4vw,34px);background:var(--ink);opacity:.55}
+
+/* hero */
+.hero{padding:52px 0 30px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--m);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+h1.title{font-family:var(--d);font-size:clamp(46px,9vw,96px);line-height:.92;font-weight:600;margin:14px 0 0;letter-spacing:-.025em}
+h1.title em{font-style:italic;font-weight:300;color:var(--teal)}
+.lede{max-width:56ch;margin:20px 0 0;font-size:clamp(16px,1.9vw,19px);color:var(--ink-soft)}
+.thesis{margin-top:26px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:2px;max-width:62ch;box-shadow:var(--shadow)}
+
+/* tabs */
+.tabs{display:flex;margin:34px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;font-family:var(--m);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);padding:14px 18px 12px;cursor:pointer;transition:color .18s,border-color .18s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--rule)}
+.tab:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+.panel{display:none;padding-top:34px;animation:fade .3s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2.sec{font-family:var(--d);font-size:clamp(26px,4vw,36px);font-weight:600;letter-spacing:-.02em;margin:0 0 6px}
+.sec-note{color:var(--ink-soft);max-width:62ch;margin:0 0 22px}
+
+/* picker */
+.pick-lbl{font-family:var(--m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 9px}
+.picker{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:26px}
+@media(max-width:820px){.picker{grid-template-columns:repeat(2,1fr)}}
+.pk{appearance:none;text-align:left;background:#fff;border:1px solid var(--line);border-left:3px solid var(--line);border-radius:2px;padding:10px 12px;cursor:pointer;font-family:var(--b);transition:border-color .16s,box-shadow .16s,background .16s}
+.pk:hover{border-left-color:var(--teal);box-shadow:0 4px 12px -8px rgba(22,35,63,.3)}
+.pk[aria-pressed="true"]{border-left-color:var(--gold);background:#FFFDF5;box-shadow:inset 0 0 0 1px var(--rule-soft)}
+.pk .n{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;color:var(--ink-faint);display:block}
+.pk .t{font-size:14px;font-weight:600;display:block;margin-top:2px;line-height:1.25}
+.pk .w{font-size:11.5px;color:var(--ink-soft);display:block;margin-top:2px}
+.pk .done{color:var(--green)}
+
+/* stage */
+.stage{background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);overflow:hidden}
+.stage-head{padding:14px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(180deg,#fff,#FBFDFF)}
+.stage-head .lbl,.counter{font-family:var(--m);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+.counter{color:var(--ink-soft);letter-spacing:.1em;text-transform:none}
+.situation{padding:22px;font-family:var(--d);font-size:clamp(19px,2.6vw,25px);line-height:1.35;font-style:italic;border-bottom:1px solid var(--line);background:#FCFDFF}
+.situation .who{display:block;font-family:var(--m);font-style:normal;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:840px){.cols{grid-template-columns:1fr}}
+.col{padding:20px 22px}
+.col+.col{border-left:1px solid var(--line)}
+@media(max-width:840px){.col+.col{border-left:0;border-top:1px solid var(--line)}}
+.col-title{font-family:var(--m);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.rcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ink-faint);border-radius:2px;padding:12px 14px;margin-bottom:10px;cursor:pointer;transition:border-color .16s,box-shadow .16s,background .16s;font-size:14.5px;line-height:1.5}
+.rcard:hover{box-shadow:0 4px 14px -6px rgba(22,35,63,.22);border-left-color:var(--blue)}
+.rcard.sel{border-left-color:var(--gold);background:#FFFDF4;box-shadow:0 0 0 2px rgba(239,182,30,.3)}
+.rcard.placed{display:none}
+.rcard .tagno{font-family:var(--m);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;display:block;margin-bottom:5px}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:560px){.bins{grid-template-columns:1fr}}
+.bin{border:1px dashed var(--line);border-radius:2px;background:#FBFCFE;padding:10px 11px;min-height:74px;cursor:pointer;transition:background .16s,border-color .16s}
+.bin:hover,.bin.armed{background:#F3F8FF;border-color:var(--blue);border-style:solid}
+.bin .bname{font-family:var(--m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+.bin .bhint{font-size:11.5px;color:var(--ink-faint);line-height:1.35;margin-top:3px}
+.chip{font-size:12.5px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--ink-faint);border-radius:2px;padding:6px 8px;margin-top:8px;position:relative;line-height:1.4}
+.chip .x{position:absolute;right:5px;top:3px;font-family:var(--m);font-size:12px;color:var(--ink-faint);cursor:pointer}
+.chip.ok{border-left-color:var(--green);background:#F4FBF7}
+.chip.no{border-left-color:var(--coral);background:#FDF5F5}
+.chip .verdict{display:block;font-family:var(--m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px}
+.chip.ok .verdict{color:var(--green)} .chip.no .verdict{color:var(--coral)}
+.chip .why{display:block;font-size:12px;color:var(--ink-soft);margin-top:4px;font-style:italic}
+.bar{padding:16px 22px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#FBFDFF}
+.btn{appearance:none;font-family:var(--m);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:11px 20px;border-radius:2px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;transition:background .16s,border-color .16s,opacity .16s}
+.btn:hover{background:var(--blue);border-color:var(--blue)}
+.btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:#fff;border-color:var(--ink)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.status{font-family:var(--m);font-size:11.5px;color:var(--ink-soft)}
+.scoreboard{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:2px}
+.metric{min-width:96px}
+.metric .n{font-family:var(--d);font-size:34px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.metric .k{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:5px}
+
+/* ===== FEEL FIRST ===== */
+.howto{background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:2px;padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow)}
+.howto ol{margin:8px 0 0;padding-left:20px;font-size:14.5px;color:var(--ink-2)}
+.howto li{margin-bottom:5px}
+.howto b{color:var(--ink)}
+
+.goal{padding:14px 22px;background:#FFFDF5;border-bottom:1px solid var(--line);font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
+.goal .g{font-family:var(--m);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--rule);padding-top:3px;flex:0 0 auto}
+
+/* heat bar */
+.heatbox{padding:18px 22px 14px;border-bottom:1px solid var(--line);background:#FBFDFF;position:sticky;top:0;z-index:5}
+.heat-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:9px}
+.heat-cap{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.heat-read{display:flex;align-items:baseline;gap:9px}
+.heat-read .num{font-family:var(--d);font-size:30px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.heat-read .st{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.track{position:relative;height:18px;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:
+  linear-gradient(90deg, rgba(63,158,106,.16) 0 40%, rgba(239,182,30,.18) 40% 70%, rgba(208,52,58,.16) 70% 100%)}
+.fill{position:absolute;top:0;bottom:0;left:0;border-radius:9px;background:var(--coral);transition:width .6s cubic-bezier(.34,1.15,.4,1),background .4s ease}
+.gate{position:absolute;top:-2px;bottom:-2px;left:40%;width:0;border-left:2px dashed var(--ink);opacity:.55}
+.zones{display:flex;margin-top:6px;font-family:var(--m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.zones span{text-align:center;border-top:1px solid var(--line);padding-top:5px}
+.z1{flex:0 0 40%;color:var(--green)} .z2{flex:0 0 30%;color:var(--gold)} .z3{flex:0 0 30%;color:var(--coral)}
+.gatehint{font-size:12.5px;color:var(--ink-2);margin-top:9px}
+.gatehint b{font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+
+/* turn steps */
+.steps{display:flex;gap:8px;align-items:center;padding:14px 22px 0}
+.step{display:flex;align-items:center;gap:7px;font-family:var(--m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.step i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-faint);display:block}
+.step.now{color:var(--ink)} .step.now i{background:var(--gold);border-color:var(--gold)}
+.step.past{color:var(--green)} .step.past i{background:var(--green);border-color:var(--green)}
+.step+.step::before{content:"";width:20px;height:1px;background:var(--line);display:block;margin-right:7px}
+
+.thread{padding:16px 22px 0}
+.turn{margin-bottom:16px}
+.said{background:#F1F6FC;border:1px solid #DCE8F5;border-left:3px solid var(--blue);border-radius:2px;padding:13px 15px;font-family:var(--d);font-size:17.5px;line-height:1.42}
+.said .spk{display:block;font-family:var(--m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:7px;font-family:var(--m)}
+.body-note{font-size:13.5px;color:var(--ink-2);font-style:italic;margin-top:9px}
+.mine{margin-top:12px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:2px;padding:12px 14px;font-size:14.5px}
+.mine .spk{display:block;font-family:var(--m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.res{margin-top:10px;border-radius:2px;padding:12px 14px;font-size:14px}
+.res .hd{font-family:var(--m);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.res .hd .pill{font-family:var(--m);font-size:9.5px;padding:2px 7px;border-radius:10px;letter-spacing:.08em}
+.res.good{background:#F4FBF7;border:1px solid #CFE9DA} .res.good .hd{color:var(--green)} .res.good .pill{background:#DFF1E7;color:#2C7A52}
+.res.bad{background:#FDF6F3;border:1px solid #F3DBD3} .res.bad .hd{color:var(--coral)} .res.bad .pill{background:#FAE3DE;color:#A62A30}
+.res .lesson{margin-top:8px;font-size:13px;color:var(--ink-2);font-style:italic;border-top:1px dashed rgba(22,35,63,.14);padding-top:8px}
+.retry{margin-top:10px;font-family:var(--m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+
+.opts{padding:6px 22px 22px}
+.opts-hd{margin:16px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+.opts-hd .q{font-family:var(--d);font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.opts-hd .of{font-family:var(--m);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.opt{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;background:#fff;
+  border:1.5px solid #BFD0E4;border-left:4px solid #BFD0E4;border-radius:4px;padding:14px 16px;margin-bottom:11px;
+  cursor:pointer;font-family:var(--b);font-size:15px;line-height:1.5;color:var(--ink);
+  box-shadow:0 1px 0 rgba(22,35,63,.05);transition:border-color .15s,box-shadow .15s,transform .15s,background .15s}
+.opt:hover{border-color:var(--teal);border-left-color:var(--teal);background:#FAFDFE;transform:translateY(-1px);box-shadow:0 6px 18px -8px rgba(21,149,175,.45)}
+.opt:active{transform:none}
+.opt:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.opt .onum{flex:0 0 28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--m);font-size:12.5px;font-weight:600;color:var(--teal);background:#E4F3F6;border:1.5px solid #B9E0E8;transition:background .15s,color .15s,border-color .15s}
+.opt:hover .onum{background:var(--teal);color:#fff;border-color:var(--teal)}
+.opt .obody{flex:1 1 auto}
+.opt .txt{color:var(--ink)}
+.opt .kind{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.opt .lock{color:#B8860B}
+.opt .tried{color:var(--coral)}
+.opt.used{background:#FBFAF8;border-color:#E2DCD2;border-left-color:#E2DCD2}
+.opt.used .onum{background:#F1EDE6;color:var(--ink-soft);border-color:#E2DCD2}
+.opt.used .txt{color:var(--ink-soft)}
+.pickhint{font-family:var(--m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.mine .kind{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;display:block}
+.res .locknote{margin-top:8px;font-size:12.5px;color:#8A6A12;background:#FDF6E0;border:1px solid #F0E0B4;border-radius:2px;padding:8px 10px}
+.debrief{background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:2px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.debrief h4{font-family:var(--d);font-size:20px;margin:0 0 8px;font-weight:600}
+.debrief p{margin:0 0 8px;font-size:14.5px;color:var(--ink-2)}
+
+/* reference */
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:860px){.grid6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid6{grid-template-columns:1fr}}
+.defn{background:#fff;border:1px solid var(--line);border-top:3px solid var(--ink-faint);border-radius:2px;padding:15px 16px;box-shadow:var(--shadow)}
+.defn h3{font-family:var(--d);font-size:19px;font-weight:600;margin:0 0 4px}
+.defn .stance{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+.defn p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+@media(max-width:700px){.twocol{grid-template-columns:1fr}}
+.engine{background:#fff;border:1px solid var(--line);border-radius:2px;padding:18px 20px;box-shadow:var(--shadow)}
+.engine h3{font-family:var(--d);font-size:22px;margin:0 0 10px;font-weight:600}
+.engine dt{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:10px}
+.engine dd{margin:2px 0 0;color:var(--ink-2);font-size:13.5px}
+.engine.aff{border-top:3px solid var(--coral)} .engine.cog{border-top:3px solid var(--blue)}
+.rules{counter-reset:r;list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px}
+.rules li{counter-increment:r;background:#fff;border:1px solid var(--line);border-radius:2px;padding:14px 18px 14px 56px;position:relative;font-size:15px;box-shadow:var(--shadow)}
+.rules li::before{content:counter(r);position:absolute;left:18px;top:12px;font-family:var(--d);font-size:22px;font-weight:600;color:var(--rule)}
+.hidden{display:none}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule-soft);font-family:var(--m);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V6SQV42EXZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V6SQV42EXZ');
+</script>
+  
+<body>
+
+<div class="masthead">
+  <div class="masthead-in">
+    <img class="ml" src="data:image/jpeg;base64,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" alt="MIND Lab, Chandigarh University">
+    <div class="wordmark">MIND LAB</div>
+    <img class="rk" src="data:image/jpeg;base64,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" alt="Rekhi Foundation for Happiness">
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Rekhi Centre of Excellence for the Science of Happiness</div>
+    <h1 class="title">Feel First,<br><em>then fix.</em></h1>
+    <p class="lede">A training room for the six ways we respond to someone’s pain — and for the one move almost everybody gets wrong: answering a feeling with a reason before the feeling has been heard.</p>
+    <div class="thesis"><b>Affective empathy earns the right to speak. Cognitive empathy decides what to say.</b> One without the other either drowns you or makes you sound like a machine.</div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="p1">The Six</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p2">Sorting Room</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p3">Feel First</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p4">Take Away</button>
+  </div>
+
+  <section class="panel on" id="p1">
+    <h2 class="sec">Six responses, one situation</h2>
+    <p class="sec-note">Read these once. You won’t be tested on the words — you’ll be tested on recognising them in the wild, where nobody announces which one they are doing.</p>
+    <div class="grid6" id="defs"></div>
+    <div class="debrief" style="border-left-color:var(--coral)">
+      <h4>The two that trip everyone</h4>
+      <p><b>Altruism is a behaviour, not a feeling.</b> You can act altruistically out of duty or habit and feel nothing at all. So the five are not one ladder.</p>
+      <p><b>Empathic distress looks like coldness but is too much feeling.</b> Walking away, taking over, or getting angrier than the person themselves — all overwhelm, not indifference.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p2">
+    <h2 class="sec">Sorting Room</h2>
+    <p class="sec-note">Pick a situation. Six reactions to it, shuffled. Tap a reaction, then tap the box it belongs in. Same story, six different people — the contrast is the lesson.</p>
+    <div class="pick-lbl">Choose a situation — eight available</div>
+    <div class="picker" id="s-pick"></div>
+    <div class="stage">
+      <div class="stage-head">
+        <div class="lbl">Situation</div>
+        <div class="counter" id="s-count"></div>
+      </div>
+      <div class="situation" id="s-text"></div>
+      <div class="cols">
+        <div class="col"><div class="col-title">Reactions — tap one</div><div id="s-cards"></div></div>
+        <div class="col"><div class="col-title">Categories — tap to place</div><div class="bins" id="s-bins"></div></div>
+      </div>
+      <div class="bar">
+        <button class="btn" id="s-check">Check answers</button>
+        <button class="btn ghost hidden" id="s-next">Next situation</button>
+        <span class="status" id="s-status">0 of 6 placed</span>
+      </div>
+    </div>
+    <div class="scoreboard hidden" id="s-board">
+      <div class="metric"><div class="n" id="m-right">0</div><div class="k">Correct</div></div>
+      <div class="metric"><div class="n" id="m-near">0</div><div class="k">Close miss</div></div>
+      <div class="metric"><div class="n" id="m-far">0</div><div class="k">Big miss</div></div>
+      <div class="metric"><div class="n" id="m-done">0</div><div class="k">Situations done</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p3">
+    <h2 class="sec">Feel First</h2>
+    <p class="sec-note">Eight conversations where someone is speaking from emotion. Your job is not to be right. Your job is to be hearable.</p>
+
+    <div class="howto">
+      <div class="pick-lbl" style="margin-bottom:4px">How this works</div>
+      <ol>
+        <li>They say something. Read the <b>bar at the top</b> — that is how hot they are right now.</li>
+        <li>Pick one reply from the list. Every reply moves the bar.</li>
+        <li>Nothing is labelled in advance. Replies that <b>reason, fix or advise</b> cannot land above 40 — you find that out by trying one, which is the point.</li>
+        <li>A reply that does not land <b>does not move the conversation.</b> The same moment waits until you meet it.</li>
+      </ol>
+    </div>
+
+    <div class="twocol">
+      <div class="engine aff"><h3>Affective empathy</h3><dl>
+        <dt>What it does</dt><dd>You feel what they feel.</dd>
+        <dt>Where you notice it</dt><dd>Chest, throat, stomach.</dd>
+        <dt>Alone, it fails by</dt><dd>Drowning. Now you need saving too.</dd></dl></div>
+      <div class="engine cog"><h3>Cognitive empathy</h3><dl>
+        <dt>What it does</dt><dd>You understand what they feel, and why.</dd>
+        <dt>Where you notice it</dt><dd>In your head. It is a guess you check.</dd>
+        <dt>Alone, it fails by</dt><dd>Sounding correct and cold.</dd></dl></div>
+    </div>
+
+    <div class="pick-lbl">Choose a conversation — eight available</div>
+    <div class="picker" id="c-pick"></div>
+
+    <div class="stage">
+      <div class="stage-head">
+        <div class="lbl">Conversation</div>
+        <div class="counter" id="c-count"></div>
+      </div>
+      <div class="goal" id="c-goal"></div>
+      <div class="heatbox">
+        <div class="heat-top">
+          <div class="heat-cap" id="heat-cap">Their emotional heat</div>
+          <div class="heat-read"><span class="num" id="heat-n">88</span><span class="st" id="heat-s">Flooded</span></div>
+        </div>
+        <div class="track"><div class="fill" id="fill" style="width:88%"></div><div class="gate"></div></div>
+        <div class="zones"><span class="z1">Ready for reason</span><span class="z2">Still hot</span><span class="z3">Flooded</span></div>
+        <div class="gatehint"><b>The dashed gate is 40.</b> Below it, a good argument helps. Above it, the same argument is heard as <i>your feelings are wrong.</i></div>
+      </div>
+      <div class="steps" id="c-steps"></div>
+      <div class="thread" id="c-thread"></div>
+      <div class="opts" id="c-opts"></div>
+      <div class="bar">
+        <button class="btn ghost" id="c-restart">Start this one again</button>
+        <button class="btn hidden" id="c-next">Next conversation</button>
+        <span class="status" id="c-status"></span>
+      </div>
+    </div>
+    <div class="debrief hidden" id="c-debrief"></div>
+  </section>
+
+  <section class="panel" id="p4">
+    <h2 class="sec">Four lines to remember</h2>
+    <p class="sec-note">Everything in this app collapses into these. If a participant leaves with only these four, the session worked.</p>
+    <ol class="rules">
+      <li><b>Emotion first, logic later.</b> Never both in the same breath.</li>
+      <li><b>“But” cancels everything before it.</b> “I understand, but…” is heard only from the <i>but</i> onward.</li>
+      <li><b>Anger is usually hurt or fear wearing a jacket.</b> Answer the thing underneath.</li>
+      <li><b>Ask before advising.</b> “Do you want my take, or not yet?” Every single time.</li>
+    </ol>
+    <div class="debrief" style="margin-top:26px">
+      <h4>The three-step drill</h4>
+      <p>Every reply, until it is automatic: <b>Name it → Sit with it → Ask before advising.</b></p>
+      <p style="font-family:var(--d);font-size:18px;font-style:italic;color:var(--ink)">“You sound really let down. That makes sense. Do you want my take, or not yet?”</p>
+    </div>
+    <div class="debrief" style="border-left-color:var(--gold)">
+      <h4>Running it in a session</h4>
+      <p>Put the Sorting Room on the projector and let the room vote out loud before anyone places a card — the disagreements are your discussion. Then run one Feel First conversation live and let them call out option numbers. The moment someone picks a locked reply and the bar goes <i>up</i> is the moment the session lands.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>MIND Lab · Chandigarh University</span>
+    <span>Dr. Kiran Jot Singh · Dr. Divneet Singh</span>
+    <span>Rekhi Foundation for Happiness</span>
+  </footer>
+</div>
+
+<script>
+/* ================= CATEGORIES ================= */
+var CATS=[
+ {id:'pity',name:'Pity',color:'var(--violet)',stance:'Above · no action',hint:'Sorry for them, looking down, doing nothing.',full:'You feel sorry for them, but from above. They become a category, not a person. Nothing follows.'},
+ {id:'symp',name:'Sympathy',color:'var(--blue)',stance:'Beside · outside',hint:'Sad FOR them. Kind words from outside.',full:'You feel sad for them and say so. Warm, accurate, and entirely from the outside. It does not enter their experience.'},
+ {id:'emp',name:'Empathy',color:'var(--teal)',stance:'Inside · felt',hint:'Feel WITH them. In the body. You get why.',full:'You feel it with them, in your body, and you understand what specifically hurts. Action is not implied yet.'},
+ {id:'comp',name:'Compassion',color:'var(--gold)',stance:'Inside · steady · moves',hint:'Feel with them, stay steady, move to help.',full:'Feeling, held steady, turned into something useful. The warmth survives contact with the problem.'},
+ {id:'altr',name:'Altruism',color:'var(--green)',stance:'Behaviour · real cost',hint:'You actually help, at cost. Feeling optional.',full:'You act, and it costs you something real and uncompensated. You could do this with no feeling at all.'},
+ {id:'dist',name:'Empathic distress',color:'var(--coral)',stance:'Inside · overwhelmed',hint:'So much feeling you withdraw or take over.',full:'The feeling floods you, so you flee, deflect, or become the one who needs comforting. Looks cold. Is not.'}
+];
+var NEAR=[['pity','symp'],['emp','comp'],['comp','altr'],['emp','dist']];
+
+/* ================= 8 SORTING SITUATIONS ================= */
+var SCENES=[
+{n:'01',title:'The Classmate',where:'Hostel corridor, 11 pm',
+ text:'Aman tells you he is failing two subjects and is thinking of dropping out.',
+ cards:[
+ {t:'“Poor guy. He was never really cut out for this course.”',a:'pity',w:'A verdict from above. He stops being Aman and becomes a type.'},
+ {t:'“That is terrible. I am really sorry — that must be so stressful.”',a:'symp',w:'Kind, accurate, and completely outside his experience. Nothing wrong with it. It just is not empathy.'},
+ {t:'You remember your own second semester. Your chest tightens. You know exactly which part scares him — telling his father.',a:'emp',w:'Body response plus perspective-taking. You located the specific fear, not the general problem.'},
+ {t:'You feel it, stay steady, and ask “what would actually help right now?” Then you sit and map his options with him.',a:'comp',w:'Feeling survived contact with the problem and became a question instead of a speech.'},
+ {t:'You give up your own exam-prep weekend to tutor him. Your grade slips.',a:'altr',w:'Enacted, uncompensated cost. Note you could do this feeling nothing — that is the point.'},
+ {t:'It is too much to hear. You say “you will be fine, bro” and start avoiding him in the corridor.',a:'dist',w:'Reads as not caring. Is actually caring so much it could not be held.'}]},
+
+{n:'02',title:'The Balcony',where:'Your street, every evening at six',
+ text:'Mrs. Sharma next door lost her husband three months ago. You see her sitting alone on her balcony every evening.',
+ cards:[
+ {t:'“So sad. She has nothing left now, poor thing.”',a:'pity',w:'Her whole future written off in one sentence, from a safe distance.'},
+ {t:'You send a message: “Thinking of you, aunty. I am so sorry.”',a:'symp',w:'A real gesture, offered from outside. It closes no distance, and it is still worth sending.'},
+ {t:'You notice it is always six — the hour he used to come home. Your throat catches. It is not loneliness, it is a habit with nobody left in it.',a:'emp',w:'You found the specific shape of her grief instead of the general fact of it.'},
+ {t:'You start going up at six with two cups of tea. You do not fill the silence.',a:'comp',w:'Steady, repeated, and it does not require her to perform recovery for you.'},
+ {t:'You take over her hospital paperwork and bank running-around for two months, using your own leave.',a:'altr',w:'Cost you can count: time, leave, money. Whether you felt anything is a separate question.'},
+ {t:'Seeing her makes your chest hurt so much that you start using the back stairs.',a:'dist',w:'The avoidance is not indifference. It is the cheapest available way to stop feeling.'}]},
+
+{n:'03',title:'The Promotion',where:'Open-plan office, Thursday',
+ text:'Your teammate Ritu was passed over for the promotion she had been promised. She is at her desk, jaw tight, saying nothing.',
+ cards:[
+ {t:'“She should have seen it coming. She was never going to get it.”',a:'pity',w:'Contempt with a sympathetic face. It explains her away.'},
+ {t:'“That is so unfair, Ritu. I am sorry it went that way.”',a:'symp',w:'True, decent, and outside. Useful as an opening — not as the whole response.'},
+ {t:'Your own stomach drops. You realise the sting is not the title — it is that she already told her parents it was coming.',a:'emp',w:'The felt drop plus the precise humiliation. That second half is cognitive empathy doing work.'},
+ {t:'You do not rush her. Later you ask: “Do you want to vent, or do you want to plan?”',a:'comp',w:'Asking before advising. You handed her the steering wheel.'},
+ {t:'You go to the manager on record and argue her case, knowing it puts your own review at risk.',a:'altr',w:'Real, uncompensated risk taken on someone else’s behalf.'},
+ {t:'You feel it so sharply that you get loudly furious on her behalf — and now she is managing your feelings instead of her own.',a:'dist',w:'The sneakiest version. Over-identification that quietly steals the situation from the person it belongs to.'}]},
+
+{n:'04',title:'The Traffic Signal',where:'Red light, 2 pm, forty-one degrees',
+ text:'A boy of about nine is going car to car selling pens in the heat. He taps your window.',
+ cards:[
+ {t:'“These children should be picked up by someone. What a life, poor thing.”',a:'pity',w:'Sorrow with a wall in front of it. He is a problem to be removed from view, not a person.'},
+ {t:'You lower the window, say “not today, beta, take care,” and mean it.',a:'symp',w:'Genuinely kind and entirely from your side of the glass. Which is still better than the window staying up.'},
+ {t:'You notice he is barefoot on the tar and your own feet flinch. You realise he is not begging — he is working, and being treated as a beggar is the part that stings.',a:'emp',w:'Felt response plus a correction to your own assumption. That correction is the cognitive half.'},
+ {t:'You start keeping water in the car for this crossing, and you ask his name and use it.',a:'comp',w:'Small, repeatable, and it restores the one thing the signal takes from him.'},
+ {t:'You spend six months of Saturdays getting him into the municipal school and you pay the fees.',a:'altr',w:'Sustained, expensive, unglamorous. Nobody will ever see this.'},
+ {t:'Your throat tightens, so you look straight ahead and pretend to check your phone until the light changes.',a:'dist',w:'The classic. Everyone has done this, and almost nobody has done it out of coldness.'}]},
+
+{n:'05',title:'The Meeting Room',where:'Monday review, 10 am',
+ text:'You criticise a junior’s slide deck in front of the whole team. Her voice cracks when she answers.',
+ cards:[
+ {t:'“She is too soft for corporate life.”',a:'pity',w:'Her reaction becomes evidence of a defect. Yours becomes invisible.'},
+ {t:'After the meeting you message: “Hey — sorry if that came out harsh.”',a:'symp',w:'Decent, and note the “if”. Regret sent from outside, with the door left open for it not to have been your fault.'},
+ {t:'Your face goes hot. You remember being twenty-three and corrected in public. It was never the criticism — it was the audience.',a:'emp',w:'You located the actual injury. Nobody minds being taught. Everybody minds being watched being taught.'},
+ {t:'You take her aside: “I should have given that to you privately. Let me tell you what I actually meant.”',a:'comp',w:'Names the mistake, keeps the feedback, and hands the feedback back in a form she can use.'},
+ {t:'In the next meeting you correct the record in front of your own boss and take the blame for an unclear brief.',a:'altr',w:'Standing spent on someone else’s behalf, with nothing coming back.'},
+ {t:'You feel so guilty that you avoid her all week and give her only easy work.',a:'dist',w:'Guilt managed by withdrawal. It reads to her as demotion.'}]},
+
+{n:'06',title:'The Broken Engagement',where:'WhatsApp, 1 am',
+ text:'Your friend’s wedding is off, two weeks before the date. She texts one line: “It’s cancelled.”',
+ cards:[
+ {t:'“I always knew he was wrong for her. Poor thing — and at her age.”',a:'pity',w:'Two verdicts in one breath: about him, and about her market value.'},
+ {t:'“Oh no. I am so sorry, yaar. Whatever you need, tell me.”',a:'symp',w:'Warm, immediate, and it puts the work of asking back on her.'},
+ {t:'Your stomach drops. You realise the worst part for her is not him — it is the four hundred people who already have the card.',a:'emp',w:'The felt drop plus the exact humiliation. Grief and shame are different problems.'},
+ {t:'You call and say: “I am coming over. You do not have to talk.” Then you sit there.',a:'comp',w:'Presence with no demand attached. She does not have to be coherent for you.'},
+ {t:'You take three days off work and handle every cancellation, relative, and lost deposit.',a:'altr',w:'The unlovely part nobody photographs. Real leave, real money, no credit.'},
+ {t:'You feel it so much that you cry harder than she does, and she ends up making you tea.',a:'dist',w:'The roles have swapped. She is now doing the caring on the worst night of her year.'}]},
+
+{n:'07',title:'The Diagnosis',where:'Hospital corridor, PGI',
+ text:'Your father’s reports have come back bad. Your mother is holding the envelope and not opening it.',
+ cards:[
+ {t:'“She will not be able to handle any of this. She never can.”',a:'pity',w:'Written off before she has been given a chance to try.'},
+ {t:'You put a hand on her shoulder: “I am so sorry, Ma.”',a:'symp',w:'True and gentle, offered from beside her. It does not yet ask what she is actually afraid of.'},
+ {t:'You watch her thumb moving over the sealed edge. Your hands go cold. She is not afraid of the result — she is afraid of being the one who read it first.',a:'emp',w:'Beautifully specific. The fear is about a role, not a prognosis.'},
+ {t:'You ask: “Do you want me to read it, or do you want to read it together?”',a:'comp',w:'You take the weight without taking the choice. That distinction is the whole skill.'},
+ {t:'You move back home, take the night shifts, and put your own transfer on hold for a year.',a:'altr',w:'A year of your life, given quietly.'},
+ {t:'You take the envelope and say “I will handle everything, do not worry about anything” — and then stop telling her what the doctors say.',a:'dist',w:'Looks exactly like compassion. It is overwhelm managed by control, and it removes her from her own husband’s illness.'}]},
+
+{n:'08',title:'The Group Chat',where:'Batch group, 11 pm',
+ text:'Thirty people are ripping into Sahil for a mistake he made at the fest. He has gone quiet.',
+ cards:[
+ {t:'“He does deserve it a bit, to be fair. Poor guy though.”',a:'pity',w:'Sympathy attached to a judgement, which cancels it.'},
+ {t:'You DM him: “Ignore them. That was unfair.”',a:'symp',w:'Kind and private, and it asks nothing of the thirty people still typing.'},
+ {t:'You feel the flush in your own face. You know the silence is worse than the messages — he is reading every one and cannot leave.',a:'emp',w:'The trap, precisely named. Leaving the group would itself be a confession.'},
+ {t:'You post: “Enough. He has read it. Stop.” Then you DM him and ask what he needs.',a:'comp',w:'Public where the harm is public, private where the person is. Both, in the right order.'},
+ {t:'You take a public share of the blame, and it costs you your own standing in the group.',a:'altr',w:'Reputation is the currency here, and you spent it.'},
+ {t:'It is too uncomfortable to read, so you mute the group and tell yourself it will blow over.',a:'dist',w:'Muting is not neutrality. To him, thirty people spoke and nobody stopped it.'}]}
+];
+
+/* ================= 8 FEEL FIRST CONVERSATIONS ================= */
+var ROUNDS=[
+{n:'A',title:'The failed interview',who:'Your sister, on the phone',where:'Crying, sentences short and absolute',start:88,
+ goal:'She has decided she is worthless. Every fact you have is true and none of it is hearable yet. Get her under 40 first.',
+ turns:[
+ {said:'“I bombed it. I always mess up. There is no point applying anywhere any more.”',
+  body:'She is crying. Listen to the words — always, no point, any more. Nothing here is a request for information.',
+  opts:[
+  {k:'Reason',t:'“That is not true — you cleared two rounds. Let us look at what went wrong.”',logic:1,d:7,r:'Silence. Then: “Forget it.” Everything you said was correct and none of it was hearable.',n:'Right content, wrong moment. At this heat a correction is heard as “your feelings are wrong.”'},
+  {k:'Comfort',t:'“You will get the next one. Do not worry.”',d:4,r:'“Yeah. Okay.” She wants to hang up.',n:'Reassurance that skips her. It solved your discomfort, not hers.'},
+  {k:'Acknowledge',t:'“Okay. Come here. That sounds crushing.”',d:-24,good:1,r:'She keeps talking. The sentences get longer.',n:'You made room and solved nothing. That is exactly correct for turn one.'},
+  {k:'Normalise',t:'“Everyone fails interviews. It is completely normal.”',d:5,r:'“So I am not even special at failing.” She laughs without meaning it.',n:'Making it general erases the particular. Her pain is not a statistic yet.'}]},
+ {said:'“I just feel so stupid.”',
+  body:'Quieter. This is the real sentence — the interview was only the wrapper.',
+  opts:[
+  {k:'Reason',t:'“You are objectively not stupid. Your marks prove it.”',logic:1,d:6,r:'“You have to say that.” The door closes again.',n:'You argued with the label and ignored the feeling underneath it.'},
+  {k:'Name it',t:'“You are not stupid — but I can hear you feel exposed. Like they saw something bad in you.”',d:-22,good:1,r:'A long pause. “Yes. That is it exactly.” Her breathing changes.',n:'Cognitive empathy earning its keep — and notice you offered it as a guess, not a diagnosis.'},
+  {k:'Fix',t:'“Let us redo your CV tonight. That will help.”',logic:1,d:5,r:'“I do not want to look at my CV.” Flat.',n:'A task offered as comfort. Movement is not the same as being met.'},
+  {k:'Deflect',t:'“Do not talk like that about yourself.”',d:3,r:'She apologises. Now she is managing you.',n:'A gentle instruction to stop feeling. She hears: this is too much for you.'}]},
+ {said:'“...I do not know what to do next.”',
+  body:'Her shoulders have dropped. This is a question now, not a spiral. The gate is open.',
+  opts:[
+  {k:'Ask first',t:'“Do you want to think it through together, or do you want to just sit for a while?”',d:-14,good:1,r:'“Together. But slowly.” And now the two of you actually work.',n:'Permission before advice. The last piece, and almost nobody does it.'},
+  {k:'Advise',t:'“Here is what you do. Three companies, applications in by Friday.”',d:9,r:'She agrees to all of it and does none of it.',n:'You got the timing right and then took the wheel. Compliance is not commitment.'},
+  {k:'Withdraw',t:'“Sleep on it. We will talk tomorrow.”',d:2,r:'“Okay.” The window you opened closes.',n:'You did the hard part and then left before the useful part.'}]}],
+ close:'You spent three turns solving nothing, and by turn three the solving became possible. That is the whole sequence.'},
+
+{n:'B',title:'Fine, do whatever you want',who:'Your friend',where:'Arms crossed, voice flat, not loud',start:76,
+ goal:'The words on the surface are not the problem. Find what is underneath before you answer anything.',
+ turns:[
+ {said:'“Fine. Do whatever you want.”',
+  body:'Arms crossed. Looking past you. Flat, not shouting — which is the more dangerous version.',
+  opts:[
+  {k:'Take it literally',t:'“Great — so we are going at eight then.”',d:10,r:'“Sure.” The whole evening becomes a performance.',n:'You answered the words. The words were the jacket, not the person.'},
+  {k:'Defend',t:'“Why are you angry? I did not even do anything.”',logic:1,d:8,r:'“I am not angry.” Escalation, delivered calmly.',n:'You put them on trial for their own feeling. Now they must defend it instead of explain it.'},
+  {k:'Read underneath',t:'“That did not sound like fine. Did it feel like I decided without you?”',d:-20,good:1,r:'A pause. “...A bit, yeah.”',n:'Anger is usually hurt or fear wearing a jacket. You went for the hurt, and you phrased it as a question.'},
+  {k:'Match it',t:'“Okay. Be like that.”',d:14,r:'Two days of nothing.',n:'Heat met with heat. Now two people need understanding and nobody is available to give it.'}]},
+ {said:'“You always plan things and then just tell me.”',
+  body:'Arms uncrossed. Still not looking at you, but talking. That is progress.',
+  opts:[
+  {k:'Correct the record',t:'“That is not true — last month you picked the place.”',logic:1,d:7,r:'“Forget it.” You won the fact and lost the conversation.',n:'“Always” is rarely literal. Arguing with the word skips the pattern they are pointing at.'},
+  {k:'Concede the feeling',t:'“I hear it. It has felt one-sided to you, and I did not notice.”',d:-18,good:1,r:'“Thank you. That is all I wanted.” The temperature drops all at once.',n:'You accepted their experience without accepting a false charge. Those are two different things.'},
+  {k:'Over-apologise',t:'“Fine, I am sorry, okay? I will never plan anything again.”',d:6,r:'“That is not what I said.” Now they are comforting you.',n:'An apology used as an exit. Over-apology makes them responsible for your guilt.'}]},
+ {said:'“So what do we do about it?”',
+  body:'Looking at you now. Open. This is an invitation, not a trap.',
+  opts:[
+  {k:'Ask first',t:'“Do you want to fix the system, or do you just need me to check with you first?”',d:-12,good:1,r:'“Just check with me.” A two-second solution, after twenty minutes of being heard.',n:'The fix was tiny. It only became available after the feeling was finished.'},
+  {k:'Over-engineer',t:'“New rule — shared calendar, and we both approve every plan.”',d:5,r:'“...Sure.” Nobody opens the calendar again.',n:'A big system for a small ask. Usually a sign the small ask was never heard.'}]}],
+ close:'None of this was about the plan. It never is. The words on the surface were the last thing worth answering.'},
+
+{n:'C',title:'Repair',who:'Your colleague',where:'You already said the wrong thing',start:92,
+ goal:'The damage is done. This one is not about getting it right — it is about what you do after getting it wrong.',
+ turns:[
+ {said:'“So now I am overreacting. Thanks.”',
+  body:'You told them they were overreacting about a client complaint. This is the reply. There is no version of this turn where you get to be right.',
+  opts:[
+  {k:'Double down',t:'“I mean — objectively, it was one email.”',logic:1,d:8,r:'They pick up the laptop and move to another desk.',n:'Defending the accurate thing you said is how a small wound becomes a standing one.'},
+  {k:'Own it plainly',t:'“That was a bad thing for me to say. I dismissed you. I am sorry.”',d:-26,good:1,r:'They stop. “Okay.” They stay in the chair.',n:'Name the specific act, not your general goodness. No “but”, no explanation attached.'},
+  {k:'Explain yourself',t:'“I did not mean it like that — I was stressed about the deadline.”',d:6,r:'“Right.” They are now hearing about your day.',n:'An explanation is an apology with the weight moved to your side of the table.'},
+  {k:'Joke it off',t:'“Arre, do not take it so seriously.”',d:11,r:'They smile, and remember this for a year.',n:'Humour used to close a wound you opened. It closes the conversation, not the wound.'}]},
+ {said:'“It just felt like you thought it was nothing.”',
+  body:'Still tight, but talking. This is an opening you did not earn and did get.',
+  opts:[
+  {k:'Ask to be corrected',t:'“Tell me what I missed. I want to get it right.”',d:-20,good:1,r:'They explain the client had already complained twice and nobody logged it.',n:'The cleanest cognitive-empathy move there is: treat your reading as a guess and hand them the pen.'},
+  {k:'Assume you know',t:'“I get it — you felt disrespected in front of the team.”',d:4,r:'“No. That was not it.” You have to start again.',n:'Confident mind-reading. Close, wrong, and now they must correct you before they can be heard.'},
+  {k:'Rush the fix',t:'“I will reply to the client myself. Right now.”',logic:1,d:5,r:'“That is not the point.”',n:'Doing something is the fastest way to stop feeling bad. It is not the fastest way to repair.'}]}],
+ close:'A repair is not an apology plus a defence. It is naming what you did, then giving up the right to be the one who understands.'},
+
+{n:'D',title:'The result',who:'Your student',where:'Outside the exam hall, marks just out',start:80,
+ goal:'He is not asking about marks. Find the sentence under the sentence before you teach anything.',
+ turns:[
+ {said:'“I cannot come to class tomorrow. Everyone will know.”',
+  body:'Not crying. Very still, which in a nineteen-year-old is usually worse.',
+  opts:[
+  {k:'Reason',t:'“One paper does not define you. Marks are not everything.”',logic:1,d:7,r:'“Yes sir.” He has stopped being present.',n:'True, and he has heard it forty times. Truth said too early is just noise.'},
+  {k:'Minimise',t:'“Nobody will even notice, trust me.”',d:6,r:'“They already have.” He shows you the group chat.',n:'You guessed at his reality and guessed wrong. Now he must correct his teacher.'},
+  {k:'Acknowledge',t:'“So it is not the paper. It is walking in tomorrow.”',d:-22,good:1,r:'He looks up for the first time. “Yeah. That.”',n:'You separated the event from the dread. Only one of them is tomorrow’s problem.'},
+  {k:'Discipline',t:'“Attendance is attendance. You have to come.”',d:9,r:'He nods and does not come.',n:'A rule offered to a feeling. The rule wins the argument and loses the student.'}]},
+ {said:'“My parents are going to look at me differently.”',
+  body:'There it is. The exam was never the thing.',
+  opts:[
+  {k:'Reassure',t:'“They will not. Parents always understand eventually.”',d:5,r:'“You do not know my father.”',n:'A promise about other people you cannot keep. He knows you cannot keep it.'},
+  {k:'Name it',t:'“You are not scared of the number. You are scared of their faces when they see it.”',d:-20,good:1,r:'A long breath. “Yes sir. Exactly that.”',n:'Precise, checked, and it makes the fear a shape instead of a fog.'},
+  {k:'Fix',t:'“I will call them and explain the paper was hard.”',logic:1,d:6,r:'“Please do not.” Panic, not relief.',n:'You reached for the thing you could do instead of the thing he needed.'}]},
+ {said:'“So what should I do, sir?”',
+  body:'Asking, properly, for the first time. The gate is open.',
+  opts:[
+  {k:'Ask first',t:'“Do you want to plan what you say to them, or do you want a minute first?”',d:-12,good:1,r:'“Plan it. Please.” And the two of you write it out.',n:'Even here, at the end, with permission. It costs one sentence and changes everything.'},
+  {k:'Advise',t:'“Backlog exam in May. Start revision Monday. Tell them tonight.”',d:8,r:'He writes it down and follows none of it.',n:'Correct plan, delivered as instruction. Instructions are complied with, not owned.'}]}],
+ close:'The exam took thirty seconds to discuss. The two turns before it were what made those thirty seconds possible.'},
+
+{n:'E',title:'We will manage alone',who:'Your mother, on the phone',where:'Sunday evening, second call this month',start:70,
+ goal:'This is guilt shaped like independence. Answer the missing, not the accusation — and do not promise what you cannot keep.',
+ turns:[
+ {said:'“It is fine. We will manage alone. You are busy.”',
+  body:'Said lightly, which is how the heaviest version is always said.',
+  opts:[
+  {k:'Take literally',t:'“Okay — call me if you need anything.”',d:9,r:'“Yes, yes.” She hangs up first.',n:'She said the opposite of what she meant and you agreed with the words.'},
+  {k:'Defend',t:'“I called last week! I do call.”',logic:1,d:8,r:'“I did not say anything.” And now the call is a court case.',n:'You heard an accusation. She made a bid for contact. Those need opposite replies.'},
+  {k:'Read underneath',t:'“That sounded like you have been missing me. Have you?”',d:-20,good:1,r:'A pause. “...A little. The house is very quiet.”',n:'You named the want under the jab, gently, and let her say yes or no to it.'},
+  {k:'Guilt back',t:'“You always do this. Every single call.”',d:13,r:'“Fine. Do not call at all then.” Both of you are now hurt.',n:'You met a bid for closeness with a scoreboard.'}]},
+ {said:'“You have your own life now. That is how it should be.”',
+  body:'Generous words, delivered as a small knife. Both things are sincere.',
+  opts:[
+  {k:'Correct the record',t:'“I call every Sunday. Check your phone.”',logic:1,d:7,r:'“I know, I know.” The subject is closed and nothing is finished.',n:'You proved attendance. She was not asking about attendance.'},
+  {k:'Concede the feeling',t:'“It has felt like I moved further away than I meant to. I did not notice that.”',d:-18,good:1,r:'“Bas. That is all.” Her voice loosens completely.',n:'You accepted her experience without accepting a charge. Two different things.'},
+  {k:'Over-promise',t:'“I will come every single weekend from now on!”',d:6,r:'“Really?” And now you have built a debt you will default on.',n:'Guilt makes promises. Promises made from guilt are the next fight, scheduled.'}]},
+ {said:'“So when are you coming?”',
+  body:'A real question, warmly asked. Do not spend it badly.',
+  opts:[
+  {k:'Honest and ask',t:'“I cannot do every weekend. I can do one Sunday a month, properly — no laptop. Would that help?”',d:-12,good:1,r:'“That is better than every weekend with your phone.” She laughs.',n:'Small and true beats large and false. And still, at the end, you asked.'},
+  {k:'Vague',t:'“Soon, Ma. Definitely soon.”',d:7,r:'“Hmm.” Nothing has moved and she knows it.',n:'Vagueness is a way of leaving the room while still on the phone.'}]}],
+ close:'She never asked for more visits. She asked to still matter. Those have very different price tags.'},
+
+{n:'F',title:'It was not my fault',who:'Your teammate',where:'Deadline missed, standing at your desk',start:68,
+ goal:'Defensiveness is fear with its fists up. Separate the fear from the facts before you touch the facts.',
+ turns:[
+ {said:'“It was not my fault. Design sent me the files two days late.”',
+  body:'Talking fast. Already arguing with someone who has not accused them yet.',
+  opts:[
+  {k:'Facts',t:'“The files came Tuesday. I checked the thread.”',logic:1,d:9,r:'“So you have already decided.” Arms fold. Nothing useful happens for a week.',n:'You were right and you were early. Being right early is how people stop telling you things.'},
+  {k:'Blame',t:'“You should have escalated it on Tuesday then.”',d:11,r:'“Great. Noted.” They will never flag a risk to you again.',n:'A correct process point used as a weapon. The next slip will be hidden from you.'},
+  {k:'Read underneath',t:'“It sounds like you are worried this is going to land on you. Let us keep that separate from what happened.”',d:-19,good:1,r:'Shoulders drop half an inch. “...Yeah. That is what I am worried about.”',n:'You named the fear and promised to handle it separately. Now the facts are safe to look at.'},
+  {k:'Placate',t:'“Forget it, no problem, these things happen.”',d:5,r:'“Okay.” Relief now, same slip next month.',n:'Peace bought by not looking. It costs the same amount later, with interest.'}]},
+ {said:'“I just do not want to be the one who gets blamed again.”',
+  body:'“Again” is the whole sentence. Everything before it was scaffolding.',
+  opts:[
+  {k:'Reassure emptily',t:'“Nobody is blaming you.”',d:4,r:'“Someone always does.” They do not believe you, and they are not wrong.',n:'A reassurance that contradicts their history. It lands as being managed.'},
+  {k:'Name it',t:'“So it is not the deadline. It is the word again.”',d:-18,good:1,r:'“Yes.” Then, unprompted, the actual timeline of what happened.',n:'One word, picked up and handed back. That is what listening looks like from the outside.'},
+  {k:'Fix',t:'“Let us build a tracker so this cannot happen again.”',logic:1,d:6,r:'“Sure.” Compliance, not relief.',n:'A system offered to a feeling. The tracker is a fine idea, in ten minutes.'}]},
+ {said:'“So what do we do?”',
+  body:'Unfolded. Actually asking.',
+  opts:[
+  {k:'Ask first',t:'“Do you want me to take it up with design, or would you rather do it yourself with me backing you?”',d:-12,good:1,r:'“I will do it. But say something if it gets ugly.” They go, and they own it.',n:'You offered help without confiscating the problem. Now the fix is theirs.'},
+  {k:'Take over',t:'“Leave it. I will handle design myself.”',d:6,r:'“Thanks.” Grateful, and slightly smaller than before.',n:'The fastest resolution and the most expensive one. You solved it and shrank them.'}]}],
+ close:'The tracker still gets built. It just gets built by someone who is not braced for a blow.'},
+
+{n:'G',title:'I am resigning tomorrow',who:'Your friend',where:'Late call, still in office clothes',start:84,
+ goal:'This is the round where your logic is genuinely needed — and completely unusable for two more turns.',
+ turns:[
+ {said:'“I am done. I am putting in my resignation tomorrow morning.”',
+  body:'Fast, loud, absolute. This is not a decision being announced. It is a wound looking for a door.',
+  opts:[
+  {k:'Reason',t:'“Do you have savings? Notice period? Have you thought this through?”',logic:1,d:8,r:'“I knew you would say that.” The conversation is now about you.',n:'Every question is a good question. Asked now, they all read as “you are being stupid.”'},
+  {k:'Alarm',t:'“Are you mad? In this market?”',d:12,r:'They stop telling you things and do it anyway.',n:'Your fear, delivered as their problem. Now they have to defend the plan to keep their dignity.'},
+  {k:'Acknowledge',t:'“Something happened today. Tell me.”',d:-24,good:1,r:'It all comes out. The resignation is barely mentioned again.',n:'Six words. You did not agree, disagree, or advise — you asked for the actual event.'},
+  {k:'Cheer',t:'“Good! You should have left that place ages ago.”',d:6,r:'“Right? Exactly!” The heat goes up, not down.',n:'Agreement feels like support and works like petrol. You have now co-signed a decision made at ninety degrees.'}]},
+ {said:'“He humiliated me in front of the entire floor. Nobody said a word.”',
+  body:'Slower now. The second sentence is the one that matters.',
+  opts:[
+  {k:'Reason',t:'“Bosses are like that everywhere. You will find it in the next place too.”',logic:1,d:7,r:'“So I should just take it.” Shut.',n:'Possibly true. Delivered here, it is a case for staying humiliated.'},
+  {k:'Name it',t:'“So it is not really the job. It is that nobody said anything while it was happening.”',d:-22,good:1,r:'A long pause. “...That is the part I cannot stop thinking about.”',n:'You found the actual injury. It was never the boss. It was the silence of the room.'},
+  {k:'Advise',t:'“File an HR complaint. Document everything.”',logic:1,d:6,r:'“And then what, work there for three years while it goes nowhere?”',n:'A procedure offered to a humiliation. Procedures do not touch shame.'}]},
+ {said:'“I do not even know if I am overreacting.”',
+  body:'This sentence only appears when someone has been heard. The gate is open.',
+  opts:[
+  {k:'Ask first',t:'“Do you want me to think it through with you, or do you just want someone on your side tonight?”',d:-14,good:1,r:'“Tonight, just be on my side. Tomorrow, think with me.” And tomorrow, they do not resign.',n:'You held the practical question until you were invited. That is the entire skill in one line.'},
+  {k:'Advise',t:'“Do not resign. Take a week off and then decide.”',d:9,r:'“Okay.” Said to end the conversation.',n:'Excellent advice, offered one sentence too early. It becomes something to obey or defy, not consider.'},
+  {k:'Judge',t:'“Honestly? A bit, yes.”',d:11,r:'“Thanks a lot.” Alone again, and now resigning to prove a point.',n:'They asked a question about themselves. It was not an invitation to score it.'}]}],
+ close:'The resignation never comes up again, because it was never the plan. It was the only exit visible from inside the feeling.'},
+
+{n:'H',title:'Something is wrong with me',who:'Your student',where:'After class, presentation on Thursday',start:72,
+ goal:'Believe her before you explain anything to her. And know where your job ends.',
+ turns:[
+ {said:'“I cannot do it. My hands shake, I cannot breathe. Something is wrong with me.”',
+  body:'Quiet, embarrassed, looking at the floor. It took her three weeks to come and say this.',
+  opts:[
+  {k:'Reason',t:'“That is just adrenaline. It is physiologically completely normal.”',logic:1,d:7,r:'“Okay.” She thanks you and leaves. She will not come back.',n:'Accurate physiology used to dismiss an experience. She came to be believed, not corrected.'},
+  {k:'Minimise',t:'“Everyone gets nervous before presenting.”',d:8,r:'“Yeah. Sorry to bother you, sir.”',n:'“Everyone” is the word that ended the conversation. It made her ordinary and wrong at once.'},
+  {k:'Acknowledge',t:'“That sounds frightening. Not dramatic — frightening.”',d:-22,good:1,r:'Her shoulders come down. “Nobody has said that before.”',n:'You believed her out loud, and named the thing she was braced to be accused of.'},
+  {k:'Fix',t:'“Practise it twenty times. Confidence comes from preparation.”',logic:1,d:6,r:'“I have practised it thirty times.” Flat.',n:'You offered effort to someone whose body is not cooperating. It reads as “try harder.”'}]},
+ {said:'“You are going to think I am making excuses.”',
+  body:'This is what she actually walked in worrying about. The presentation is second.',
+  opts:[
+  {k:'Reassure',t:'“I would never think that.”',d:4,r:'“Okay.” Polite, unconvinced.',n:'A denial about your own mind. It cannot be verified, so it cannot settle anything.'},
+  {k:'Name it',t:'“You are more worried about not being believed than about Thursday.”',d:-20,good:1,r:'“...Yes. That is exactly it.” And she finally sits down.',n:'The real fear, said out loud by someone else. That is what makes it survivable.'},
+  {k:'Fix',t:'“Let us just move you to the last slot, then.”',logic:1,d:5,r:'“So I am the special case now.” Worse, not better.',n:'An accommodation offered before understanding becomes a label she did not ask for.'}]},
+ {said:'“So what do I do about Thursday?”',
+  body:'Asking. Steady. Now it is a real question with a real answer.',
+  opts:[
+  {k:'Ask first, then offer',t:'“Two things we could do — work out a plan for Thursday, or put you in touch with the counselling centre so someone qualified looks at the breathing. Or both. Your call.”',d:-14,good:1,r:'“Both. Can we do the plan now?” And you do.',n:'You gave her the choice, and you named the limit of your own role without making it a rejection.'},
+  {k:'Diagnose',t:'“This sounds like anxiety disorder. You need therapy.”',d:10,r:'She goes pale. “Is it that bad?”',n:'A label you are not qualified to give, delivered as a verdict. Referring is kind. Diagnosing is not yours to do.'},
+  {k:'Handle it alone',t:'“We will manage it between us. No need to involve anyone.”',d:7,r:'“Okay sir.” Loyal, and now nobody qualified is looking at it.',n:'Warm, and it quietly makes you the whole support system. Knowing where your job ends is part of compassion.'}]}],
+ close:'You did two things: you believed her, and you knew what was not yours to fix. Both were the compassionate move.'}
+];
+
+/* ================= HELPERS ================= */
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function catById(id){for(var i=0;i<CATS.length;i++)if(CATS[i].id===id)return CATS[i];return null;}
+function isNear(a,b){for(var i=0;i<NEAR.length;i++){var p=NEAR[i];if((p[0]===a&&p[1]===b)||(p[1]===a&&p[0]===b))return 1;}return 0;}
+
+/* tabs */
+var tabs=document.querySelectorAll('.tab');
+for(var ti=0;ti<tabs.length;ti++)tabs[ti].addEventListener('click',function(){
+  for(var j=0;j<tabs.length;j++)tabs[j].setAttribute('aria-selected','false');
+  this.setAttribute('aria-selected','true');
+  var ps=document.querySelectorAll('.panel');
+  for(var k=0;k<ps.length;k++)ps[k].classList.remove('on');
+  document.getElementById(this.dataset.p).classList.add('on');
+  window.scrollTo({top:document.querySelector('.tabs').offsetTop-10,behavior:'smooth'});
+});
+
+/* definitions */
+(function(){var box=document.getElementById('defs');
+ CATS.forEach(function(c){var d=el('div','defn');d.style.borderTopColor=c.color;
+  d.appendChild(el('div','stance',c.stance));
+  var h=el('h3',null,c.name);h.style.color=c.color;d.appendChild(h);
+  d.appendChild(el('p',null,c.full));box.appendChild(d);});})();
+
+/* ================= SORTING ================= */
+var sIdx=0,sel=null,placed={},checked=false,tot={r:0,n:0,f:0,d:0},sDone={};
+
+function buildScenePicker(){
+  var w=document.getElementById('s-pick');w.innerHTML='';
+  SCENES.forEach(function(s,i){
+    var b=el('button','pk');b.type='button';b.setAttribute('aria-pressed',i===sIdx?'true':'false');
+    b.innerHTML='<span class="n">'+s.n+(sDone[i]?' <span class="done">✓ done</span>':'')+'</span><span class="t">'+s.title+'</span><span class="w">'+s.where+'</span>';
+    b.addEventListener('click',function(){sIdx=i;renderScene();});
+    w.appendChild(b);
+  });
+}
+
+function renderScene(){
+  var sc=SCENES[sIdx];sel=null;placed={};checked=false;
+  buildScenePicker();
+  document.getElementById('s-count').textContent=sc.n+' — '+sc.title;
+  document.getElementById('s-text').innerHTML='<span class="who">'+sc.where+'</span>'+sc.text;
+  var cw=document.getElementById('s-cards');cw.innerHTML='';
+  var order=sc.cards.map(function(c,i){return i;});order.sort(function(){return Math.random()-.5;});
+  order.forEach(function(i,pos){
+    var c=sc.cards[i],d=el('div','rcard');d.dataset.i=i;
+    d.appendChild(el('span','tagno','Reaction '+String.fromCharCode(65+pos)));
+    d.appendChild(el('span',null,c.t));
+    d.addEventListener('click',function(){
+      if(checked)return;
+      var was=this.classList.contains('sel'),all=cw.querySelectorAll('.rcard');
+      for(var q=0;q<all.length;q++)all[q].classList.remove('sel');
+      var bins=document.querySelectorAll('#s-bins .bin');
+      if(!was){this.classList.add('sel');sel=parseInt(this.dataset.i,10);for(var z=0;z<bins.length;z++)bins[z].classList.add('armed');}
+      else{sel=null;for(var y=0;y<bins.length;y++)bins[y].classList.remove('armed');}
+    });
+    cw.appendChild(d);
+  });
+  var bw=document.getElementById('s-bins');bw.innerHTML='';
+  CATS.forEach(function(cat){
+    var b=el('div','bin');b.dataset.cat=cat.id;
+    var nm=el('div','bname');var dot=el('span','dot');dot.style.background=cat.color;
+    nm.appendChild(dot);nm.appendChild(el('span',null,cat.name));b.appendChild(nm);
+    b.appendChild(el('div','bhint',cat.hint));b.appendChild(el('div','slot'));
+    b.addEventListener('click',function(){
+      if(checked||sel===null)return;
+      place(sel,this.dataset.cat);sel=null;
+      var bins=document.querySelectorAll('#s-bins .bin');
+      for(var z=0;z<bins.length;z++)bins[z].classList.remove('armed');
+    });
+    bw.appendChild(b);
+  });
+  var ck=document.getElementById('s-check');ck.classList.remove('hidden');ck.disabled=true;
+  document.getElementById('s-next').classList.add('hidden');
+  updateStatus();
+}
+function place(ci,cat){
+  for(var k in placed)if(placed[k]===ci)delete placed[k];
+  placed[cat]=ci;drawSlots();updateStatus();
+}
+function drawSlots(){
+  var sc=SCENES[sIdx],bins=document.querySelectorAll('#s-bins .bin');
+  for(var i=0;i<bins.length;i++){
+    var b=bins[i],slot=b.querySelector('.slot'),cat=b.dataset.cat;slot.innerHTML='';
+    if(placed[cat]!==undefined){
+      var ch=el('div','chip',sc.cards[placed[cat]].t);
+      if(!checked){var x=el('span','x','✕');
+        x.addEventListener('click',function(e){e.stopPropagation();
+          delete placed[this.closest('.bin').dataset.cat];drawSlots();updateStatus();});
+        ch.appendChild(x);}
+      slot.appendChild(ch);
+    }
+  }
+  var cards=document.querySelectorAll('#s-cards .rcard'),used={};
+  for(var k in placed)used[placed[k]]=1;
+  for(var j=0;j<cards.length;j++){
+    if(used[cards[j].dataset.i])cards[j].classList.add('placed');else cards[j].classList.remove('placed');
+  }
+  var cw=document.getElementById('s-cards'),old=cw.querySelector('.allplaced');
+  if(old)old.remove();
+  if(Object.keys(placed).length===6){
+    var m=el('div','allplaced body-note',checked
+      ? 'All six sorted. The italic line under each card is the point — read those out loud in a session.'
+      : 'All six placed. Tap ✕ on any card to move it, or check your answers below.');
+    m.style.margin='0';cw.appendChild(m);
+  }
+}
+function updateStatus(){
+  var n=Object.keys(placed).length;
+  document.getElementById('s-status').textContent=n+' of 6 placed';
+  document.getElementById('s-check').disabled=(n<6);
+}
+document.getElementById('s-check').addEventListener('click',function(){
+  var sc=SCENES[sIdx];checked=true;var right=0,near=0,far=0;
+  var bins=document.querySelectorAll('#s-bins .bin');
+  for(var i=0;i<bins.length;i++){
+    var b=bins[i],cat=b.dataset.cat,ci=placed[cat];if(ci===undefined)continue;
+    var card=sc.cards[ci],ok=(card.a===cat),chip=b.querySelector('.chip');
+    chip.classList.add(ok?'ok':'no');
+    var v=el('span','verdict');
+    if(ok){right++;v.textContent='Correct — '+catById(cat).name;}
+    else{var truth=catById(card.a).name;
+      if(isNear(cat,card.a)){near++;v.textContent='Close miss — this is '+truth;}
+      else{far++;v.textContent='Big miss — this is '+truth;}}
+    var xb=chip.querySelector('.x');if(xb)xb.remove();
+    chip.appendChild(v);chip.appendChild(el('span','why',card.w));
+  }
+  tot.r+=right;tot.n+=near;tot.f+=far;tot.d+=1;sDone[sIdx]=1;buildScenePicker();
+  document.getElementById('m-right').textContent=tot.r;
+  document.getElementById('m-near').textContent=tot.n;
+  document.getElementById('m-far').textContent=tot.f;
+  document.getElementById('m-done').textContent=tot.d;
+  document.getElementById('s-board').classList.remove('hidden');
+  this.classList.add('hidden');
+  document.getElementById('s-status').textContent=right+' of 6 correct — read the italics, that is the actual lesson';
+  var nx=document.getElementById('s-next');nx.classList.remove('hidden');
+  nx.textContent=(sIdx<SCENES.length-1)?'Next situation':'Back to the first';
+});
+document.getElementById('s-next').addEventListener('click',function(){sIdx=(sIdx+1)%SCENES.length;renderScene();});
+renderScene();
+
+/* ================= FEEL FIRST ================= */
+var rIdx=0,tIdx=0,heat=88,missteps=0,clean=true,tried={},rDone={};
+
+function buildRoundPicker(){
+  var w=document.getElementById('c-pick');w.innerHTML='';
+  ROUNDS.forEach(function(R,i){
+    var b=el('button','pk');b.type='button';b.setAttribute('aria-pressed',i===rIdx?'true':'false');
+    b.innerHTML='<span class="n">'+R.n+(rDone[i]?' <span class="done">✓ done</span>':'')+'</span><span class="t">'+R.title+'</span><span class="w">'+R.who+'</span>';
+    b.addEventListener('click',function(){rIdx=i;renderRound();});
+    w.appendChild(b);
+  });
+}
+function setHeat(v){
+  heat=Math.max(0,Math.min(100,v));
+  var f=document.getElementById('fill');f.style.width=heat+'%';
+  f.style.background=(heat>=70?'var(--coral)':(heat>=40?'var(--gold)':'var(--green)'));
+  document.getElementById('heat-n').textContent=Math.round(heat);
+  var s=document.getElementById('heat-s');
+  if(heat>=70){s.textContent='Flooded';s.style.color='var(--coral)';}
+  else if(heat>=40){s.textContent='Still hot';s.style.color='var(--gold)';}
+  else{s.textContent='Ready for reason';s.style.color='var(--green)';}
+}
+function renderRound(){
+  var R=ROUNDS[rIdx];tIdx=0;missteps=0;clean=true;tried={};
+  buildRoundPicker();
+  document.getElementById('c-count').textContent=R.n+' — '+R.title;
+  document.getElementById('heat-cap').textContent=R.who+' — how hot they are';
+  document.getElementById('c-goal').innerHTML='<span class="g">Goal</span><span>'+R.goal+'</span>';
+  document.getElementById('c-thread').innerHTML='';
+  document.getElementById('c-opts').innerHTML='';
+  document.getElementById('c-debrief').classList.add('hidden');
+  document.getElementById('c-next').classList.add('hidden');
+  document.getElementById('c-status').textContent=R.where;
+  setHeat(R.start);drawSteps();renderTurn();
+}
+function drawSteps(){
+  var R=ROUNDS[rIdx],w=document.getElementById('c-steps');w.innerHTML='';
+  R.turns.forEach(function(T,i){
+    var cls='step'+(i<tIdx?' past':(i===tIdx?' now':''));
+    var s=el('div',cls);s.appendChild(el('i'));
+    s.appendChild(el('span',null,'Turn '+(i+1)+(i<tIdx?' cleared':'')));
+    w.appendChild(s);
+  });
+}
+function renderTurn(){
+  var R=ROUNDS[rIdx],T=R.turns[tIdx],th=document.getElementById('c-thread');
+  var t=el('div','turn');
+  var said=el('div','said');
+  said.appendChild(el('span','spk',R.who+' says'));
+  said.appendChild(el('span',null,T.said));
+  t.appendChild(said);t.appendChild(el('div','body-note',T.body));
+  th.appendChild(t);drawSteps();drawOpts(T,t);
+}
+function drawOpts(T,turnNode){
+  var w=document.getElementById('c-opts');w.innerHTML='';
+  var hd=el('div','opts-hd');
+  hd.appendChild(el('span','q','What do you say?'));
+  hd.appendChild(el('span','of','Turn '+(tIdx+1)+' of '+ROUNDS[rIdx].turns.length));
+  w.appendChild(hd);
+  w.appendChild(el('div','pickhint','Tap one of the '+T.opts.length+' replies'));
+  T.opts.forEach(function(o,oi){
+    var key=tIdx+'-'+oi,wasTried=!!tried[key];
+    var b=el('button','opt'+(wasTried?' used':''));b.type='button';
+    b.appendChild(el('span','onum',String(oi+1)));
+    var body=el('span','obody');
+    if(wasTried){
+      var k=el('span','kind');
+      k.appendChild(el('span',null,o.k));
+      if(o.logic)k.appendChild(el('span','lock','🔒 reasoning move'));
+      k.appendChild(el('span','tried','· already tried'));
+      body.appendChild(k);
+    }
+    body.appendChild(el('span','txt',o.t));
+    b.appendChild(body);
+    b.addEventListener('click',function(){tried[key]=1;choose(o,turnNode);});
+    w.appendChild(b);
+  });
+}
+function choose(o,turnNode){
+  var R=ROUNDS[rIdx],T=R.turns[tIdx];
+  var mine=el('div','mine');
+  mine.appendChild(el('span','spk','You said'));
+  mine.appendChild(el('span',null,o.t));
+  mine.appendChild(el('span','kind','That was a '+o.k.toLowerCase()+' move'));
+  turnNode.appendChild(mine);
+  var good=!!o.good,before=Math.round(heat);
+  setHeat(heat+o.d);
+  var res=el('div','res '+(good?'good':'bad'));
+  var hd=el('div','hd');
+  hd.appendChild(el('span',null,good?'That landed':'That set you back'));
+  hd.appendChild(el('span','pill',(o.d>0?'heat +':'heat ')+o.d+'  ·  '+before+' → '+Math.round(heat)));
+  res.appendChild(hd);
+  res.appendChild(el('div',null,o.r));
+  if(o.logic&&before>=40)res.appendChild(el('div','locknote','🔒 That was a reasoning move, used at '+before+'. Reasoning only lands below 40 — the gate on the bar above.'));
+  res.appendChild(el('div','lesson',o.n));
+  if(!good)res.appendChild(el('div','retry','The moment has not moved — try again'));
+  turnNode.appendChild(res);
+  document.getElementById('c-opts').innerHTML='';
+  if(!good){
+    missteps++;clean=false;
+    document.getElementById('c-status').textContent='Missteps in this conversation: '+missteps;
+    setTimeout(function(){drawOpts(T,turnNode);},400);
+    return;
+  }
+  tIdx++;drawSteps();
+  if(tIdx<R.turns.length)setTimeout(renderTurn,420);else finish();
+}
+function finish(){
+  var R=ROUNDS[rIdx];rDone[rIdx]=1;buildRoundPicker();
+  var d=document.getElementById('c-debrief');d.innerHTML='';
+  d.appendChild(el('h4',null,clean?'Clean run — not one misstep':'Finished — '+missteps+' misstep'+(missteps===1?'':'s')+' on the way'));
+  d.appendChild(el('p',null,R.close));
+  d.appendChild(el('p',null,'<b>Name it → Sit with it → Ask before advising.</b> Three moves, in that order, every time.'));
+  d.classList.remove('hidden');
+  document.getElementById('c-status').textContent='Brought them from '+R.start+' down to '+Math.round(heat);
+  var nx=document.getElementById('c-next');nx.classList.remove('hidden');
+  nx.textContent=(rIdx<ROUNDS.length-1)?'Next conversation':'Back to the first';
+}
+document.getElementById('c-next').addEventListener('click',function(){rIdx=(rIdx+1)%ROUNDS.length;renderRound();});
+document.getElementById('c-restart').addEventListener('click',renderRound);
+renderRound();
+</script>
+</body>
+</html>
