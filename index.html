@@ -22,6 +22,7 @@
     --blue:#2E6E8E;
     --clay:#B85C4A;
     --plum:#6E5A87;
+    --rose:#A63E5E;
     --shadow: 0 1px 2px rgba(18,40,33,0.04), 0 12px 28px -14px rgba(18,40,33,0.18);
   }
 
@@ -374,11 +375,20 @@
   }
   .cls-smile{stroke-dasharray:70;stroke-dashoffset:70;animation:smile-draw 3.2s ease-in-out infinite;}
 
+  /* talks: pulsing play button + filling progress bar */
+  .talk-play{animation:dot-pulse 2.2s ease-in-out infinite;}
+  @keyframes progress-fill{
+    0%,100%{transform:scaleX(0.04);}
+    50%{transform:scaleX(1);}
+  }
+  .talk-progress{transform-origin:left;transform-box:fill-box;animation:progress-fill 2.6s ease-in-out infinite;}
+
   .card.workbooks{--accent:var(--gold);}
   .card.explorers{--accent:var(--teal);}
   .card.softwares{--accent:var(--blue);}
   .card.kiosk{--accent:var(--clay);}
   .card.classroom{--accent:var(--plum);}
+  .card.talks{--accent:var(--rose);}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -600,6 +610,27 @@
         <p>Ready-to-run classroom activities that bring the Science of Happiness into the curriculum — structured group exercises, discussion prompts, and reflection tools teachers can lead without any special equipment.</p>
         <p><em>For better performance, right-click/ long-press here and select <strong>"Open link in Incognito/ Inprivate/ Secret window"</strong>.</em></p>
         <span class="format">Classroom · Guided activities</span>
+      </div>
+    </a>
+
+    <!-- TODO: replace href="#" below with the live Google Drive folder URL -->
+    <a class="card talks" href="https://drive.google.com/drive/folders/1Np2DUuBzaQN87W-EfQzYxXnZkftWU7Sh?usp=sharing" target="_blank" rel="noopener noreferrer">
+      <div class="card-visual">
+        <svg viewBox="0 0 400 140" fill="none">
+          <rect x="120" y="16" width="160" height="96" rx="10" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <line x1="170" y1="122" x2="230" y2="122" stroke="currentColor" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+          <path class="talk-play" d="M184 42 v44 l38 -22 z" fill="currentColor"/>
+          <rect x="136" y="98" width="128" height="4" rx="2" fill="currentColor" opacity="0.18"/>
+          <rect class="talk-progress" x="136" y="98" width="128" height="4" rx="2" fill="currentColor"/>
+        </svg>
+        <div class="go-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></div>
+      </div>
+      <div class="card-body">
+        <div class="tag">Curated collection</div>
+        <h3>Talks &amp; Lectures</h3>
+        <p>A growing archive of PPTs, talks, and recorded lectures from eminent researchers and speakers on the Science of Happiness — curated for browsing, reference, and classroom use.</p>
+        <p><em>Hosted on Google Drive — opens in a new tab; you may need to request access on your first visit.</em></p>
+        <span class="format">Google Drive · PPTs &amp; videos</span>
       </div>
     </a>
 
