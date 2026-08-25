@@ -64,7 +64,7 @@ h2.sec{font-family:var(--d);font-size:clamp(26px,4vw,36px);font-weight:600;lette
 .pk .done{color:var(--green)}
 
 /* stage */
-.stage{background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);overflow:hidden}
+.stage{background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow)}
 .stage-head{padding:14px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(180deg,#fff,#FBFDFF)}
 .stage-head .lbl,.counter{font-family:var(--m);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
 .counter{color:var(--ink-soft);letter-spacing:.1em;text-transform:none}
@@ -113,49 +113,114 @@ h2.sec{font-family:var(--d);font-size:clamp(26px,4vw,36px);font-weight:600;lette
 .howto ol{margin:8px 0 0;padding-left:20px;font-size:14.5px;color:var(--ink-2)}
 .howto li{margin-bottom:5px}
 .howto b{color:var(--ink)}
-
 .goal{padding:14px 22px;background:#FFFDF5;border-bottom:1px solid var(--line);font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
 .goal .g{font-family:var(--m);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--rule);padding-top:3px;flex:0 0 auto}
+.goal .gate-x{display:block;margin-top:7px;font-size:13px;color:var(--ink-2)}
+.goal .gate-x b{font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
 
-/* heat bar */
-.heatbox{padding:18px 22px 14px;border-bottom:1px solid var(--line);background:#FBFDFF;position:sticky;top:0;z-index:5}
-.heat-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:9px}
-.heat-cap{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
-.heat-read{display:flex;align-items:baseline;gap:9px}
-.heat-read .num{font-family:var(--d);font-size:30px;font-weight:600;line-height:1;letter-spacing:-.02em}
-.heat-read .st{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
-.track{position:relative;height:18px;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:
-  linear-gradient(90deg, rgba(63,158,106,.16) 0 40%, rgba(239,182,30,.18) 40% 70%, rgba(208,52,58,.16) 70% 100%)}
-.fill{position:absolute;top:0;bottom:0;left:0;border-radius:9px;background:var(--coral);transition:width .6s cubic-bezier(.34,1.15,.4,1),background .4s ease}
-.gate{position:absolute;top:-2px;bottom:-2px;left:40%;width:0;border-left:2px dashed var(--ink);opacity:.55}
-.zones{display:flex;margin-top:6px;font-family:var(--m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
-.zones span{text-align:center;border-top:1px solid var(--line);padding-top:5px}
-.z1{flex:0 0 40%;color:var(--green)} .z2{flex:0 0 30%;color:var(--gold)} .z3{flex:0 0 30%;color:var(--coral)}
-.gatehint{font-size:12.5px;color:var(--ink-2);margin-top:9px}
-.gatehint b{font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+/* --- sticky scene: two figures either side of the gauge --- */
+.scenebar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);
+  padding:12px 20px 10px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+  box-shadow:0 8px 16px -14px rgba(22,35,63,.7)}
+@media(max-width:620px){.scenebar{gap:10px;padding:10px 12px 8px}}
+.charwrap{text-align:center}
+.cname{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;max-width:96px;line-height:1.3}
+@media(max-width:620px){.cname{max-width:64px;font-size:8px}}
+.fig{width:104px;height:118px;display:block;overflow:hidden}
+@media(max-width:620px){.fig{width:68px;height:77px}}
+.fig.me{transform:scaleX(-1)}
+.fig .pose{transition:transform .62s cubic-bezier(.34,1.4,.5,1)}
+.fig .bob{animation:bobbing 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes bobbing{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-1.6px) scaleY(1.02)}}
+.fig .head{transition:transform .62s cubic-bezier(.34,1.4,.5,1);transform-box:fill-box;transform-origin:50% 95%}
+.fig .eyes{animation:blink 5.4s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96.5%{transform:scaleY(.07)}}
+.fig .ln{stroke:#33261F;stroke-width:3;stroke-linecap:round;fill:none}
+.fig .pupil{fill:#33261F}.fig .spark{fill:#fff}
+.fig .blush{fill:#F1948C;opacity:.75;transition:opacity .6s}
+.fig .tear{fill:#63BFDC;opacity:0}
+.fig .hand{stroke-linecap:round}
+.fig .glass{stroke:#4A4038;stroke-width:2.4;fill:rgba(255,255,255,.22)}
+.fig .stub{fill:#33261F;opacity:.2}
+.fig .acc{fill:#EFB61E}
+/* default state = flooded */
+.fig .brow-calm,.fig .brow-up,.fig .mouth-flat,.fig .mouth-smile,.fig .arm-cross,.fig .arm-open,.fig .arm-up{display:none}
+.fig.s-flood .tear{opacity:1;animation:teardrop 2.8s ease-in infinite}
+@keyframes teardrop{0%{opacity:0;transform:translateY(0)}18%{opacity:1}100%{opacity:0;transform:translateY(11px)}}
+.fig.s-flood .pose{transform:translateY(3px) rotate(-6deg)}
+.fig.s-flood .head{transform:rotate(-7deg) translateX(-2px)}
+.fig.s-hot .arm-cover,.fig.s-hot .brow-worry,.fig.s-hot .mouth-sad{display:none}
+.fig.s-hot .arm-cross,.fig.s-hot .brow-up,.fig.s-hot .mouth-flat{display:block}
+.fig.s-hot .blush{opacity:.42}
+.fig.s-hot .pose{transform:rotate(-3deg)}.fig.s-hot .head{transform:rotate(-3deg)}
+.fig.s-cool .arm-cover,.fig.s-cool .brow-worry,.fig.s-cool .mouth-sad{display:none}
+.fig.s-cool .arm-open,.fig.s-cool .brow-calm,.fig.s-cool .mouth-flat{display:block}
+.fig.s-cool .blush{opacity:.5}
+.fig.s-cool .pose{transform:none}.fig.s-cool .head{transform:none}
+.fig.s-calm .arm-cover,.fig.s-calm .brow-worry,.fig.s-calm .mouth-sad{display:none}
+.fig.s-calm .arm-open,.fig.s-calm .brow-calm,.fig.s-calm .mouth-smile{display:block}
+.fig.s-calm .blush{opacity:.68}
+.fig.s-calm .pose{transform:translateY(-1px) rotate(3deg)}.fig.s-calm .head{transform:rotate(3deg)}
+/* joy round: high number = alone with it, low = shared */
+.fig.joy.s-flood .arm-cover,.fig.joy.s-flood .brow-worry,.fig.joy.s-flood .mouth-sad{display:none}
+.fig.joy.s-flood .arm-open,.fig.joy.s-flood .brow-up,.fig.joy.s-flood .mouth-smile{display:block}
+.fig.joy.s-flood .tear{opacity:0;animation:none}
+.fig.joy.s-flood .pose{transform:none}.fig.joy.s-flood .head{transform:none}
+.fig.joy.s-hot .mouth-flat{display:block}.fig.joy.s-hot .mouth-smile{display:none}
+.fig.joy.s-calm .arm-open{display:none}.fig.joy.s-calm .arm-up{display:block}
+.fig.joy.s-calm .pose{transform:translateY(-3px)}
+.fig.joy .blush{opacity:.8}
+.gaugecol{min-width:0}
+.heat-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+.heat-cap{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heat-read{display:flex;align-items:baseline;gap:8px;flex:0 0 auto}
+.heat-read .num{font-family:var(--d);font-size:27px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.heat-read .st{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+.track{position:relative;height:16px;border-radius:8px;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(63,158,106,.14) 0 40%,rgba(239,182,30,.16) 40% 70%,rgba(208,52,58,.14) 70% 100%)}
+.fill{position:absolute;top:0;bottom:0;left:0;border-radius:8px;background:var(--coral);transition:width .6s cubic-bezier(.34,1.15,.4,1),background .4s ease}
+.gate{position:absolute;top:-2px;bottom:-2px;left:40%;border-left:2px dashed var(--ink);opacity:.55}
+.zones{display:flex;margin-top:5px;font-family:var(--m);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.zones span{text-align:center}
+.z1{flex:0 0 40%;color:var(--green)}.z2{flex:0 0 30%;color:#B8860B}.z3{flex:0 0 30%;color:var(--coral)}
+.zones b{font-weight:500}.zones .sm{display:none}
+@media(max-width:620px){.zones{font-size:8px}.zones .lg{display:none}.zones .sm{display:inline}
+.heat-read .num{font-size:23px}.heat-cap{display:none}.heat-top{justify-content:flex-end;margin-bottom:5px}}
 
-/* turn steps */
-.steps{display:flex;gap:8px;align-items:center;padding:14px 22px 0}
+.steps{display:flex;gap:8px;align-items:center;padding:14px 22px 0;flex-wrap:wrap}
 .step{display:flex;align-items:center;gap:7px;font-family:var(--m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
 .step i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-faint);display:block}
-.step.now{color:var(--ink)} .step.now i{background:var(--gold);border-color:var(--gold)}
-.step.past{color:var(--green)} .step.past i{background:var(--green);border-color:var(--green)}
-.step+.step::before{content:"";width:20px;height:1px;background:var(--line);display:block;margin-right:7px}
+.step.now{color:var(--ink)}.step.now i{background:var(--gold);border-color:var(--gold)}
+.step.past{color:var(--green)}.step.past i{background:var(--green);border-color:var(--green)}
+.step+.step::before{content:"";width:18px;height:1px;background:var(--line);display:block;margin-right:7px}
 
-.thread{padding:16px 22px 0}
-.turn{margin-bottom:16px}
-.said{background:#F1F6FC;border:1px solid #DCE8F5;border-left:3px solid var(--blue);border-radius:2px;padding:13px 15px;font-family:var(--d);font-size:17.5px;line-height:1.42}
-.said .spk{display:block;font-family:var(--m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:7px;font-family:var(--m)}
-.body-note{font-size:13.5px;color:var(--ink-2);font-style:italic;margin-top:9px}
-.mine{margin-top:12px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:2px;padding:12px 14px;font-size:14.5px}
-.mine .spk{display:block;font-family:var(--m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.res{margin-top:10px;border-radius:2px;padding:12px 14px;font-size:14px}
-.res .hd{font-family:var(--m);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:7px}
-.res .hd .pill{font-family:var(--m);font-size:9.5px;padding:2px 7px;border-radius:10px;letter-spacing:.08em}
-.res.good{background:#F4FBF7;border:1px solid #CFE9DA} .res.good .hd{color:var(--green)} .res.good .pill{background:#DFF1E7;color:#2C7A52}
-.res.bad{background:#FDF6F3;border:1px solid #F3DBD3} .res.bad .hd{color:var(--coral)} .res.bad .pill{background:#FAE3DE;color:#A62A30}
-.res .lesson{margin-top:8px;font-size:13px;color:var(--ink-2);font-style:italic;border-top:1px dashed rgba(22,35,63,.14);padding-top:8px}
-.retry{margin-top:10px;font-family:var(--m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+/* --- chat --- */
+.chat{padding:18px 22px 2px}
+.msg{margin-bottom:18px;max-width:min(84%,600px);animation:pop .4s cubic-bezier(.2,1,.3,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.msg.me{margin-left:auto}
+.who-lbl{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+.msg.me .who-lbl{text-align:right;color:var(--gold)}
+.bub{padding:13px 17px}
+.msg.them .bub{background:#EAF2FB;border:1px solid #CFE0F2;border-radius:16px 16px 16px 5px;font-family:var(--d);font-size:17.5px;line-height:1.4}
+.msg.me .bub{background:#fff;border:1.5px solid #E8D9AE;border-radius:16px 16px 5px 16px;font-size:15.5px;line-height:1.5}
+.stagedir{font-size:13px;color:var(--ink-2);font-style:italic;margin-top:9px;padding-left:6px}
+.typing .bub{display:inline-flex;gap:5px;align-items:center;padding:15px 18px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#9FBBD8;display:block;animation:tp 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.after{margin-top:9px;border-radius:10px;padding:12px 15px;font-size:14px}
+.after.good{background:#F3FAF6;border:1px solid #CBE7D8}
+.after.bad{background:#FDF5F2;border:1px solid #F1D9D0}
+.vhead{font-family:var(--m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+.after.good .vhead{color:var(--green)}.after.bad .vhead{color:var(--coral)}
+.vhead .pill{font-size:9.5px;padding:2px 8px;border-radius:10px;letter-spacing:.06em}
+.after.good .pill{background:#DEF1E6;color:#2C7A52}.after.bad .pill{background:#F9E1DB;color:#A62A30}
+.vhead .mv{color:var(--ink-soft)}
+.rtext{color:var(--ink)}
+.locknote{margin-top:9px;font-size:12.5px;color:#8A6A12;background:#FDF6E0;border:1px solid #F0E0B4;border-radius:6px;padding:8px 11px}
+.lesson{margin-top:9px;font-size:13px;color:var(--ink-2);font-style:italic;border-top:1px dashed rgba(22,35,63,.14);padding-top:9px}
+.retry{margin-top:9px;font-family:var(--m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
 
 .opts{padding:6px 22px 22px}
 .opts-hd{margin:16px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
@@ -174,14 +239,11 @@ h2.sec{font-family:var(--d);font-size:clamp(26px,4vw,36px);font-weight:600;lette
 .opt .obody{flex:1 1 auto}
 .opt .txt{color:var(--ink)}
 .opt .kind{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
-.opt .lock{color:#B8860B}
-.opt .tried{color:var(--coral)}
+.opt .lock{color:#B8860B}.opt .tried{color:var(--coral)}
 .opt.used{background:#FBFAF8;border-color:#E2DCD2;border-left-color:#E2DCD2}
 .opt.used .onum{background:#F1EDE6;color:var(--ink-soft);border-color:#E2DCD2}
 .opt.used .txt{color:var(--ink-soft)}
 .pickhint{font-family:var(--m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
-.mine .kind{font-family:var(--m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;display:block}
-.res .locknote{margin-top:8px;font-size:12.5px;color:#8A6A12;background:#FDF6E0;border:1px solid #F0E0B4;border-radius:2px;padding:8px 10px}
 .debrief{background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:2px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
 .debrief h4{font-family:var(--d);font-size:20px;margin:0 0 8px;font-weight:600}
 .debrief p{margin:0 0 8px;font-size:14.5px;color:var(--ink-2)}
@@ -287,13 +349,13 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule-soft);fo
 
   <section class="panel" id="p3">
     <h2 class="sec">Feel First</h2>
-    <p class="sec-note">Eight conversations where someone is speaking from emotion. Your job is not to be right. Your job is to be hearable.</p>
+    <p class="sec-note">Sixteen conversations where someone is speaking from emotion. Your job is not to be right. Your job is to be hearable.</p>
 
     <div class="howto">
       <div class="pick-lbl" style="margin-bottom:4px">How this works</div>
       <ol>
-        <li>They say something. Read the <b>bar at the top</b> — that is how hot they are right now.</li>
-        <li>Pick one reply from the list. Every reply moves the bar.</li>
+        <li>They say something. Watch <b>their posture and the bar at the top</b> — that is how hot they are.</li>
+        <li>Pick one reply. Every reply moves the bar, and moves them.</li>
         <li>Nothing is labelled in advance. Replies that <b>reason, fix or advise</b> cannot land above 40 — you find that out by trying one, which is the point.</li>
         <li>A reply that does not land <b>does not move the conversation.</b> The same moment waits until you meet it.</li>
       </ol>
@@ -310,7 +372,7 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule-soft);fo
         <dt>Alone, it fails by</dt><dd>Sounding correct and cold.</dd></dl></div>
     </div>
 
-    <div class="pick-lbl">Choose a conversation — eight available</div>
+    <div class="pick-lbl">Choose a conversation — sixteen available</div>
     <div class="picker" id="c-pick"></div>
 
     <div class="stage">
@@ -319,17 +381,22 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule-soft);fo
         <div class="counter" id="c-count"></div>
       </div>
       <div class="goal" id="c-goal"></div>
-      <div class="heatbox">
-        <div class="heat-top">
-          <div class="heat-cap" id="heat-cap">Their emotional heat</div>
-          <div class="heat-read"><span class="num" id="heat-n">88</span><span class="st" id="heat-s">Flooded</span></div>
+
+      <div class="scenebar">
+        <div class="charwrap"><div id="slot-them"></div><div class="cname" id="name-them">Them</div></div>
+        <div class="gaugecol">
+          <div class="heat-top">
+            <span class="heat-cap" id="heat-cap">How hot they are</span>
+            <span class="heat-read"><span class="num" id="heat-n">88</span><span class="st" id="heat-s">Flooded</span></span>
+          </div>
+          <div class="track"><div class="fill" id="fill" style="width:88%"></div><div class="gate"></div></div>
+          <div class="zones"><span class="z1"><b class="lg">Ready for reason</b><b class="sm">Ready</b></span><span class="z2"><b class="lg">Still hot</b><b class="sm">Hot</b></span><span class="z3"><b class="lg">Flooded</b><b class="sm">Flooded</b></span></div>
         </div>
-        <div class="track"><div class="fill" id="fill" style="width:88%"></div><div class="gate"></div></div>
-        <div class="zones"><span class="z1">Ready for reason</span><span class="z2">Still hot</span><span class="z3">Flooded</span></div>
-        <div class="gatehint"><b>The dashed gate is 40.</b> Below it, a good argument helps. Above it, the same argument is heard as <i>your feelings are wrong.</i></div>
+        <div class="charwrap"><div id="slot-me"></div><div class="cname">You</div></div>
       </div>
+
       <div class="steps" id="c-steps"></div>
-      <div class="thread" id="c-thread"></div>
+      <div class="chat" id="c-thread"></div>
       <div class="opts" id="c-opts"></div>
       <div class="bar">
         <button class="btn ghost" id="c-restart">Start this one again</button>
@@ -645,7 +712,196 @@ var ROUNDS=[
   {k:'Ask first, then offer',t:'“Two things we could do — work out a plan for Thursday, or put you in touch with the counselling centre so someone qualified looks at the breathing. Or both. Your call.”',d:-14,good:1,r:'“Both. Can we do the plan now?” And you do.',n:'You gave her the choice, and you named the limit of your own role without making it a rejection.'},
   {k:'Diagnose',t:'“This sounds like anxiety disorder. You need therapy.”',d:10,r:'She goes pale. “Is it that bad?”',n:'A label you are not qualified to give, delivered as a verdict. Referring is kind. Diagnosing is not yours to do.'},
   {k:'Handle it alone',t:'“We will manage it between us. No need to involve anyone.”',d:7,r:'“Okay sir.” Loyal, and now nobody qualified is looking at it.',n:'Warm, and it quietly makes you the whole support system. Knowing where your job ends is part of compassion.'}]}],
- close:'You did two things: you believed her, and you knew what was not yours to fix. Both were the compassionate move.'}
+ close:'You did two things: you believed her, and you knew what was not yours to fix. Both were the compassionate move.'},
+
+{n:'I',title:'I am fine',who:'Your friend',where:'Said to the wall, not to you',start:64,
+ goal:'They have shut the door. Every question you ask pulls at the handle. Presence opens it; pressure does not.',
+ turns:[
+ {said:'“I am fine.”',
+  body:'Said flatly, to the wall. Two words doing the work of a locked door.',
+  opts:[
+  {k:'Take it literally',t:'“Okay, cool. So — did you see the match?”',d:8,r:'“Yeah.” They look at their phone for the rest of the evening.',n:'Sometimes “fine” means fine. The flatness told you this was not one of those times.'},
+  {k:'Interrogate',t:'“What is wrong? Just tell me. Is it something I did?”',logic:1,d:9,r:'“I said I am fine.” They get up and leave the room.',n:'Three questions in a row is not interest. It is pressure with a question mark on the end.'},
+  {k:'Stay',t:'“Okay. I am not going anywhere. Tell me whenever you want.”',d:-20,good:1,r:'They do not answer. But they sit down instead of leaving.',n:'You offered company without a price. That is the only offer a shut door can accept.'},
+  {k:'Accuse',t:'“You always do this. This shutting-down thing.”',d:13,r:'“Great. Now I am the problem.” Two days of politeness.',n:'You turned their silence into a character flaw. Now there are two things to be defensive about.'}]},
+ {said:'“...It is stupid. You will think it is stupid.”',
+  body:'Still not looking at you. But talking, which is everything.',
+  opts:[
+  {k:'Promise',t:'“I will not think it is stupid. I promise.”',d:4,r:'“You will.” They are not being difficult. They genuinely believe it.',n:'A promise about your own reaction cannot be checked. It settles nothing.'},
+  {k:'Name it',t:'“You are more worried about how I will take it than about the thing itself.”',d:-20,good:1,r:'A pause. “...Yeah. That is basically it.”',n:'The fear was never the topic. It was your face while they said the topic.'},
+  {k:'Push',t:'“Just say it. How bad can it be?”',logic:1,d:7,r:'“Forget it.” The door swings back.',n:'Impatience dressed as encouragement. They can hear the difference.'}]},
+ {said:'“Okay. So. Today at work something happened.”',
+  body:'Turned toward you now. Beginning properly.',
+  opts:[
+  {k:'Ask first',t:'“Do you want me to just listen, or do you want me to say things back?”',d:-12,good:1,r:'“Just listen. For a bit.” And they talk for twenty minutes.',n:'One sentence, asked before you started, that decided whether the next twenty minutes helped.'},
+  {k:'Jump in',t:'“Wait — was this your manager again? What did he say exactly?”',d:8,r:'They give you the facts you asked for and none of the ones that mattered.',n:'You took charge of a story you had not heard yet.'}]}],
+ close:'“Fine” is a door, not a sentence. Doors open when nobody is pulling at them.'},
+
+{n:'J',title:'I got the job',who:'Your best friend',where:'Calling you first, out of breath',start:72,joy:1,
+ meterLabel:'How alone she feels with her good news',
+ states:['Alone with it','Half held back','Sharing it with you'],
+ zones:['Sharing it with you','Half held back','Alone with it'],zonesShort:['Shared','Half held','Alone'],
+ gateNote:'<b>The dashed gate is 40.</b> Below it, the practical questions are welcome. Above it, they land as <i>is that all you have to say?</i>',
+ goal:'Empathy is not only for pain. How you answer good news predicts a friendship better than how you answer bad news — and most people answer it badly.',
+ turns:[
+ {said:'“I got it! I actually got the job!”',
+  body:'Out of breath. She called you before she called her parents.',
+  opts:[
+  {k:'Flat',t:'“Oh nice. Congrats, that is great.”',d:10,r:'“Yeah... thanks.” You can hear the balloon deflate in real time.',n:'Accurate, polite, and it told her the news was small. Correctness is not celebration.'},
+  {k:'Logistics',t:'“What is the salary? When do you start? Is it a good company?”',logic:1,d:8,r:'She starts answering like it is a second interview.',n:'Turning joy into admin is the commonest way to steal it. The questions are fine — in ten minutes.'},
+  {k:'Celebrate',t:'“WHAT! Tell me everything — when did they call, what did they say?”',d:-26,good:1,r:'She talks for ten minutes straight and laughs four times.',n:'You asked her to relive it. Making someone tell the story again is the purest form of sharing joy.'},
+  {k:'Attach advice',t:'“See, I told you. Now do not mess this one up.”',d:12,r:'“...Right. Thanks.” The call gets shorter.',n:'A warning stapled to a celebration. She now has to pay for the congratulations.'}]},
+ {said:'“I honestly thought I had failed the second round.”',
+  body:'Quieter, and this is the real sentence. The job is not the point.',
+  opts:[
+  {k:'Move on',t:'“Anyway — we should go out this weekend to celebrate.”',d:6,r:'“Sure, yeah.” The moment closes politely.',n:'A plan offered instead of a response. The plan is lovely and it changed the subject.'},
+  {k:'Reflect the meaning',t:'“So this is not just a job. It is proof you were wrong about yourself.”',d:-22,good:1,r:'A long pause. “...I had not thought of it like that. But yes.”',n:'You found what the news actually meant to her. That is cognitive empathy pointed at happiness.'},
+  {k:'Mild scolding',t:'“You always underestimate yourself, you know.”',d:5,r:'“I know, I know.” Now she is being corrected on her best day.',n:'True, and delivered as a small telling-off. Save the observation for a Tuesday.'}]},
+ {said:'“I want to tell everyone but I feel a bit silly.”',
+  body:'Grinning, you can hear it. Also genuinely unsure.',
+  opts:[
+  {k:'Ask first',t:'“Do you want to make a big deal of this, or keep it small? Either way I am in.”',d:-14,good:1,r:'“Big deal. Obviously big deal.” And she posts it.',n:'Even in joy, you asked before deciding for her. The permission move works in both directions.'},
+  {k:'Decide for her',t:'“Post it. Obviously post it. Do not be silly.”',d:7,r:'She posts it and feels slightly odd about it.',n:'Right answer, taken out of her hands. Now it is your decision she is carrying out.'}]}],
+ close:'Psychologists call this capitalisation — what you do with someone else’s good news. It predicts closeness better than anything you do with their bad news.'},
+
+{n:'K',title:'I am just a burden now',who:'Your father',where:'Six months after retiring',start:76,
+ goal:'He is not asking to be contradicted. Reassurance here is a polite way of not listening.',
+ turns:[
+ {said:'“Do not ask me. What do I know? I am just a burden now.”',
+  body:'Said to the newspaper, not to you. He has said versions of this for weeks.',
+  opts:[
+  {k:'Contradict',t:'“Papa, do not say that. You are not a burden at all.”',logic:1,d:7,r:'“Hmm.” He turns the page.',n:'You argued with the sentence and walked straight past the man saying it.'},
+  {k:'Prescribe',t:'“You should join a walking group. Keep yourself busy.”',logic:1,d:8,r:'“Yes yes. Later.” It will always be later.',n:'A timetable offered to a loss of purpose. Busy is not the same as needed.'},
+  {k:'Acknowledge',t:'“Something has changed for you since you stopped working. Hasn’t it.”',d:-22,good:1,r:'A long silence. Then: “Nobody calls me now, beta.”',n:'You said the true thing plainly and left space after it. The space is what let him answer.'},
+  {k:'Generalise',t:'“Everyone feels like this after retirement, Papa.”',d:6,r:'“Then it is nothing. Fine.”',n:'You made his experience ordinary, which is the fastest way to make someone stop describing it.'}]},
+ {said:'“Thirty-four years, people asked me things. Every day. Now nobody asks.”',
+  body:'The newspaper is down. This is the sentence he has been carrying.',
+  opts:[
+  {k:'Fix it',t:'“I will tell everyone to call you more often.”',logic:1,d:7,r:'“Do not tell anyone anything.” Sharper than he meant.',n:'Arranged sympathy. Calls you had to request are proof of the problem, not a solution to it.'},
+  {k:'Name it',t:'“It is not the work you miss. It is being the one people came to.”',d:-20,good:1,r:'He looks at you properly for the first time. “Yes. That.”',n:'The distinction he could feel but had not said. Handing it back is the whole job.'},
+  {k:'Reassure',t:'“We all still need you, Papa. You know that.”',d:4,r:'“Hmm.” Warm, and it lands nowhere.',n:'General need does not answer a specific absence. He can hear that it is a kindness, not a fact.'}]},
+ {said:'“So what am I supposed to do with myself now?”',
+  body:'A real question, asked of you, which is itself the beginning of an answer.',
+  opts:[
+  {k:'Ask him',t:'“I actually need your help with something real. Do you want to hear it now, or talk more first?”',d:-15,good:1,r:'He sits up straighter. “Tell me.” And he is useful for the first time in six months.',n:'You did not reassure him he mattered. You gave him something that made it true.'},
+  {k:'Hobbies',t:'“Take up gardening. Or yoga. Something to fill the day.”',d:8,r:'“Yes yes.” Nothing happens.',n:'Filling time answers boredom. He did not say he was bored.'}]}],
+ close:'He never wanted comfort. He wanted to be asked something.'},
+
+{n:'L',title:'Sorry, sorry, sorry',who:'Your junior',where:'Standing at your desk, half turned to leave',start:66,
+ goal:'Telling someone to stop apologising gives them one more thing to apologise for. Lower the cost of asking instead.',
+ turns:[
+ {said:'“Sorry — sorry, I know you are busy, sorry to bother you, it is probably a stupid question.”',
+  body:'Four apologies before the question. She has been standing there for a while working up to it.',
+  opts:[
+  {k:'Instruct',t:'“Stop apologising. You do not need to say sorry every time.”',d:8,r:'“Sorry. I mean — okay. Sorry.” She goes red.',n:'You handed her a new rule to fail at, in the same breath as the old one.'},
+  {k:'Brush past',t:'“It is fine, what is the question?”',d:3,r:'She asks it very quickly and in a smaller voice than usual.',n:'Efficient, and it left the fear exactly where it was. You answered the question, not the person.'},
+  {k:'Make it safe',t:'“You are not bothering me. Ask me — I would much rather you asked than guessed.”',d:-20,good:1,r:'Her shoulders drop. She asks a good question, at normal volume.',n:'You did not ban the apology. You removed the thing it was protecting her from.'},
+  {k:'Tease',t:'“You apologise more than anyone I have ever met!”',d:11,r:'She laughs and goes redder. “Sorry!”',n:'Affectionate, and it is more of the exact thing that is causing it. Being noticed is the fear.'}]},
+ {said:'“I just do not want to look like I do not know things.”',
+  body:'There it is. The question was never the problem.',
+  opts:[
+  {k:'Reassure',t:'“Nobody expects you to know everything at this stage.”',d:4,r:'“Okay.” Polite. Unchanged.',n:'A statement about other people’s expectations, which she has no way to verify.'},
+  {k:'Name it',t:'“So the sorry is not politeness. It is insurance, in case I judge you.”',d:-19,good:1,r:'A startled pause. “...I had not thought about it like that. Yes.”',n:'Precise, non-accusing, and it makes an automatic habit visible enough to change.'},
+  {k:'Systematise',t:'“Collect your questions and send them to me once a day.”',logic:1,d:6,r:'“That is a good idea, sorry.” She sends none.',n:'A process that makes asking rarer. The goal was to make it cheaper.'}]},
+ {said:'“Is it okay if I just ask you things directly?”',
+  body:'Asking for permission to stop asking for permission.',
+  opts:[
+  {k:'Yes, and hand it back',t:'“Yes. And tell me if I ever answer in a way that makes it harder — I will not always notice.”',d:-13,good:1,r:'“Okay. I will.” And a week later, she actually does.',n:'You accepted a share of the responsibility. That is what made the permission believable.'},
+  {k:'Grand permission',t:'“Of course! Ask me anything, any time, always!”',d:5,r:'“Thank you so much, sorry!”',n:'Enthusiastic, and it puts every bit of the work back on her.'}]}],
+ close:'The apologising stops when asking gets cheap. Not when the word gets banned.'},
+
+{n:'M',title:'He was just a dog',who:'Your friend',where:'Two weeks after, still crying at odd times',start:80,
+ goal:'There is nothing here to fix. Everything you say that tries to fix it will cost you.',
+ turns:[
+ {said:'“I keep crying and I feel so stupid about it. He was just a dog.”',
+  body:'Apologising for grief. Fourteen years of that dog, and she is embarrassed.',
+  opts:[
+  {k:'Agree quietly',t:'“Well — it has been two weeks. You will feel better soon.”',d:9,r:'“Yeah. Sorry.” She changes the subject and does not come back to it.',n:'You agreed with the “just”. Now she knows this is not a safe thing to say to you.'},
+  {k:'Replace',t:'“You could always get another one, when you are ready.”',d:13,r:'“I do not want another one.” Sharp, then immediately apologetic.',n:'Offering a replacement says the thing she lost was a category. It was a someone.'},
+  {k:'Refuse the “just”',t:'“He was not just a dog. Fourteen years is not nothing.”',d:-24,good:1,r:'She cries properly for the first time — and it looks like relief, not pain.',n:'You contradicted the only part worth contradicting: the permission slip she was denying herself.'},
+  {k:'Silver lining',t:'“At least he did not suffer at the end.”',d:8,r:'“...I suppose.” Conversation over.',n:'“At least” is the phrase that ends conversations. It asks the person to feel better on your schedule.'}]},
+ {said:'“I feel like I am not allowed to be this sad about it.”',
+  body:'The real problem. Not the grief — the sense that she has not earned it.',
+  opts:[
+  {k:'Give permission',t:'“You are allowed. You do not need anyone’s permission for this, including mine.”',d:-20,good:1,r:'“Okay.” Very small, and something in her posture lets go.',n:'She was waiting for exactly this and could not ask for it.'},
+  {k:'Cite research',t:'“People grieve pets more than relatives sometimes. It is well documented.”',logic:1,d:5,r:'“Huh.” Interesting, and useless.',n:'A fact used as a permission slip. Facts do not grant permission. People do.'},
+  {k:'Distract',t:'“Come on, let us go out. Take your mind off it.”',d:7,r:'She goes, and performs being fine for three hours.',n:'Rescue offered where company was needed. Now she has to look better than she feels.'}]},
+ {said:'“Nobody really wants to hear about him any more.”',
+  body:'Said as a fact about the world. It is a request, and she does not know it.',
+  opts:[
+  {k:'Invite the story',t:'“I do. Tell me about him — what was he like as a puppy?”',d:-17,good:1,r:'She talks about him for an hour and laughs twice.',n:'You did not fix, comfort, or advise. You asked for more, which was the one thing on offer.'},
+  {k:'Sympathise and stop',t:'“That is really sad. I am sorry.”',d:3,r:'“Thanks.” Silence.',n:'Warm, and it gently closed the door she had just opened a crack.'}]}],
+ close:'You fixed nothing and offered nothing. You gave her the only thing available — permission to keep talking about him.'},
+
+{n:'N',title:'You never help anyone',who:'Your classmate',where:'In the corridor, loud enough that others hear',start:84,
+ goal:'The accusation is unfair. Defending yourself is accurate, satisfying, and completely wrong.',
+ turns:[
+ {said:'“You never help anyone. You only care about your own marks.”',
+  body:'Said in front of three other people. Your face is already hot.',
+  opts:[
+  {k:'Defend',t:'“That is completely unfair. I helped you in February with the stats assignment.”',logic:1,d:9,r:'“Of course you remember the date.” The others are watching.',n:'You produced evidence for a person who was not making an argument. Being right won you nothing.'},
+  {k:'Counter-attack',t:'“And what exactly have you ever done for me?”',d:14,r:'It becomes a real fight, in a corridor, with an audience.',n:'You matched the charge with a charge. Now nobody can back down without losing.'},
+  {k:'Look underneath',t:'“That has come from somewhere. What happened?”',d:-21,good:1,r:'A pause. Then, quieter: “...I asked four people about the submission. Nobody helped.”',n:'You treated an attack as information. That takes one second and almost nobody does it.'},
+  {k:'Collapse',t:'“Okay, fine, you are right. I am a terrible person.”',d:7,r:'“Now you are doing this.” And now they have to manage you.',n:'Over-apology turns their complaint into your performance. It is a way of leaving the conversation.'}]},
+ {said:'“I asked you as well. You said you would check and you never did.”',
+  body:'Quieter. And this part happens to be true.',
+  opts:[
+  {k:'Own the true part',t:'“You did. I said I would check and I forgot. That part is true.”',d:-23,good:1,r:'“...Okay.” The whole corridor stops being a stage.',n:'You conceded the specific true thing without conceding the false general one. That is the move.'},
+  {k:'Explain',t:'“I had three deadlines that week, it was chaos.”',logic:1,d:7,r:'“Everyone had three deadlines.”',n:'A reason offered where an admission was needed. Reasons sound like refusals.'},
+  {k:'Over-correct',t:'“I will do your entire submission tonight. Send it to me.”',d:5,r:'“That is not what I want.” Uncomfortable for both of you.',n:'Penance instead of repair. It buys quiet, and it does not buy trust.'}]},
+ {said:'“So do you actually care, or not?”',
+  body:'Asked flatly. Not rhetorical. They want an answer.',
+  opts:[
+  {k:'Answer and ask',t:'“I do. Tell me what you needed from me — I clearly got it wrong.”',d:-15,good:1,r:'They tell you. It takes forty seconds and is entirely doable.',n:'You answered the question and then handed them the microphone. Both halves were necessary.'},
+  {k:'Prove it',t:'“Obviously I care! Look at everything I have done for people!”',d:9,r:'“Right.” They walk off.',n:'Caring, argued. An argued case for your own goodness is the least convincing thing there is.'}]}],
+ close:'“Never” was false and the thing under it was true. You could only reach the second by refusing to fight the first.'},
+
+{n:'O',title:'I did something I am not proud of',who:'Your friend',where:'Late, after avoiding you for a week',start:86,
+ goal:'Shame closes faster than any other feeling. Understanding is not approval — and rushing to say “it is fine” is its own kind of abandonment.',
+ turns:[
+ {said:'“I need to tell you something. I copied in the final exam. I have been sick about it all week.”',
+  body:'He has been avoiding you for seven days. This sentence took all of them to build.',
+  opts:[
+  {k:'Absolve',t:'“Honestly? Everyone does it. Do not beat yourself up about it.”',d:9,r:'“...Right.” Relief for one second, then something worse behind it.',n:'Instant forgiveness tells him you did not take it seriously — including the part where he did. Cheap absolution is not comfort.'},
+  {k:'Judge',t:'“Why would you do that? That is not who you are.”',d:12,r:'“Forget it. I should not have said anything.”',n:'A week of working up to it, closed in one sentence. And note the sentence was on his side.'},
+  {k:'Acknowledge',t:'“That took something to say out loud. I am glad you told me.”',d:-24,good:1,r:'A long breath. “I thought you would look at me differently.”',n:'You answered the act of telling before the thing told. That is what makes everything after it possible.'},
+  {k:'Damage control',t:'“Did anyone see? Has the college found out yet?”',logic:1,d:8,r:'He switches into logistics with you and the confession evaporates.',n:'The practical questions are real. They are also a very effective way of not looking at him.'}]},
+ {said:'“I do not know how to stop feeling like this.”',
+  body:'Not asking to be forgiven. Asking whether he is still allowed in the room.',
+  opts:[
+  {k:'Reassure',t:'“You are a good person. One mistake does not change that.”',d:5,r:'“You have to say that.”',n:'True, and it argues with his guilt. Guilt that gets argued with gets louder.'},
+  {k:'Name it',t:'“You are not asking me to say it was okay. You are asking whether I still think you are worth knowing.”',d:-22,good:1,r:'A very long pause. “...Yeah. That is it.”',n:'Guilt is about the act. Shame is about the self. Naming which one he has is the whole move.'},
+  {k:'Prescribe',t:'“Go to the professor and own it. That is the only way out.”',logic:1,d:7,r:'“Maybe.” He will not.',n:'Probably the right advice. Delivered now it is a sentence, not a plan he can carry.'}]},
+ {said:'“So what do I do?”',
+  body:'Looking straight at you. He has stopped bracing.',
+  opts:[
+  {k:'Honest and in',t:'“I will help you think it through. And I am not going to tell you it was fine — you would not believe me anyway.”',d:-15,good:1,r:'“No. I would not.” And the two of you work out what tomorrow looks like.',n:'You kept your honesty and your warmth. Most people assume they have to trade one for the other.'},
+  {k:'Let it go',t:'“Nothing. It is done. Just put it behind you.”',d:8,r:'“Okay.” He carries it for another year.',n:'Kindness that quietly costs him the chance to put it right.'},
+  {k:'Instruct',t:'“Confess tomorrow. First thing in the morning.”',d:7,r:'“Fine.” Said to end the conversation.',n:'Right direction, taken out of his hands. A decision he did not make will not survive the night.'}]}],
+ close:'You never said it was fine. He never needed you to. He needed to find out whether he could still be seen.'},
+
+{n:'P',title:'It is the same thing again',who:'Your friend',where:'Fifth call this month, 11 pm',start:60,
+ goal:'Your patience is running out, and that is information rather than a failure. The skill is being honest about your limit without disappearing behind it.',
+ turns:[
+ {said:'“I know, I know. It is the same thing again. Sorry.”',
+  body:'Your jaw tightens before she finishes the sentence. Notice that. It is the round’s real subject.',
+  opts:[
+  {k:'Perform patience',t:'“No no, it is fine, tell me.”',d:7,r:'Said in a voice that is not fine. She hears it and starts editing herself.',n:'Patience you do not actually have is audible. Now she is managing your tone instead of her problem.'},
+  {k:'Snap',t:'“We have been through this four times. At some point you have to actually do something.”',d:13,r:'“You are right. Sorry. Bye.”',n:'The truest thing you have said all month, fired at the worst possible moment.'},
+  {k:'Acknowledge',t:'“You do not have to apologise for it being the same. It is still happening to you.”',d:-20,good:1,r:'A pause. “...It is. That is the worst part.”',n:'Repetition is a feature of a stuck problem, not a defect in the person describing it.'},
+  {k:'Escape',t:'“Can we talk tomorrow? I am really tired.”',d:9,r:'“Yeah. Sure.” She does not call tomorrow, or the week after.',n:'Honest about you, and it arrived as a door closing. True is not the same as complete.'}]},
+ {said:'“You must be so sick of me.”',
+  body:'Testing the thing you were both avoiding. This is the moment the round exists for.',
+  opts:[
+  {k:'Deny',t:'“Not at all! Never! Do not be silly.”',d:5,r:'“Okay.” She does not believe you, and now neither of you can raise it again.',n:'A denial she can hear is false costs more than the truth would have.'},
+  {k:'Honest and warm',t:'“I am tired tonight. Not of you — of watching this keep happening and not being able to stop it.”',d:-21,good:1,r:'“...I did not know it got to you as well.” Something changes between you.',n:'You named your limit and kept her inside it. That distinction is the entire skill of this round.'},
+  {k:'Change the subject',t:'“Anyway — let us talk about something else.”',d:6,r:'She follows you politely into the something else.',n:'Relief for you. Abandonment for her. The two are hard to tell apart from your side.'}]},
+ {said:'“Maybe I should just stop bringing it up.”',
+  body:'Not sulking. Genuinely offering to disappear so you are not burdened.',
+  opts:[
+  {k:'Give it a shape',t:'“No. But can we do it differently — I listen tonight, and we plan it properly on Sunday when I am not half asleep?”',d:-14,good:1,r:'“That is fair. Sunday.” And Sunday actually happens.',n:'You protected the friendship by naming a limit out loud instead of quietly running out of one.'},
+  {k:'Over-promise',t:'“Call me any time. Always. I mean it.”',d:8,r:'She calls on Thursday. You do not pick up.',n:'A promise made out of guilt is the next disappointment, already scheduled.'}]}],
+ close:'Compassion that ignores its own limits curdles into distress, then into avoidance. Saying where the edge is keeps you in the room.'}
 ];
 
 /* ================= HELPERS ================= */
@@ -789,8 +1045,98 @@ document.getElementById('s-next').addEventListener('click',function(){sIdx=(sIdx
 renderScene();
 
 /* ================= FEEL FIRST ================= */
-var rIdx=0,tIdx=0,heat=88,missteps=0,clean=true,tried={},rDone={};
-
+var rIdx=0,tIdx=0,heat=88,missteps=0,clean=true,tried={},rDone={},busy=false;
+var figUID=0;
+var gen=0;
+var CAST=[
+ {them:{hair:'long',hc:'#2A211C',sk:'#EFCFAE',cl:'#1595AF',ac:['earrings']},        me:{hair:'short',hc:'#33261F',sk:'#F6DFC8',cl:'#2A3C63',ac:[]}},
+ {them:{hair:'curly',hc:'#4A3227',sk:'#E0B98F',cl:'#8579BE',ac:[]},                  me:{hair:'short',hc:'#2A211C',sk:'#EFCFAE',cl:'#3F9E6A',ac:[]}},
+ {them:{hair:'bun',hc:'#2A211C',sk:'#F6DFC8',cl:'#1560BD',ac:['lanyard']},           me:{hair:'short',hc:'#33261F',sk:'#E0B98F',cl:'#2A3C63',ac:['collar']}},
+ {them:{hair:'short',hc:'#2A211C',sk:'#C99465',cl:'#EFB61E',ac:[]},                  me:{hair:'thin',hc:'#8C8C8C',sk:'#EFCFAE',cl:'#16233F',ac:['glasses']}},
+ {them:{hair:'dupatta',hc:'#8C8C8C',sk:'#EFCFAE',cl:'#D0343A',ac:['earrings']},      me:{hair:'long',hc:'#2A211C',sk:'#EFCFAE',cl:'#1595AF',ac:[]}},
+ {them:{hair:'short',hc:'#33261F',sk:'#E0B98F',cl:'#3F9E6A',ac:['stubble']},         me:{hair:'ponytail',hc:'#2A211C',sk:'#F6DFC8',cl:'#1560BD',ac:['lanyard']}},
+ {them:{hair:'plait',hc:'#2A211C',sk:'#EFCFAE',cl:'#1595AF',ac:['earrings']},        me:{hair:'short',hc:'#4A3227',sk:'#C99465',cl:'#8579BE',ac:[]}},
+ {them:{hair:'plait',hc:'#2A211C',sk:'#C99465',cl:'#5B9BD5',ac:[]},                  me:{hair:'short',hc:'#8C8C8C',sk:'#EFCFAE',cl:'#16233F',ac:['glasses']}},
+ {them:{hair:'bob',hc:'#4A3227',sk:'#F6DFC8',cl:'#657798',ac:[]},                    me:{hair:'curly',hc:'#2A211C',sk:'#E0B98F',cl:'#EFB61E',ac:[]}},
+ {them:{hair:'ponytail',hc:'#2A211C',sk:'#E0B98F',cl:'#EFB61E',ac:['earrings']},     me:{hair:'long',hc:'#4A3227',sk:'#EFCFAE',cl:'#1595AF',ac:[]}},
+ {them:{hair:'thin',hc:'#8C8C8C',sk:'#E0B98F',cl:'#9AA8C0',ac:['glasses','stubble']},me:{hair:'short',hc:'#2A211C',sk:'#EFCFAE',cl:'#1560BD',ac:[]}},
+ {them:{hair:'bun',hc:'#2A211C',sk:'#F6DFC8',cl:'#8579BE',ac:['earrings']},          me:{hair:'short',hc:'#33261F',sk:'#E0B98F',cl:'#2A3C63',ac:['collar']}},
+ {them:{hair:'long',hc:'#4A3227',sk:'#EFCFAE',cl:'#3F9E6A',ac:[]},                   me:{hair:'short',hc:'#2A211C',sk:'#F6DFC8',cl:'#657798',ac:[]}},
+ {them:{hair:'turban',hc:'#2A211C',sk:'#C99465',cl:'#D0343A',ac:['stubble']},        me:{hair:'short',hc:'#33261F',sk:'#EFCFAE',cl:'#1595AF',ac:['lanyard']}},
+ {them:{hair:'short',hc:'#2A211C',sk:'#C99465',cl:'#657798',ac:['stubble']},         me:{hair:'curly',hc:'#33261F',sk:'#EFCFAE',cl:'#3F9E6A',ac:[]}},
+ {them:{hair:'bob',hc:'#2A211C',sk:'#EFCFAE',cl:'#EFB61E',ac:['earrings']},          me:{hair:'long',hc:'#4A3227',sk:'#F6DFC8',cl:'#1560BD',ac:[]}}
+];
+function hairSVG(c){
+  var H=c.hc, cap='<path class="hair" d="M23 56 C23 14 97 14 97 56 C93 39 80 32 60 32 C40 32 27 39 23 56 Z"/>';
+  if(c.hair==='long')  return '<path class="hair" d="M23 54 C23 13 97 13 97 54 L97 108 C92 97 89 85 89 63 C89 41 75 30 60 30 C45 30 31 41 31 63 C31 85 28 97 23 108 Z"/>';
+  if(c.hair==='bob')   return '<path class="hair" d="M23 54 C23 13 97 13 97 54 L97 90 C93 85 90 77 90 63 C90 41 75 30 60 30 C45 30 30 41 30 63 C30 77 27 85 23 90 Z"/>';
+  if(c.hair==='bun')   return '<circle class="hair" cx="60" cy="13" r="13"/>'+cap;
+  if(c.hair==='ponytail') return '<path class="hair" d="M92 44 C110 52 108 84 96 96 C102 76 100 56 88 48 Z"/>'+cap;
+  if(c.hair==='plait') return cap+'<circle class="hair" cx="26" cy="72" r="8"/><circle class="hair" cx="25" cy="86" r="7"/><circle class="hair" cx="25" cy="98" r="6"/>'
+    +'<circle class="hair" cx="94" cy="72" r="8"/><circle class="hair" cx="95" cy="86" r="7"/><circle class="hair" cx="95" cy="98" r="6"/>';
+  if(c.hair==='curly') return '<circle class="hair" cx="34" cy="34" r="16"/><circle class="hair" cx="50" cy="21" r="16"/><circle class="hair" cx="70" cy="21" r="16"/><circle class="hair" cx="86" cy="34" r="16"/>'+cap;
+  if(c.hair==='turban')return '<path class="hair" d="M18 58 C18 0 102 0 102 58 C100 40 88 30 60 30 C32 30 20 40 18 58 Z"/>'
+    +'<path class="hair" d="M53 18 C58 8 70 11 66 21 C61 19 56 19 53 18 Z"/>'
+    +'<path d="M24 48 C40 28 80 28 96 48" stroke="#fff" stroke-width="2.2" fill="none" opacity=".26"/>';
+  if(c.hair==='dupatta')return '<path class="hair" d="M19 58 C19 11 101 11 101 58 L101 106 C95 92 93 78 93 64 C93 42 76 31 60 31 C44 31 27 42 27 64 C27 78 25 92 19 106 Z"/>';
+  if(c.hair==='thin')  return '<path class="hair" d="M27 50 C31 25 89 25 93 50 C85 41 74 37 60 37 C46 37 35 41 27 50 Z"/>';
+  return cap;
+}
+function accSVG(c){
+  var s='',a=c.ac||[];
+  if(a.indexOf('collar')>-1) s+='<path d="M49 99 L60 112 L71 99" fill="#fff" opacity=".92"/><path d="M57 110 L60 126 L63 110 Z" fill="#D0343A"/>';
+  if(a.indexOf('lanyard')>-1) s+='<path d="M47 100 L57 118 M73 100 L63 118" stroke="#D0343A" stroke-width="3.4" fill="none"/><rect x="52" y="117" width="16" height="11" rx="2.5" fill="#fff" stroke="#D0343A" stroke-width="1.8"/>';
+  return s;
+}
+function figSVG(c,isMe){
+  var body = '<path class="cloth" d="M30 156 C30 108 43 98 60 98 C77 98 90 108 90 156 Z"/>';
+  var neck = '<rect class="skin" x="52" y="82" width="16" height="20" rx="8"/>';
+  var head = '<ellipse class="skin" cx="60" cy="56" rx="37" ry="35"/>';
+  var face =
+     '<ellipse class="blush" cx="30" cy="70" rx="8.5" ry="5.2"/><ellipse class="blush" cx="90" cy="70" rx="8.5" ry="5.2"/>'
+    +'<g class="eyes"><ellipse class="pupil" cx="46" cy="60" rx="6.6" ry="7.6"/><ellipse class="pupil" cx="74" cy="60" rx="6.6" ry="7.6"/>'
+    +'<circle class="spark" cx="48.4" cy="56.6" r="2.5"/><circle class="spark" cx="76.4" cy="56.6" r="2.5"/></g>'
+    +'<g class="brow-worry"><path class="ln" d="M35 47 L50 41"/><path class="ln" d="M85 47 L70 41"/></g>'
+    +'<g class="brow-up"><path class="ln" d="M36 45 L50 42"/><path class="ln" d="M84 45 L70 42"/></g>'
+    +'<g class="brow-calm"><path class="ln" d="M36 43 L50 43"/><path class="ln" d="M84 43 L70 43"/></g>'
+    +'<path class="ln mouth-sad" d="M51 77 Q60 69 69 77"/>'
+    +'<path class="ln mouth-flat" d="M53 75 L67 75"/>'
+    +'<path class="ln mouth-smile" d="M50 72 Q60 82 70 72"/>'
+    +'<path class="tear" d="M43 70 c1.9 3.4 1.9 6 0 7.4 c-1.9 -1.4 -1.9 -4 0 -7.4"/>';
+  var arms =
+     '<g class="arm-cover"><path class="limb" d="M31 120 C33 108 42 101 47 99"/><path class="limb" d="M89 120 C87 108 78 101 73 99"/>'
+    +'<circle class="skin hand" cx="46" cy="98" r="7.6"/><circle class="skin hand" cx="74" cy="98" r="7.6"/></g>'
+    +'<g class="arm-cross"><path class="limb" d="M29 114 L91 118"/><path class="limb" d="M91 110 L29 120"/>'
+    +'<circle class="skin hand" cx="29" cy="117" r="7.6"/><circle class="skin hand" cx="91" cy="114" r="7.6"/></g>'
+    +'<g class="arm-open"><path class="limb" d="M31 110 C22 116 20 124 21 130"/><path class="limb" d="M89 110 C98 116 100 124 99 130"/>'
+    +'<circle class="skin hand" cx="21" cy="129" r="7.6"/><circle class="skin hand" cx="99" cy="129" r="7.6"/></g>'
+    +'<g class="arm-up"><path class="limb" d="M32 114 C22 106 20 98 22 92"/><path class="limb" d="M88 114 C98 106 100 98 98 92"/>'
+    +'<circle class="skin hand" cx="21" cy="90" r="7.6"/><circle class="skin hand" cx="99" cy="90" r="7.6"/></g>';
+  var u='u'+(figUID++);
+  return '<svg class="fig '+u+(isMe?' me':'')+'" viewBox="-6 -8 132 152" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+  +'<style>.'+u+' .hair{fill:'+c.hc+'}.'+u+' .skin{fill:'+c.sk+'}.'+u+' .cloth{fill:'+c.cl+'}'
+  +'.'+u+' .limb{stroke:'+c.cl+';stroke-width:13;stroke-linecap:round;fill:none}</style>'
+  +'<g class="pose"><g class="bob">'
+  + body + neck + accSVG(c)
+  +'<g class="head">'+ head + hairSVG(c) + face + accSVG2(c) +'</g>'
+  + arms
+  +'</g></g></svg>';
+}
+function accSVG2(c){
+  var s='',a=c.ac||[];
+  if(a.indexOf('stubble')>-1) s+='<path class="stub" d="M28 64 C31 88 44 91 60 91 C76 91 89 88 92 64 C87 80 76 83 60 83 C44 83 33 80 28 64 Z"/>';
+  if(a.indexOf('glasses')>-1) s+='<circle class="glass" cx="46" cy="60" r="11.5"/><circle class="glass" cx="74" cy="60" r="11.5"/><path class="glass" d="M57.5 59 L62.5 59" fill="none"/>';
+  if(a.indexOf('earrings')>-1) s+='<circle class="acc" cx="24" cy="72" r="3.8"/><circle class="acc" cx="96" cy="72" r="3.8"/>';
+  return s;
+}
+function poseClass(v){return v>=70?'s-flood':v>=40?'s-hot':v>=20?'s-cool':'s-calm';}
+var meMood='s-cool';
+function keepUID(node){var m=String(node.getAttribute('class')||'').match(/\bu\d+\b/);return m?m[0]:'';}
+function applyPose(){
+  var R=ROUNDS[rIdx],j=R.joy?'joy ':'';
+  var t=document.querySelector('#slot-them .fig'); if(t)t.setAttribute('class','fig '+keepUID(t)+' '+j+poseClass(heat));
+  var m=document.querySelector('#slot-me .fig'); if(m)m.setAttribute('class','fig me '+keepUID(m)+' '+meMood);
+}
 function buildRoundPicker(){
   var w=document.getElementById('c-pick');w.innerHTML='';
   ROUNDS.forEach(function(R,i){
@@ -805,17 +1151,30 @@ function setHeat(v){
   var f=document.getElementById('fill');f.style.width=heat+'%';
   f.style.background=(heat>=70?'var(--coral)':(heat>=40?'var(--gold)':'var(--green)'));
   document.getElementById('heat-n').textContent=Math.round(heat);
-  var s=document.getElementById('heat-s');
-  if(heat>=70){s.textContent='Flooded';s.style.color='var(--coral)';}
-  else if(heat>=40){s.textContent='Still hot';s.style.color='var(--gold)';}
-  else{s.textContent='Ready for reason';s.style.color='var(--green)';}
+  var s=document.getElementById('heat-s'),R=ROUNDS[rIdx],st=R.states||['Flooded','Still hot','Ready for reason'];
+  if(heat>=70){s.textContent=st[0];s.style.color='var(--coral)';}
+  else if(heat>=40){s.textContent=st[1];s.style.color='#B8860B';}
+  else{s.textContent=st[2];s.style.color='var(--green)';}
+  applyPose();
 }
+function shortWho(w){return w.split(',')[0];}
 function renderRound(){
-  var R=ROUNDS[rIdx];tIdx=0;missteps=0;clean=true;tried={};
+  gen++;
+  var R=ROUNDS[rIdx];tIdx=0;missteps=0;clean=true;tried={};busy=false;meMood='s-cool';
   buildRoundPicker();
   document.getElementById('c-count').textContent=R.n+' — '+R.title;
-  document.getElementById('heat-cap').textContent=R.who+' — how hot they are';
-  document.getElementById('c-goal').innerHTML='<span class="g">Goal</span><span>'+R.goal+'</span>';
+  var C=CAST[rIdx]||CAST[0];
+  document.getElementById('slot-them').innerHTML=figSVG(C.them,false);
+  document.getElementById('slot-me').innerHTML=figSVG(C.me,true);
+  document.getElementById('name-them').textContent=shortWho(R.who);
+  document.getElementById('heat-cap').textContent=R.meterLabel||('How hot '+shortWho(R.who).replace(/^Your /,'your ')+' is');
+  var zz=R.zones||['Ready for reason','Still hot','Flooded'];
+  document.querySelector('.zones').innerHTML=
+    '<span class="z1"><b class="lg">'+zz[0]+'</b><b class="sm">'+(R.zonesShort?R.zonesShort[0]:'Ready')+'</b></span>'+
+    '<span class="z2"><b class="lg">'+zz[1]+'</b><b class="sm">'+(R.zonesShort?R.zonesShort[1]:'Hot')+'</b></span>'+
+    '<span class="z3"><b class="lg">'+zz[2]+'</b><b class="sm">'+(R.zonesShort?R.zonesShort[2]:'Flooded')+'</b></span>';
+  document.getElementById('c-goal').innerHTML='<span class="g">Goal</span><span>'+R.goal
+    +'<span class="gate-x">'+(R.gateNote||'<b>The dashed gate is 40.</b> Below it a good argument helps. Above it, the same argument is heard as <i>your feelings are wrong.</i>')+'</span></span>';
   document.getElementById('c-thread').innerHTML='';
   document.getElementById('c-opts').innerHTML='';
   document.getElementById('c-debrief').classList.add('hidden');
@@ -826,22 +1185,30 @@ function renderRound(){
 function drawSteps(){
   var R=ROUNDS[rIdx],w=document.getElementById('c-steps');w.innerHTML='';
   R.turns.forEach(function(T,i){
-    var cls='step'+(i<tIdx?' past':(i===tIdx?' now':''));
-    var s=el('div',cls);s.appendChild(el('i'));
-    s.appendChild(el('span',null,'Turn '+(i+1)+(i<tIdx?' cleared':'')));
+    var s=el('div','step'+(i<tIdx?' past':(i===tIdx?' now':'')));
+    s.appendChild(el('i'));s.appendChild(el('span',null,'Turn '+(i+1)+(i<tIdx?' cleared':'')));
     w.appendChild(s);
   });
 }
 function renderTurn(){
-  var R=ROUNDS[rIdx],T=R.turns[tIdx],th=document.getElementById('c-thread');
-  var t=el('div','turn');
-  var said=el('div','said');
-  said.appendChild(el('span','spk',R.who+' says'));
-  said.appendChild(el('span',null,T.said));
-  t.appendChild(said);t.appendChild(el('div','body-note',T.body));
-  th.appendChild(t);drawSteps();drawOpts(T,t);
+  var g=gen,R=ROUNDS[rIdx],T=R.turns[tIdx],th=document.getElementById('c-thread');
+  busy=true;drawSteps();
+  var typ=el('div','msg them typing');
+  typ.innerHTML='<div class="who-lbl">'+shortWho(R.who)+'</div><div class="bub"><i></i><i></i><i></i></div>';
+  th.appendChild(typ);
+  setTimeout(function(){
+    if(g!==gen){typ.remove();return;}
+    typ.remove();
+    var m=el('div','msg them');
+    m.appendChild(el('div','who-lbl',shortWho(R.who)));
+    m.appendChild(el('div','bub',T.said));
+    m.appendChild(el('div','stagedir',T.body));
+    th.appendChild(m);
+    busy=false;drawOpts(T);
+    document.getElementById('c-opts').scrollIntoView({block:'nearest',behavior:'smooth'});
+  },620);
 }
-function drawOpts(T,turnNode){
+function drawOpts(T){
   var w=document.getElementById('c-opts');w.innerHTML='';
   var hd=el('div','opts-hd');
   hd.appendChild(el('span','q','What do you say?'));
@@ -849,51 +1216,60 @@ function drawOpts(T,turnNode){
   w.appendChild(hd);
   w.appendChild(el('div','pickhint','Tap one of the '+T.opts.length+' replies'));
   T.opts.forEach(function(o,oi){
-    var key=tIdx+'-'+oi,wasTried=!!tried[key];
-    var b=el('button','opt'+(wasTried?' used':''));b.type='button';
+    var key=tIdx+'-'+oi,was=!!tried[key];
+    var b=el('button','opt'+(was?' used':''));b.type='button';
     b.appendChild(el('span','onum',String(oi+1)));
     var body=el('span','obody');
-    if(wasTried){
-      var k=el('span','kind');
-      k.appendChild(el('span',null,o.k));
+    if(was){
+      var k=el('span','kind');k.appendChild(el('span',null,o.k));
       if(o.logic)k.appendChild(el('span','lock','🔒 reasoning move'));
       k.appendChild(el('span','tried','· already tried'));
       body.appendChild(k);
     }
     body.appendChild(el('span','txt',o.t));
     b.appendChild(body);
-    b.addEventListener('click',function(){tried[key]=1;choose(o,turnNode);});
+    b.addEventListener('click',function(){if(busy)return;tried[key]=1;choose(o,T);});
     w.appendChild(b);
   });
 }
-function choose(o,turnNode){
-  var R=ROUNDS[rIdx],T=R.turns[tIdx];
-  var mine=el('div','mine');
-  mine.appendChild(el('span','spk','You said'));
-  mine.appendChild(el('span',null,o.t));
-  mine.appendChild(el('span','kind','That was a '+o.k.toLowerCase()+' move'));
-  turnNode.appendChild(mine);
-  var good=!!o.good,before=Math.round(heat);
-  setHeat(heat+o.d);
-  var res=el('div','res '+(good?'good':'bad'));
-  var hd=el('div','hd');
-  hd.appendChild(el('span',null,good?'That landed':'That set you back'));
-  hd.appendChild(el('span','pill',(o.d>0?'heat +':'heat ')+o.d+'  ·  '+before+' → '+Math.round(heat)));
-  res.appendChild(hd);
-  res.appendChild(el('div',null,o.r));
-  if(o.logic&&before>=40)res.appendChild(el('div','locknote','🔒 That was a reasoning move, used at '+before+'. Reasoning only lands below 40 — the gate on the bar above.'));
-  res.appendChild(el('div','lesson',o.n));
-  if(!good)res.appendChild(el('div','retry','The moment has not moved — try again'));
-  turnNode.appendChild(res);
+function choose(o,T){
+  busy=true;
+  var g=gen,R=ROUNDS[rIdx],th=document.getElementById('c-thread');
   document.getElementById('c-opts').innerHTML='';
-  if(!good){
-    missteps++;clean=false;
-    document.getElementById('c-status').textContent='Missteps in this conversation: '+missteps;
-    setTimeout(function(){drawOpts(T,turnNode);},400);
-    return;
-  }
-  tIdx++;drawSteps();
-  if(tIdx<R.turns.length)setTimeout(renderTurn,420);else finish();
+  var good=!!o.good,before=Math.round(heat);
+
+  var m=el('div','msg me');
+  m.appendChild(el('div','who-lbl','You'));
+  m.appendChild(el('div','bub',o.t));
+  th.appendChild(m);
+
+  setTimeout(function(){
+    if(g!==gen)return;
+    setHeat(heat+o.d);
+    meMood=good?'s-calm':'s-hot';applyPose();
+    var a=el('div','after '+(good?'good':'bad'));
+    var vh=el('div','vhead');
+    vh.appendChild(el('span',null,good?'That landed':'That set you back'));
+    vh.appendChild(el('span','pill',(o.d>0?'+':'')+o.d+' · '+before+' → '+Math.round(heat)));
+    vh.appendChild(el('span','mv','· '+o.k.toLowerCase()+' move'));
+    a.appendChild(vh);
+    a.appendChild(el('div','rtext',o.r));
+    if(o.logic&&before>=40)a.appendChild(el('div','locknote','🔒 A reasoning move, used at '+before+'. Reasoning only lands below 40.'));
+    a.appendChild(el('div','lesson',o.n));
+    if(!good)a.appendChild(el('div','retry','The moment has not moved — try again'));
+    m.appendChild(a);
+    setTimeout(function(){if(g!==gen)return;meMood='s-cool';applyPose();},2200);
+
+    if(!good){
+      missteps++;clean=false;
+      document.getElementById('c-status').textContent='Missteps in this conversation: '+missteps;
+      busy=false;drawOpts(T);
+      document.getElementById('c-opts').scrollIntoView({block:'nearest',behavior:'smooth'});
+      return;
+    }
+    tIdx++;drawSteps();busy=false;
+    if(tIdx<R.turns.length)setTimeout(function(){if(g!==gen)return;renderTurn();},500);else finish();
+  },560);
 }
 function finish(){
   var R=ROUNDS[rIdx];rDone[rIdx]=1;buildRoundPicker();
