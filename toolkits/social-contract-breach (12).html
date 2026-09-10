@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breach of the social contract &#8212; where you stand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#23180C; --ink-soft:#5A4A34; --paper:#EDE9E1; --paper-2:#F6F4EF;
+  --rule:#CFC7B8; --amber:#E39B0C; --ledger:#2E4A6B; --alarm:#A32B1C; --repair:#3F6B45;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Spline Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16.5px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 96px}
+h1,h2,h3,h4,.stage-no,.gauge-word,.pct,.share-word,.doThis b,.fut h4,.gapnum{
+  font-family:Oswald,"Arial Narrow",Impact,sans-serif;font-weight:600;letter-spacing:.01em}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.02;margin:0 0 .4em;text-transform:uppercase}
+h2{font-size:clamp(1.35rem,3.4vw,1.9rem);line-height:1.08;margin:0;text-transform:uppercase}
+h3{font-size:1.02rem;letter-spacing:.02em;margin:0 0 .5rem;text-transform:uppercase;color:var(--ink-soft)}
+p{margin:0 0 .85em;max-width:66ch}
+
+.brandbar{display:flex;align-items:center;gap:16px;padding:14px 0 12px;border-bottom:1px solid var(--rule)}
+.brandbar img{display:block}
+.brandbar .rekhi{height:44px;width:auto;flex:0 0 auto}
+.brandbar .seal{height:46px;width:46px;flex:0 0 auto}
+.brandbar .lab{flex:1 1 auto;text-align:center;font-family:Oswald,"Arial Narrow",sans-serif;font-weight:500;
+  font-size:clamp(1.05rem,3.2vw,1.6rem);letter-spacing:.34em;text-transform:uppercase;color:var(--ink);
+  white-space:nowrap;padding-left:.34em}
+@media(max-width:520px){
+  .brandbar{gap:10px}.brandbar .rekhi{height:32px}.brandbar .seal{height:34px;width:34px}
+  .brandbar .lab{letter-spacing:.18em;padding-left:.18em}
+}
+header.top{padding:40px 0 26px;border-bottom:3px solid var(--ink)}
+.kicker{display:inline-block;font-family:Oswald,sans-serif;font-size:.82rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink);background:var(--amber);padding:.28em .7em;margin-bottom:1.4rem}
+header.top p{font-size:1.06rem;color:var(--ink-soft)}
+.split{border-left:4px solid var(--ink);padding:.2em 0 .2em 1em;margin:1.4rem 0 0;max-width:66ch}
+.split p{font-size:.97rem;margin:0 0 .4em}
+.split p:last-child{margin:0}
+.split b{font-family:Oswald,sans-serif;font-weight:500;letter-spacing:.02em}
+
+.map{margin:26px 0 8px;padding:18px 0 6px;border-bottom:1px solid var(--rule);overflow-x:auto}
+.map svg{width:100%;height:auto;display:block;min-width:700px}
+.node rect{fill:var(--paper-2);stroke:var(--rule);stroke-width:2}
+.node text{font-family:Oswald,sans-serif;font-size:14px;fill:var(--ink-soft);letter-spacing:.02em}
+.node.done rect{fill:#E3DDD0;stroke:var(--ink-soft)}
+.node.done text{fill:var(--ink)}
+.node.active rect{fill:var(--amber);stroke:var(--ink);stroke-width:2.5}
+.node.active text{fill:var(--ink)}
+.out rect{stroke:var(--rule);stroke-width:1.5}
+.out text{font-family:"Spline Sans",sans-serif;font-size:12.5px;fill:var(--ink-soft)}
+.out.lead rect{stroke:var(--ink);stroke-width:2.5}
+.out.lead text{fill:var(--ink);font-weight:600}
+.link{stroke:var(--rule);stroke-width:2;fill:none}
+.link.on{stroke:var(--ink)}
+.zonelbl{font-family:Oswald,sans-serif;font-size:12px;fill:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase}
+
+section.stage{padding:38px 0 34px;border-bottom:1px solid var(--rule)}
+.stage-head{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.stage-no{font-size:1.5rem;color:var(--amber);border-bottom:3px solid var(--amber);line-height:1;padding-bottom:2px;flex:0 0 auto}
+.tag{font-family:Oswald,sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--ink-soft);color:var(--ink-soft);padding:.15em .5em;align-self:center}
+.tag.ev{border-color:var(--ledger);color:var(--ledger)}
+.tag.ch{border-color:var(--amber);color:#9a6a05;background:#fff}
+.stage-body{padding-top:14px}
+.stage.locked{opacity:.34;pointer-events:none;filter:saturate(.4)}
+.stage.locked .stage-body{display:none}
+
+.doThis{border:2px solid var(--ink);background:#fff;padding:.85em 1em;margin:0 0 24px;max-width:70ch}
+.doThis b{display:block;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:.15em}
+.doThis span{display:block;font-size:1rem}
+.doThis em{font-style:normal;color:var(--ink-soft);font-size:.92rem;display:block;margin-top:.35em}
+
+.lanes{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+.lane{border-top:3px solid var(--ink);padding-top:10px}
+.lane[data-w="cog"]{border-top-color:var(--ledger)}
+.lane[data-w="beh"]{border-top-color:var(--alarm)}
+.lane h3{color:var(--ink)}
+.lane .why{font-size:.86rem;color:var(--ink-soft);margin:-.2rem 0 .7rem}
+.chip{display:block;width:100%;text-align:left;cursor:pointer;background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--rule);padding:.55em .7em;margin:0 0 7px;
+  font:inherit;color:var(--ink)}
+.chip:hover{border-color:var(--ink-soft)}
+.chip b{display:block;font-weight:600}
+.chip span{font-size:.88rem;color:var(--ink-soft)}
+.chip[aria-pressed="true"]{background:#fff;border-left-color:var(--amber);border-color:var(--ink-soft)}
+.lane[data-w="cog"] .chip[aria-pressed="true"]{border-left-color:var(--ledger)}
+.lane[data-w="beh"] .chip[aria-pressed="true"]{border-left-color:var(--alarm)}
+.chip[aria-pressed="true"] b::after{content:" \2713";color:var(--amber)}
+.lane[data-w="beh"] .chip[aria-pressed="true"] b::after{color:var(--alarm)}
+.chip:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--ledger);outline-offset:2px}
+
+.gauge{margin:26px 0 6px;border:2px solid var(--ink);background:var(--paper-2);padding:16px}
+.gauge-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.gauge-word{font-size:1.35rem;text-transform:uppercase}
+.bar{height:16px;background:#DDD6C7;margin:12px 0 10px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--amber);transition:width .25s ease}
+.bar.hot i{background:var(--alarm)}
+.gauge .read{font-size:.95rem;color:var(--ink-soft);margin:0}
+.flag{margin-top:12px;border-left:4px solid var(--alarm);background:#fff;padding:.6em .8em;font-size:.93rem}
+.flag.ok{border-left-color:var(--repair)}
+.flag.neutral{border-left-color:var(--ledger)}
+
+.pick{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 22px}
+.pick button{font:inherit;cursor:pointer;background:transparent;color:var(--ink);
+  border:2px solid var(--ink-soft);padding:.45em .9em}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.field{margin:0 0 20px}
+.field label,.qlabel{display:block;font-size:.9rem;color:var(--ink-soft);margin-bottom:.35em}
+
+/* question blocks - one visual language for all evidence */
+.qblock{border-top:1px solid var(--rule);padding:18px 0}
+.qblock:last-of-type{border-bottom:1px solid var(--rule)}
+.qblock h4{margin:0 0 .15em;font-size:1.06rem}
+.qblock .qsub{font-size:.92rem;color:var(--ink-soft);margin:0 0 .7em}
+.opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.opts button{font:inherit;text-align:left;cursor:pointer;background:var(--paper-2);color:var(--ink);
+  border:1px solid var(--rule);border-left:4px solid var(--rule);padding:.55em .7em;line-height:1.3}
+.opts button:hover{border-color:var(--ink-soft)}
+.opts button[aria-pressed="true"]{background:#fff;border-color:var(--ink);border-left-color:var(--ink);font-weight:600}
+.opts button small{display:block;font-weight:400;color:var(--ink-soft);font-size:.85rem}
+.opts button[data-k="yes"][aria-pressed="true"]{border-left-color:var(--repair)}
+.opts button[data-k="no"][aria-pressed="true"]{border-left-color:var(--alarm)}
+.opts button[data-k="part"][aria-pressed="true"]{border-left-color:var(--amber)}
+.plan li.willdo{color:var(--ink)}
+.opts button[data-k="notpossible"][aria-pressed="true"]{border-left-color:var(--ink-soft)}
+.opts button[data-k="willdo"][aria-pressed="true"]{border-left-color:var(--ledger);background:#fff}
+.opts button[data-k="willdo"][aria-pressed="true"] span::after{content:" \21BB";color:var(--ledger)}
+.counts{margin-top:14px;border-left:4px solid var(--ledger);background:#fff;padding:.6em .8em;font-size:.94rem}
+.counts b{font-family:Oswald,sans-serif;font-weight:500}
+.detail{margin-top:10px;font-size:.88rem;color:var(--ink-soft)}
+.detail summary{cursor:pointer;color:var(--ledger)}
+.detail ul{margin:.5em 0 0;padding-left:1.1em}
+
+.promises{display:grid;gap:7px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.promises button{font:inherit;text-align:left;cursor:pointer;background:var(--paper-2);color:var(--ink);
+  border:1px solid var(--rule);border-left:4px solid var(--rule);padding:.5em .7em}
+.promises button:hover{border-color:var(--ink-soft)}
+.promises button[aria-pressed="true"]{background:#fff;border-color:var(--ink-soft);border-left-color:var(--alarm);font-weight:600}
+.promises button[aria-pressed="true"]::after{content:" \2713";color:var(--alarm)}
+.drow{border-bottom:1px solid var(--rule);padding:.7em 0}
+.drow .dname{font-weight:600;display:block;margin-bottom:.15em}
+.drow .dhint{display:block;font-size:.86rem;color:var(--ink-soft);margin-bottom:.5em}
+.dopts{display:flex;gap:7px;flex-wrap:wrap}
+.dopts button{flex:1 1 130px;font:inherit;font-size:.9rem;cursor:pointer;background:var(--paper-2);
+  color:var(--ink-soft);border:1px solid var(--rule);padding:.4em .5em;text-align:center}
+.dopts button[aria-pressed="true"]{color:#fff;font-weight:600}
+.dopts button[data-v="asked"][aria-pressed="true"]{background:var(--alarm);border-color:var(--alarm)}
+.dopts button[data-v="partial"][aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.dopts button[data-v="given"][aria-pressed="true"]{background:var(--repair);border-color:var(--repair)}
+
+input[type=text],input[type=date]{font:inherit;padding:.5em .6em;background:var(--paper-2);
+  border:2px solid var(--ink-soft);color:var(--ink);max-width:440px;width:100%}
+.notes{list-style:none;padding:0;margin:12px 0 0;counter-reset:t}
+.notes li{counter-increment:t;display:flex;gap:10px;align-items:center;padding:.45em .7em;background:#fff;
+  border:1px solid var(--rule);margin-bottom:6px;font-size:.94rem}
+.notes li::before{content:counter(t) ".";font-family:Oswald,sans-serif;color:var(--ledger)}
+.notes .del{margin-left:auto;background:none;border:0;color:var(--alarm);cursor:pointer;font:inherit;font-size:.85rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.btn{font:inherit;font-family:Oswald,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;
+  background:var(--ink);color:var(--paper-2);border:2px solid var(--ink);padding:.5em 1.1em}
+.btn.ghost{background:transparent;color:var(--ink)}
+.continue{margin-top:26px}
+
+.sunkToggle{margin-top:12px;font:inherit;font-size:.93rem;cursor:pointer;text-align:left;
+  background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--rule);
+  color:var(--ink);padding:.5em .7em;width:100%;max-width:520px}
+.sunkToggle[aria-pressed="true"]{background:#fff;border-color:var(--alarm);border-left-color:var(--alarm);font-weight:600}
+.sunkToggle[aria-pressed="true"]::before{content:"\2713 ";color:var(--alarm)}
+.scoreboard{display:grid;gap:20px;grid-template-columns:1fr minmax(250px,1fr);align-items:center;margin-top:26px;
+  border:2px solid var(--ink);background:var(--paper-2);padding:18px}
+@media(max-width:760px){.scoreboard{grid-template-columns:1fr}}
+.sums{list-style:none;padding:0;margin:0}
+.sums li{display:flex;justify-content:space-between;gap:10px;padding:.45em 0;border-bottom:1px solid var(--rule);font-size:.96rem}
+.sums li:last-child{border-bottom:0}
+.sums li i{font-style:normal;font-family:Oswald,sans-serif;font-size:1.15rem}
+.sums li.net{border-top:2px solid var(--ink);margin-top:.3em;padding-top:.6em;font-weight:600}
+.beam-arm{transition:transform .35s ease;transform-origin:250px 60px}
+.pan-txt{font-family:Oswald,sans-serif;font-size:14px}
+.beam svg{width:100%;height:auto}
+
+/* board */
+.share{border:2px solid var(--ink);background:var(--paper-2);padding:16px;margin:0 0 24px}
+.share-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline}
+.share-word{font-size:1.3rem;text-transform:uppercase}
+.sbar{display:flex;height:20px;margin:12px 0 8px;overflow:hidden;background:#DDD6C7}
+.sbar i{display:block;height:100%;transition:width .3s ease}
+.sbar .rep{background:var(--repair)}
+.sbar .ext{background:var(--alarm)}
+.share small{color:var(--ink-soft);font-size:.92rem}
+.odds{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.odd{border:2px solid var(--rule);background:var(--paper-2);padding:14px;display:flex;flex-direction:column}
+.odd.lead{border-color:var(--ink);background:#fff}
+.odd h4{margin:0;font-size:1.02rem;text-transform:uppercase;line-height:1.15}
+.odd .pct{font-size:2.3rem;line-height:1;margin:.25em 0 0}
+.odd[data-side="rep"] .pct{color:var(--repair)}
+.odd[data-side="ext"] .pct{color:var(--alarm)}
+.obar{height:8px;background:#DDD6C7;margin:8px 0 10px}
+.obar i{display:block;height:100%;width:0;transition:width .3s ease}
+.odd[data-side="rep"] .obar i{background:var(--repair)}
+.odd[data-side="ext"] .obar i{background:var(--alarm)}
+.odd .means{font-size:.9rem;color:var(--ink-soft);margin:0 0 10px}
+.odd .why{list-style:none;padding:0;margin:auto 0 0;font-size:.86rem}
+.odd .why li{padding:.15em 0;color:var(--ink-soft)}
+.odd .why li b{font-family:Oswald,sans-serif;font-weight:500;margin-right:.4em}
+.odd .why li.up b{color:var(--repair)}
+.odd .why li.down b{color:var(--alarm)}
+.badge{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper-2);padding:.15em .5em;margin-bottom:.5em}
+.panel{border-top:3px solid var(--ink);margin-top:32px;padding-top:18px}
+
+/* two futures */
+.futures{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-top:16px}
+@media(max-width:720px){.futures{grid-template-columns:1fr}}
+.fut{border:2px solid var(--rule);background:var(--paper-2);padding:14px}
+.fut.now{border-color:var(--ink)}
+.fut.then{border-color:var(--repair);border-style:dashed}
+.fut h4{margin:0;font-size:1rem;text-transform:uppercase}
+.fut .sub{font-size:.86rem;color:var(--ink-soft);margin:.15em 0 .8em}
+.frow{display:flex;align-items:center;gap:8px;font-size:.88rem;padding:.2em 0}
+.frow .fn{flex:0 0 84px;color:var(--ink-soft)}
+.frow .fb{flex:1 1 auto;height:9px;background:#DDD6C7}
+.frow .fb i{display:block;height:100%;transition:width .3s ease}
+.frow[data-side="rep"] .fb i{background:var(--repair)}
+.frow[data-side="ext"] .fb i{background:var(--alarm)}
+.frow .fv{flex:0 0 38px;text-align:right;font-family:Oswald,sans-serif}
+.fut .foot{margin:.8em 0 0;font-size:.9rem;font-weight:600}
+.gapbox{border:3px solid var(--ink);background:#fff;padding:16px;margin-top:18px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.gapnum{font-size:2.6rem;line-height:1;flex:0 0 auto}
+.gapnum.up{color:var(--repair)}
+.gapnum.flat{color:var(--alarm)}
+.gapbox div{flex:1 1 260px}
+.gapbox p{margin:0;font-size:.96rem}
+.gapbox b{display:block;font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;font-size:.86rem;letter-spacing:.06em;margin-bottom:.2em}
+.plan{list-style:none;padding:0;margin:16px 0 0}
+.plan li{display:flex;gap:10px;padding:.5em 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.plan li::before{content:"\2192";color:var(--amber);font-weight:700}
+.plan li.done::before{content:"\2713";color:var(--repair)}
+.whatif{list-style:none;padding:0;margin:0}
+.whatif li{display:flex;gap:14px;align-items:baseline;padding:.55em 0;border-bottom:1px solid var(--rule);font-size:.96rem}
+.delta{font-family:Oswald,sans-serif;flex:0 0 66px;text-align:right}
+.delta.up{color:var(--repair)}
+.delta.down{color:var(--alarm)}
+.acts{padding-left:1.1em;margin:0}
+.acts li{margin-bottom:.45em}
+.note{border-left:4px solid var(--amber);background:#fff;padding:.7em .9em;font-size:.95rem;margin:18px 0 0}
+.recap{list-style:none;padding:0;margin:18px 0 0;border-top:1px solid var(--rule)}
+.recap li{display:flex;gap:12px;padding:.5em 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.recap li b{flex:0 0 40%;font-weight:600;color:var(--ink-soft)}
+
+.fbox{margin-top:18px;border:2px solid var(--ink-soft);background:var(--paper-2);padding:16px;overflow-x:auto}
+.fbox h4{margin:18px 0 .4em;font-size:.95rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.fbox h4:first-child{margin-top:0}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.55}
+.fbox .mono p{max-width:none;margin:0 0 .5em}
+table.ftable{border-collapse:collapse;width:100%;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-width:520px}
+table.ftable th,table.ftable td{border-bottom:1px solid var(--rule);padding:.35em .5em;text-align:right;white-space:nowrap}
+table.ftable th:first-child,table.ftable td:first-child{text-align:left;white-space:normal;min-width:190px}
+table.ftable thead th{color:var(--ink-soft);text-transform:uppercase;font-size:.72rem;letter-spacing:.06em}
+table.ftable tr.sumrow td{border-top:2px solid var(--ink);font-weight:700}
+table.ftable td.pos{color:var(--repair)}
+table.ftable td.neg{color:var(--alarm)}
+footer{padding:30px 0;color:var(--ink-soft);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* plan mode strip */
+.modestrip{border:2px solid var(--ledger);background:#fff;padding:.7em .9em;margin:0 0 22px;font-size:.95rem}
+.modestrip b{font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.08em;
+  font-size:.78rem;color:var(--ledger);display:block;margin-bottom:.15em}
+.stage-sub{flex:1 1 100%;font-size:.93rem;color:var(--ink-soft);margin:.3em 0 0}
+.futures.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.futures.three{grid-template-columns:1fr}}
+.fut.plan{border-color:var(--ledger);border-style:dashed}
+.fut.ceil{border-color:var(--amber);border-style:dashed}
+.gaps{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:18px}
+@media(max-width:720px){.gaps{grid-template-columns:1fr}}
+.gapbox{border:3px solid var(--ink);background:#fff;padding:16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:0}
+.gapbox.second{border-color:var(--amber)}
+.gapnum.mid{color:var(--amber)}
+.plan li.blocked::before{content:"\2715";color:var(--ink-soft)}
+.plan li.willdo::before{content:"\21BB";color:var(--ledger)}
+.blockedlist{list-style:none;padding:0;margin:14px 0 0;font-size:.93rem;color:var(--ink-soft)}
+.blockedlist li{padding:.35em 0;border-bottom:1px solid var(--rule)}
+.blockedlist li::before{content:"\2715 ";color:var(--alarm)}
+
+/* mode-driven stage 3 */
+.rowlbl{display:block;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+  margin:.5em 0 .3em;font-family:Oswald,sans-serif}
+.rowlbl.fc{color:var(--ledger)}
+.dopts.fc button[aria-pressed="true"]{background:var(--ledger);border-color:var(--ledger);color:#fff}
+.dopts.fc button[data-f="none"][aria-pressed="true"]{background:var(--ink-soft);border-color:var(--ink-soft)}
+.collapsenote{margin:14px 0 0;font-size:.88rem;color:var(--ink-soft);border-left:3px solid var(--rule);padding-left:.8em}
+/* branch columns */
+.fut.bad{border-color:var(--alarm);border-style:dashed}
+.fut.plan{border-color:var(--ledger);border-style:dashed}
+.fut.then{border-color:var(--repair);border-style:dashed}
+.gapbox.second{border-color:var(--alarm)}
+.gapnum.mid{color:var(--alarm)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="brandbar">
+  <img class="rekhi" alt="Rekhi Foundation for Happiness" src="data:image/png;base64,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">
+  <span class="lab">Mind Lab</span>
+  <img class="seal" alt="MIND Lab, Chandigarh University" src="data:image/png;base64,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">
+</div>
+
+<header class="top">
+  <span class="kicker">Where you stand</span>
+  <h1>When the unwritten deal breaks</h1>
+  <p>A social contract is the promise nobody wrote down: effort for recognition, loyalty for security, care for care. It breaks quietly, then loudly. This page does not ask you to do anything. It asks what has already happened, and reads it back as odds.</p>
+  <div class="split">
+    <p><b>Stages 1&#8211;4 are evidence.</b> Past tense throughout. An unanswered question and a stated intention both count zero &#8212; nothing here is a task you are failing.</p>
+    <p><b>Stage 5 is the choice.</b> What you answer in stage 2 decides what the later stages ask and which two futures stage 5 compares.</p>
+  </div>
+</header>
+
+<div class="map" aria-hidden="true">
+<svg viewBox="0 0 980 190" role="img">
+  <text class="zonelbl" x="8" y="12">Evidence</text>
+  <text class="zonelbl" x="722" y="12">Choice</text>
+  <path class="link" id="l1" d="M158 50 H186"></path>
+  <path class="link" id="l2" d="M336 50 H364"></path>
+  <path class="link" id="l3" d="M514 50 H542"></path>
+  <path class="link" id="l4" d="M692 50 H720"></path>
+  <path class="link" d="M820 50 C831 50 829 26 840 26"></path>
+  <path class="link" d="M820 50 C831 50 829 64 840 64"></path>
+  <path class="link" d="M820 50 C831 50 829 102 840 102"></path>
+  <path class="link" d="M820 50 C831 50 829 140 840 140"></path>
+  <g class="node" id="n1"><rect x="8" y="25" width="150" height="50" rx="2"></rect><text x="83" y="55" text-anchor="middle">1 &#183; Signals</text></g>
+  <g class="node" id="n2"><rect x="186" y="25" width="150" height="50" rx="2"></rect><text x="261" y="55" text-anchor="middle">2 &#183; What was said</text></g>
+  <g class="node" id="n3"><rect x="364" y="25" width="150" height="50" rx="2"></rect><text x="439" y="55" text-anchor="middle" id="mapN3">3 &#183; What was given</text></g>
+  <g class="node" id="n4"><rect x="542" y="25" width="150" height="50" rx="2"></rect><text x="617" y="55" text-anchor="middle">4 &#183; What it's worth</text></g>
+  <g class="node" id="n5"><rect x="720" y="25" width="100" height="50" rx="2"></rect><text x="770" y="55" text-anchor="middle">5 &#183; Odds</text></g>
+  <g class="out" id="o0"><rect x="840" y="12" width="136" height="28"></rect><text x="848" y="30">Repair</text><text x="968" y="30" text-anchor="end" id="op0">&#8211;</text></g>
+  <g class="out" id="o1"><rect x="840" y="50" width="136" height="28"></rect><text x="848" y="68">Time-boxed</text><text x="968" y="68" text-anchor="end" id="op1">&#8211;</text></g>
+  <g class="out" id="o2"><rect x="840" y="88" width="136" height="28"></rect><text x="848" y="106">Contain</text><text x="968" y="106" text-anchor="end" id="op2">&#8211;</text></g>
+  <g class="out" id="o3"><rect x="840" y="126" width="136" height="28"></rect><text x="848" y="144">Exit</text><text x="968" y="144" text-anchor="end" id="op3">&#8211;</text></g>
+</svg>
+</div>
+
+<!-- STAGE 1 -->
+<section class="stage" id="s1">
+  <div class="stage-head"><span class="stage-no">01</span><h2>The signals</h2><span class="tag ev">Evidence</span></div>
+  <div class="stage-body">
+    <div class="doThis">
+      <b>What this asks</b>
+      <span>Which signals are present today &#8212; not which you should be looking for.</span>
+      <em>Tap to record, tap again to remove. Only tick what you can point to. Behavioural signals weigh heaviest, because by the time they show, the breach has stopped being private.</em>
+    </div>
+
+    <div class="field">
+      <label>Whose side of the contract are you on?</label>
+      <div class="pick" id="rolePick">
+        <button type="button" data-role="victim" aria-pressed="true">The promise was broken on me</button>
+        <button type="button" data-role="violator" aria-pressed="false">I'm the one who broke it</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What kind of relationship is it?</label>
+      <div class="pick" id="relPick">
+        <button type="button" data-rel="job" aria-pressed="true">Job</button>
+        <button type="button" data-rel="friendship" aria-pressed="false">Friendship</button>
+        <button type="button" data-rel="partnership" aria-pressed="false">Partnership</button>
+      </div>
+    </div>
+
+    <p class="qlabel">Which of these are present?</p>
+    <div class="lanes">
+      <div class="lane" data-w="emo"><h3>Emotional</h3><p class="why">Felt heat. Fast to appear, slow to leave.</p><div class="chipset"></div></div>
+      <div class="lane" data-w="cog"><h3>Cognitive</h3><p class="why">The private accounting. Where the story hardens.</p><div class="chipset"></div></div>
+      <div class="lane" data-w="beh"><h3>Behavioural</h3><p class="why">The contract being rewritten in actions.</p><div class="chipset"></div></div>
+    </div>
+
+    <div class="gauge">
+      <div class="gauge-top">
+        <span class="gauge-word" id="gWord">Nothing recorded yet</span>
+        <span id="gCount" style="font-size:.9rem;color:var(--ink-soft)">0 of 11 signals</span>
+      </div>
+      <div class="bar" id="gBar"><i></i></div>
+      <p class="read" id="gRead">Intensity rises fastest when private feeling turns into public behaviour.</p>
+      <div class="flag" id="gFlag" hidden></div>
+    </div>
+
+    <button class="btn continue" data-next="s2" type="button">Continue</button>
+  </div>
+</section>
+
+<!-- STAGE 2 -->
+<section class="stage locked" id="s2">
+  <div class="stage-head"><span class="stage-no">02</span><h2>What was said</h2><span class="tag ev">Evidence</span>
+    <p class="stage-sub">This stage decides what the next three ask</p></div>
+  <div class="stage-body">
+    <div class="doThis">
+      <b>What this asks</b>
+      <span>Whether the breach has been spoken about &#8212; and if so, how it went.</span>
+      <em id="s2lead"></em>
+    </div>
+    <div class="modestrip" id="modeStrip" hidden></div>
+    <div id="saidQs"></div>
+    <div class="counts" id="saidCount" hidden></div>
+    <button class="btn continue" data-next="s3" type="button">Continue</button>
+  </div>
+</section>
+
+<!-- STAGE 3 -->
+<section class="stage locked" id="s3">
+  <div class="stage-head"><span class="stage-no">03</span><h2 id="s3title">What was given</h2><span class="tag ev">Evidence</span>
+    <p class="stage-sub" id="s3sub"></p></div>
+  <div class="stage-body">
+    <div class="doThis">
+      <b>What this asks</b>
+      <span id="s3lead"></span>
+      <em id="s3note"></em>
+    </div>
+    <div id="s3body"></div>
+    <button class="btn continue" data-next="s4" type="button">Continue</button>
+  </div>
+</section>
+
+<!-- STAGE 4 -->
+<section class="stage locked" id="s4">
+  <div class="stage-head"><span class="stage-no">04</span><h2 id="s4title">What it's worth</h2><span class="tag ev">Evidence</span>
+    <p class="stage-sub" id="s4sub"></p></div>
+  <div class="stage-body">
+    <div class="doThis">
+      <b>What this asks</b>
+      <span id="s4lead"></span>
+      <em>Judge the future only. What you have already invested is gone whichever way this goes, so it is not a reason to stay.</em>
+    </div>
+
+    <div class="qblock">
+      <h4>1. If this ended, what would you lose?</h4>
+      <p class="qsub">Count only what is still ahead &#8212; income, people, standing, opportunities.</p>
+      <div class="opts" id="qStay"></div>
+      <button class="sunkToggle" id="sunkBtn" type="button" aria-pressed="false">Most of my reason to stay is what I have already put in</button>
+    </div>
+
+    <div class="qblock">
+      <h4>2. What is carrying this costing you?</h4>
+      <p class="qsub">The ongoing drain of the resentment, not the original incident.</p>
+      <div class="opts" id="qTax"></div>
+    </div>
+
+    <div class="qblock">
+      <h4>3. If you walked away, what is waiting?</h4>
+      <p class="qsub" id="s4q3s">Leaving is only a real option if there is somewhere to go. Otherwise the honest version of disengaging is to stay and withdraw the goodwill.</p>
+      <div class="opts" id="qAlt"></div>
+    </div>
+
+    <div class="qblock">
+      <h4>4. Has this happened before?</h4>
+      <p class="qsub">The heaviest answer on the page. A one-off can be repaired; a habit can only be managed or left.</p>
+      <div class="opts" id="qPattern"></div>
+    </div>
+
+    <div id="modeQBlock"></div>
+
+    <div class="scoreboard">
+      <div>
+        <ul class="sums">
+          <li><span id="sumStayLbl">What you'd lose</span> <i id="sumStay">&#8211;</i></li>
+          <li id="sunkRow" hidden><span>Less what you already gave</span> <i id="sumSunk">&#8211;</i></li>
+          <li><span id="sumTaxLbl">What carrying it costs</span> <i id="sumTax">&#8211;</i></li>
+          <li class="net"><span id="netLbl">Net</span> <i id="sumNet">&#8211;</i></li>
+          <li><span id="sumAltLbl">Alternative</span> <i id="sumAlt">&#8211;</i></li>
+        </ul>
+        <p class="read" id="beamRead" style="font-size:.95rem;color:var(--ink-soft);margin-top:.9em">Answer questions 1 and 2 and the scale will tip.</p>
+      </div>
+      <div class="beam">
+        <svg viewBox="0 0 500 200" role="img" aria-labelledby="beamTitle">
+          <title id="beamTitle">Scale weighing what you would lose against what carrying it costs</title>
+          <path d="M250 62 L230 175 L270 175 Z" fill="#DDD6C7"></path>
+          <rect x="200" y="175" width="100" height="8" fill="#23180C"></rect>
+          <g class="beam-arm" id="arm">
+            <rect x="70" y="56" width="360" height="8" fill="#23180C"></rect>
+            <circle cx="250" cy="60" r="9" fill="#E39B0C" stroke="#23180C" stroke-width="2"></circle>
+            <path d="M70 60 v26" stroke="#23180C" stroke-width="2"></path>
+            <rect x="18" y="86" width="104" height="34" fill="#3F6B45"></rect>
+            <text class="pan-txt" x="70" y="108" text-anchor="middle" fill="#F6F4EF">Staying</text>
+            <path d="M430 60 v26" stroke="#23180C" stroke-width="2"></path>
+            <rect x="378" y="86" width="104" height="34" fill="#A32B1C"></rect>
+            <text class="pan-txt" x="430" y="108" text-anchor="middle" fill="#F6F4EF">Carrying it</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="flag" id="s4flag" hidden></div>
+
+    <button class="btn continue" data-next="s5" type="button">Read the odds</button>
+  </div>
+</section>
+
+<!-- STAGE 5 -->
+<section class="stage locked" id="s5">
+  <div class="stage-head"><span class="stage-no">05</span><h2 id="s5title">The choice</h2><span class="tag ch">Choice</span>
+    <p class="stage-sub" id="s5sub"></p></div>
+  <div class="stage-body">
+    <div class="doThis">
+      <b>What this is</b>
+      <span id="s5lead"></span>
+      <em>Change any answer above and every number here updates. A 55/45 split is a genuinely open question &#8212; the right response to one is to buy information, not to commit.</em>
+    </div>
+
+    <div class="share">
+      <div class="share-top">
+        <span class="share-word" id="shareWord">Repair side vs exit side</span>
+        <span id="conf" style="font-size:.9rem;color:var(--ink-soft)"></span>
+      </div>
+      <div class="sbar"><i class="rep" id="sRep"></i><i class="ext" id="sExt"></i></div>
+      <small id="shareRead"></small>
+    </div>
+
+    <div class="odds" id="odds"></div>
+    <div class="note" id="closeNote" hidden></div>
+
+    <div class="panel">
+      <h3 id="branchHead">The fork</h3>
+      <p style="font-size:.95rem;color:var(--ink-soft)" id="branchLead"></p>
+      <div class="futures" id="futures"></div>
+      <div class="gaps" id="gaps"></div>
+      <h3 style="margin-top:26px" id="planHead">What is still open</h3>
+      <ul class="plan" id="plan"></ul>
+      <ul class="blockedlist" id="blocked"></ul>
+    </div>
+
+    <div class="panel">
+      <h3>What would move the odds most</h3>
+      <p style="font-size:.95rem;color:var(--ink-soft);margin-bottom:.6em">Each line re-runs the board with one thing different &#8212; including things you don't control. The biggest number is where the situation is most sensitive, which is not always where your effort can reach.</p>
+      <ul class="whatif" id="whatif"></ul>
+    </div>
+
+    <div class="panel">
+      <h3 id="actHead">If you take the leading option</h3>
+      <ol class="acts" id="acts"></ol>
+      <p id="vRole" style="color:var(--ink-soft);margin-top:1em"></p>
+    </div>
+
+    <div class="panel">
+      <h3>Set the review date</h3>
+      <p style="font-size:.95rem;color:var(--ink-soft)">An open-ended wait is how repair quietly becomes tolerance. Pick the date you re-run this, and decide now what visible change would count by then.</p>
+      <div class="row">
+        <input type="date" id="review" style="max-width:230px" aria-label="Review date">
+        <span id="reviewRead" style="font-size:.95rem;color:var(--ink-soft)"></span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>The evidence ledger</h3>
+      <ul class="recap" id="recap"></ul>
+      <div class="row" style="margin-top:24px"><button class="btn ghost" id="restart" type="button">Start over</button></div>
+    </div>
+
+    <div class="panel">
+      <h3>The arithmetic</h3>
+      <p style="font-size:.95rem;color:var(--ink-soft)">Nothing here is measured. Every percentage comes from the weights below, applied to your own answers &#8212; so you can disagree with a number by disagreeing with a weight.</p>
+      <button class="btn ghost" id="fToggle" type="button" aria-expanded="false" aria-controls="fbox">Show the formula</button>
+      <div class="fbox" id="fbox" hidden></div>
+    </div>
+  </div>
+</section>
+
+<footer>Built from the seven slides on breach of the social contract: emotional, cognitive and behavioural signals, the sensemaking and action phases, the sunk-cost audit, and the choice between repair and exit. The alternative question, the delivery ledger and the branching futures are additions.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var clamp = function(v,a,b){ return Math.max(a, Math.min(b, v)); };
+  var fmt = function(v){ return (v > 0 ? "+" : v < 0 ? "\u2212" : " ") + Math.abs(v).toFixed(2); };
+  function el(tag, cls, txt){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(txt !== undefined) e.textContent = txt;
+    return e;
+  }
+
+  /* ===================== content ===================== */
+  var SIGNALS = {
+    emo:[["Anger and rage","Intense, active response to an unfulfilled promise.",1],
+         ["Betrayal and mistrust","Feeling cheated or misled; confidence in the other party drops.",1.2],
+         ["Frustration and resentment","Low-grade negativity that persists and reframes the relationship.",1],
+         ["Emotional exhaustion","Burnout from carrying the strain of a broken relationship.",1.2]],
+    cog:[["Perception of injustice","The exchange reads as unfair - effort in, nothing back.",1.2],
+         ["Appraisal of resource loss","What is gone: perks, benefits, career opportunities.",1.2],
+         ["Tit-for-tat mentality","Balance will be restored by withholding, matching harm for harm.",1.6]],
+    beh:[["Reduced citizenship behaviour","No more going above the formal duties. Only what's written.",1.4],
+         ["Counterproductive work behaviour","Revenge or sabotage: absenteeism, deliberate slowness, negative word of mouth.",2],
+         ["Withdrawal or silence","Disengaging; withholding helpful input even when the problem is visible.",1.6],
+         ["Turnover intentions","Actively thinking about leaving.",1.6]]
+  };
+
+  var PROMISE_SETS = {
+    job:{
+      promotion:["Promotion or step up","a lead role, sponsorship in writing, an interim title"],
+      pay:["Pay, bonus or equity","flexible hours, extra leave, a dated review of the decision"],
+      load:["Workload or support","something publicly cut, temporary help, protected focus time"],
+      growth:["Development and career path","a mentor, a rotation, funded training with time to use it"],
+      credit:["Recognition and credit","the record corrected publicly, attribution fixed, a nomination"],
+      security:["Security or a stable role","written scope, honest notice, redeployment support"],
+      loyalty:["Loyalty and public backing","being backed out loud, blame taken where it belongs"]
+    },
+    friendship:{
+      showup:["Showing up when it mattered","turning up next time, a real apology, presence not excuses"],
+      discretion:["Discretion with what you told them","the leak owned and corrected, the story walked back"],
+      mutual:["Effort that goes both ways","them initiating for once, carrying the plans a while"],
+      honesty:["Honesty to your face","the real reason said out loud, however late"],
+      defended:["Being taken your side in public","the record corrected with the same people who heard it"],
+      time:["Time and attention","a standing arrangement they actually keep"],
+      help:["Help they promised in a crisis","showing up for the next one, or naming what they can do"]
+    },
+    partnership:{
+      work:["The agreed division of work","the load rebalanced, or their share formally reassigned"],
+      money:["The agreed split of money or credit","the split corrected, back-payment, credit restated"],
+      consulted:["Being consulted on decisions","decision rights in writing, a veto, advance notice"],
+      candour:["Honesty about problems while fixable","open books, earlier warnings, a reporting rhythm"],
+      external:["Commitments kept on your behalf","the third party put right, the relationship repaired"],
+      focus:["Exclusivity or focus","the competing commitment dropped or declared"],
+      winddown:["Fair terms if it winds down","a written wind-down agreement, valuation, timeline"]
+    }
+  };
+  function promiseSet(st){ return PROMISE_SETS[st.rel] || PROMISE_SETS.job; }
+  function promiseLabel(st, key){ var s = promiseSet(st); return s[key] ? s[key][0] : key; }
+
+  var SAID = {
+    victim:[
+      ["Was the breach named out loud?","Someone said plainly what was promised and what happened.","It was left unsaid, or raised and shut down.","The breach named out loud"],
+      ["Was a real reason given?","A credible explanation - budget, systemic change, a decision made elsewhere.","No explanation, or one that didn't hold up.","A real reason given"],
+      ["Was it said what would repair it?","A concrete request was put on the table.","No specific remedy has been named by anyone.","A concrete remedy named"]
+    ],
+    violator:[
+      ["Was the breach acknowledged?","You faced it directly rather than letting it pass.","It was glossed over or met with silence.","The breach acknowledged"],
+      ["Was the impact acknowledged?","The effect on them was recognised, not just the decision defended.","The conversation stayed about the decision, not the cost.","The impact acknowledged"],
+      ["Was a sincere explanation given?","A transparent reason they could check.","No reason offered, or one they didn't believe.","A sincere explanation given"]
+    ]
+  };
+  var LEADS = {
+    victim:"A breach kept in silence keeps its worst possible explanation. This records whether that silence has been broken - not whether you should break it.",
+    violator:"The first conversation shapes the breach more than the remedy that follows. This records what has already been said."
+  };
+
+  var YNN = [
+    ["yes","Yes","It happened"],
+    ["no","No","It didn't, or it went badly"],
+    ["notpossible","Not possible","No route to it - the person, forum or budget is gone"],
+    ["willdo","I will do it","An intention, not an event"]
+  ];
+  function labelYNN(k){ var o = "unanswered"; YNN.forEach(function(x){ if(x[0] === k) o = x[1].toLowerCase(); }); return o; }
+
+  var DELIV = [["asked","Asked, nothing back",0],["partial","Partly given",0.5],["given","Fully given",1],["off","Off the table",null]];
+  var FORECAST = [["full","All of it","They come through in full",1],
+                  ["part","Some of it","A partial substitute",0.5],
+                  ["none","Nothing","I don't expect it to land",0]];
+
+  var Q = {
+    stay:[["Little","Nothing I couldn't replace",3],["Some","Enough that it would sting",6],["A lot","My situation is built on this",10]],
+    tax:[["Barely anything","I hardly think about it",3],["Some","It surfaces now and then",6],["A lot","On my mind most days",10]],
+    alt:[["Nothing lined up","Nowhere else to go right now",0],["I could find something","It would take effort and time",1],["Something concrete","A real option is available now",2]],
+    pattern:[["First time","A one-off they are working to fix","once"],["Happened before","This is how they operate","pattern"]],
+    terms:[["accepted","Yes, and both sides accepted them","Explicit and agreed.",1],
+           ["raised","Raised, but not accepted","One side named them; the other hasn't signed up.",0],
+           ["unspoken","No, still assumed","They remain unwritten and unspoken.",-1]],
+    finality:[["renegotiable","Renegotiable","A no for now, with a route back to it later.",1],
+              ["unclear","Unclear","Nobody has said whether it is final.",0],
+              ["final","Final","That door is shut and they have said so.",-1]],
+    recover:[["elsewhere","Yes, elsewhere","Someone or somewhere else can provide it.",1],
+             ["partly","Partly","Some of it is replaceable, some isn't.",0],
+             ["no","No","It only existed here.",-1]],
+    unprompted:[["yes","Yes, unprompted","Something arrived without anyone asking.",1],
+                ["partly","A little","Some movement, unasked.",0.5],
+                ["no","Nothing","Nothing has arrived.",0]]
+  };
+
+  /* the extra stage-4 question, one per mode */
+  var MODEQ = {
+    silent:{ q:"5. What is stopping you raising it?",
+      sub:"Avoidance is itself evidence. A missing forum is a fact about the situation; not wanting the answer is a fact about you.",
+      opts:[["nothingyet","Nothing yet","Just hasn't come up"],
+            ["noforum","No safe forum","There is no room where this could be said"],
+            ["dontwant","I don't want the answer","I would rather not know"]] },
+    spoken:null,
+    refused:{ q:"5. Was a reason given for the no?",
+      sub:"A credible reason lets you attribute the refusal to circumstance. No reason, or one you don't believe, points at character.",
+      opts:[["credible","A credible one","I can check it and it holds"],
+            ["none","None at all","Refused without explanation"],
+            ["disbelieved","One I don't believe","Given, but it doesn't hold up"]] },
+    blocked:{ q:"5. Does anything still depend on them?",
+      sub:"With no route to repair, this decides whether you are entangled or merely disappointed.",
+      opts:[["nothing","Nothing","No live dependency"],
+            ["some","Some things","Partly entangled"],
+            ["alot","A lot","My position depends on them"]] },
+    plan:{ q:"5. If you do it and nothing comes back, what then?",
+      sub:"Worth deciding in advance. Asking is cheap only if you know what a refusal would mean.",
+      opts:[["answer","I'd have my answer","The refusal would settle it"],
+            ["again","I'd try again","I would keep at it"],
+            ["regret","I'd regret asking","It would cost me something to be refused"]] }
+  };
+
+  /* ===================== the modes ===================== */
+  var MODES = {
+    silent:{
+      tag:"Nothing said yet",
+      mapN3:"3 \u00B7 Unasked",
+      s3title:"What has arrived unasked",
+      s3sub:"Nothing has been raised, so nothing has been refused",
+      s3lead:"Nothing has been said yet. So rather than asking what came back, this asks whether anything has arrived without anyone asking.",
+      s3note:"An untested situation is not a failed one. It weighs less here than a refusal would, and the fork in stage 5 is about whether you test it.",
+      collapse:"Per-promise delivery is hidden: with nothing asked, there is nothing to rate promise by promise.",
+      q2mode:"unprompted",
+      q3:"terms", q3label:"Have the unspoken expectations ever been raised?",
+      q3sub:"Mostly a record of what has been left assumed - useful before the next conversation, whenever it happens.",
+      s4title:"Is it worth finding out",
+      s4sub:"Whether raising it at all is worth the effort",
+      s4lead:"Four judgements. With nothing said yet, these decide whether raising it at all is worth the effort.",
+      s4q3:"With nothing raised, your alternative decides whether you would have any leverage in the conversation you haven't had.",
+      s5title:"Raise it, or don't",
+      s5sub:"The fork is whether you test this at all",
+      s5lead:"Nothing to fill in. Nothing has been asked, so nothing has been refused - the two columns are the two ways that stays true or stops being true.",
+      branchHead:"If you raise it, or if you never do",
+      branchLead:"Neither column is a recommendation. The left is this situation left untested; the right is it tested and met.",
+      planHead:"What has never been raised"
+    },
+    spoken:{
+      tag:"Spoken about",
+      mapN3:"3 \u00B7 What was given",
+      s3title:"What was given",
+      s3sub:"What has landed since it was raised",
+      s3lead:"It has been talked about. This records what has actually arrived since.",
+      s3note:"Delivery is the only reliable evidence about the future. A promise renewed is not a promise kept.",
+      q2mode:"delivery",
+      q3:"terms", q3label:"Were the unspoken expectations put into words?",
+      q3sub:"Assumptions are what broke last time. This asks whether they are explicit and accepted - by both sides, not written down by one.",
+      s4title:"What it's worth",
+      s4sub:"Whether repair is worth it",
+      s4lead:"Four judgements: what you'd lose, what it's costing, what else is available, and whether this has happened before.",
+      s4q3:"Leaving is only a real option if there is somewhere to go. Otherwise the honest version of disengaging is to stay and withdraw the goodwill.",
+      s5title:"The choice",
+      s5sub:"Two futures, and the gap between them",
+      s5lead:"Nothing to fill in. This is what your evidence adds up to, and what it would add up to if the open items landed.",
+      branchHead:"Two futures",
+      branchLead:"The left column is your evidence as it stands. The right is the same evidence with every open item answered the best way it could be.",
+      planHead:"What is still open"
+    },
+    refused:{
+      tag:"Raised and refused",
+      mapN3:"3 \u00B7 Despite the no",
+      s3title:"What arrived despite the refusal",
+      s3sub:"A refusal is evidence; delivery is the only thing that can contradict it",
+      s3lead:"It was raised and not met. This records whether anything arrived anyway - words that go nowhere are the cheapest thing to give.",
+      s3note:"The question is no longer whether to raise it. It is what is available now, and whether the door is actually shut.",
+      q2mode:"delivery",
+      q3:"finality", q3label:"Is the no final, renegotiable, or unclear?",
+      q3sub:"This replaces the expectations question, because after a refusal it is the more useful thing to know. A final no and an unclear no lead to different places.",
+      s4title:"Is it worth staying after a no",
+      s4sub:"Whether the relationship is worth keeping on the terms actually on offer",
+      s4lead:"Four judgements. After a refusal, these decide whether this is worth keeping on the terms actually available - not the ones you hoped for.",
+      s4q3:"This is now the decisive question. After a no, your alternative is the only thing that turns disengaging from a feeling into an option.",
+      s5title:"The choice after a no",
+      s5sub:"The fork is whether the no holds",
+      s5lead:"Nothing to fill in. A refusal is already weighted as evidence. The two columns are the no holding, and the no being reopened.",
+      branchHead:"If the no holds, or if it reopens",
+      branchLead:"Two branches from the same refusal. Which one is realistic is what your answer to question 3 above is for.",
+      planHead:"What is still open despite the no"
+    },
+    blocked:{
+      tag:"No route left",
+      mapN3:"3 \u00B7 Recoverable?",
+      s3title:"What is recoverable",
+      s3sub:"With no route to the conversation, the question becomes replaceability",
+      s3lead:"The conversation has no route left. So rather than what they gave, this asks whether what you lost can be got anywhere else.",
+      s3note:"Closed routes are not held against anyone. They do lower the ceiling, and that is the honest picture rather than a pessimistic one.",
+      collapse:"Per-promise delivery is hidden: with no route to ask, rating each promise against a request nobody can make would be noise.",
+      q2mode:"recover",
+      q3:"terms", q3label:"Were the expectations ever made explicit?",
+      q3sub:"A record of what was left assumed. Worth knowing before the next arrangement, even if it changes nothing here.",
+      s4title:"Is what remains worth keeping",
+      s4sub:"Repair is not on the table; this is about what is left",
+      s4lead:"Four judgements. With the conversation closed off, repair is not really available - these decide whether what remains is worth staying for.",
+      s4q3:"With no route to repair, this decides everything. Containing is only bearable while an alternative is being built.",
+      s5title:"The choice, with routes closed",
+      s5sub:"The fork is whether the loss is replaceable",
+      s5lead:"Nothing to fill in. Repair is largely unavailable here, so the two columns are the loss being replaced elsewhere, and it not being replaceable at all.",
+      branchHead:"If you replace it elsewhere, or if you can't",
+      branchLead:"Neither branch involves them changing. This is about your world, not theirs - which is what makes it a real fork rather than a wish.",
+      planHead:"What is still open"
+    },
+    plan:{
+      tag:"Plan recorded",
+      mapN3:"3 \u00B7 Landed / expected",
+      s3title:"What has landed, and what you expect",
+      s3sub:"Two answers per promise: what is in, and what you expect if you act",
+      s3lead:"You have said you will do something. So each promise gets two answers: what has already landed, and what you honestly expect back if you go through with it.",
+      s3note:"Your forecast does not touch the current odds - it builds the middle column in stage 5. That is the point: the plan gets priced against your own expectation, not an assumed best case.",
+      q2mode:"delivery+forecast",
+      q3:"terms", q3label:"Were the unspoken expectations put into words?",
+      q3sub:"Your plan is worth more if it ends with these agreed rather than merely raised. The difference shows up in the branch columns.",
+      s4title:"Is the plan worth executing",
+      s4sub:"Whether doing it is worth the effort",
+      s4lead:"Four judgements. With a plan on the table, these decide whether executing it is worth the effort - a plan that lands in a relationship not worth keeping is still a loss.",
+      s4q3:"Worth answering honestly. A plan looks more attractive when you have nowhere else to go, which is exactly when to check it on its merits.",
+      s5title:"Your plan, and the choice",
+      s5sub:"The fork is whether they come through",
+      s5lead:"Nothing to fill in. Three columns: where you stand now, where your own forecast would take you, and where a refusal would leave you.",
+      branchHead:"If they deliver, or if they don't",
+      branchLead:"The middle column uses your forecast, not a best case. The right column is you having done it and got nothing back - which is a different, worse position than never having asked.",
+      planHead:"Your plan, and what is still open"
+    }
+  };
+
+  var OUTCOMES = [
+    {key:"full", side:"rep", name:"Repair it properly", means:"Invest fully. Substitute what was lost, make the terms explicit, let the relationship reset."},
+    {key:"time", side:"rep", name:"Repair on a deadline", means:"Worth trying, not worth waiting indefinitely for. A named horizon and a named test."},
+    {key:"contain", side:"ext", name:"Contain and hold", means:"Keep the relationship, stop investing discretionary effort. Only what is written."},
+    {key:"exit", side:"ext", name:"Exit strategy", means:"Repair is no longer the project. Leave deliberately, on your own timetable."}
+  ];
+
+  var ACTIONS = {
+    full:["Get what was agreed written down, with a date on it.","Have the other party confirm each term back to you.","Watch for one small kept promise a week - that is the rate trust actually returns at."],
+    time:["Name the horizon out loud: a quarter, a project, one conversation.","Name the single visible change that would count as progress by then.","Decide in advance what happens if it doesn't, so the deadline isn't renegotiated when it arrives."],
+    contain:["Reset your effort to the written role and hold it there without announcing it.","Stop offering discretionary goodwill you would resent losing.","Build the alternative you don't have - containing is only bearable while it is temporary."],
+    exit:["Choose your timing rather than reacting to the next incident.","Bank what the relationship still gives: reference, skills, credit, documentation.","Leave the terms clean. A dignified exit keeps the door usable."]
+  };
+
+  /* ===================== state ===================== */
+  var state = { role:"victim", rel:"job", ticked:{},
+                said:{}, promises:{}, forecast:{},
+                termState:null, finality:null, recover:null, unprompted:null, modeQ:null,
+                stay:null, tax:null, alt:null, pattern:null, sunk:false,
+                reached:1, score:0 };
+
+  var MAXW = 0;
+  Object.keys(SIGNALS).forEach(function(k){ SIGNALS[k].forEach(function(s){ MAXW += s[2]; }); });
+
+  /* ===================== stage 1 ===================== */
+  Array.prototype.forEach.call(document.querySelectorAll(".lane"), function(lane){
+    var key = lane.getAttribute("data-w"), box = lane.querySelector(".chipset");
+    SIGNALS[key].forEach(function(sig,i){
+      var b = el("button","chip");
+      b.type = "button"; b.setAttribute("aria-pressed","false"); b.dataset.id = key + i;
+      b.appendChild(el("b","",sig[0])); b.appendChild(el("span","",sig[1]));
+      b.addEventListener("click", function(){
+        var on = b.getAttribute("aria-pressed") === "true";
+        b.setAttribute("aria-pressed", on ? "false" : "true");
+        if(on) delete state.ticked[b.dataset.id];
+        else state.ticked[b.dataset.id] = {w:sig[2], lane:key, name:sig[0], idx:i};
+        renderGauge(); renderBoard();
+      });
+      box.appendChild(b);
+    });
+  });
+
+  function countsFor(st){
+    var c = {n:0, score:0, beh:0, cog:0, titfortat:0, names:[]};
+    Object.keys(st.ticked).forEach(function(id){
+      var t = st.ticked[id];
+      c.n++; c.score += t.w; c.names.push(t.name);
+      if(t.lane === "beh") c.beh++;
+      if(t.lane === "cog"){ c.cog++; if(t.idx === 2) c.titfortat = 1; }
+    });
+    c.pct = Math.round(c.score / MAXW * 100);
+    return c;
+  }
+  function counts(){ return countsFor(state); }
+
+  function renderGauge(){
+    var c = counts();
+    state.score = c.pct;
+    var bar = $("gBar");
+    bar.querySelector("i").style.width = c.pct + "%";
+    bar.classList.toggle("hot", c.pct >= 55);
+    $("gCount").textContent = c.n + " of 11 signals";
+    var word = "Nothing recorded yet", read = "Intensity rises fastest when private feeling turns into public behaviour.";
+    if(c.n > 0 && c.pct < 22){ word = "Strain"; read = "A live irritation, not yet a violation."; }
+    else if(c.pct >= 22 && c.pct < 45){ word = "Felt breach"; read = "The promise is registered as broken. The story is being written privately."; }
+    else if(c.pct >= 45 && c.pct < 68){ word = "Violation"; read = "Emotion plus a settled judgement of unfairness. Remedy alone won't shift it."; }
+    else if(c.pct >= 68){ word = "Rupture"; read = "Broad, deep and acted upon. Assume a decision has been made that hasn't been announced."; }
+    $("gWord").textContent = word; $("gRead").textContent = read;
+    var flag = $("gFlag");
+    if(c.beh >= 2){ flag.hidden = false; flag.className = "flag";
+      flag.textContent = "Behavioural signals are present. The contract is already being rewritten in actions - withheld effort, silence, exit thinking."; }
+    else if(c.cog === SIGNALS.cog.length){ flag.hidden = false; flag.className = "flag";
+      flag.textContent = "All three cognitive signals, including tit-for-tat. Reciprocity has flipped from positive to negative."; }
+    else if(c.n > 0){ flag.hidden = false; flag.className = "flag ok";
+      flag.textContent = "Still mostly felt rather than acted on."; }
+    else { flag.hidden = true; }
+  }
+
+  function bindPick(id, key, after){
+    var wrap = $(id);
+    wrap.addEventListener("click", function(e){
+      var b = e.target.closest("button");
+      if(!b) return;
+      Array.prototype.forEach.call(wrap.querySelectorAll("button"), function(x){
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      state[key] = b.dataset[key];
+      if(after) after();
+    });
+  }
+  bindPick("rolePick","role", function(){ renderSaid(); renderStage3(); renderBoard(); });
+  bindPick("relPick","rel", function(){
+    state.promises = {}; state.forecast = {};
+    renderStage3(); renderBoard();
+  });
+
+  /* ===================== stage 2 ===================== */
+  function renderSaid(){
+    var box = $("saidQs");
+    box.innerHTML = ""; state.said = {};
+    $("s2lead").textContent = LEADS[state.role];
+    SAID[state.role].forEach(function(q,i){
+      var block = el("div","qblock");
+      block.appendChild(el("h4","",(i+1) + ". " + q[0]));
+      block.appendChild(el("p","qsub","Yes: " + q[1] + "  \u00B7  No: " + q[2]));
+      var opts = el("div","opts");
+      YNN.forEach(function(o){
+        var b = el("button");
+        b.type = "button"; b.dataset.k = o[0]; b.setAttribute("aria-pressed","false");
+        b.appendChild(el("span","",o[1])); b.appendChild(el("small","",o[2]));
+        b.setAttribute("aria-label", q[0] + " " + o[1]);
+        b.addEventListener("click", function(){
+          Array.prototype.forEach.call(opts.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+          b.setAttribute("aria-pressed","true");
+          state.said[i] = o[0];
+          onModeChange();
+        });
+        opts.appendChild(b);
+      });
+      block.appendChild(opts);
+      box.appendChild(block);
+    });
+    renderSaidCount();
+  }
+
+  function saidFor(st){
+    var r = {yes:0, no:0, notpossible:0, willdo:0, unanswered:0};
+    for(var i=0;i<3;i++){
+      var v = st.said[i];
+      if(v && r[v] !== undefined) r[v]++; else r.unanswered++;
+    }
+    r.answered = 3 - r.unanswered;
+    return r;
+  }
+
+  function modeOf(st){
+    var s = saidFor(st);
+    if(s.willdo > 0) return "plan";
+    if(s.no > 0) return "refused";
+    if(s.notpossible >= 2 || (s.notpossible > 0 && s.yes === 0)) return "blocked";
+    if(s.yes > 0) return "spoken";
+    return "silent";
+  }
+  function mode(){ return modeOf(state); }
+  function cfg(){ return MODES[mode()]; }
+  function isRetry(){ return mode() === "plan" && saidFor(state).no > 0; }
+
+  function renderSaidCount(){
+    var s = saidFor(state), box = $("saidCount");
+    if(s.answered === 0){ box.hidden = true; }
+    else {
+      box.hidden = false;
+      var parts = [];
+      if(s.yes) parts.push("<b>" + s.yes + "</b> yes");
+      if(s.no) parts.push("<b>" + s.no + "</b> no");
+      if(s.notpossible) parts.push("<b>" + s.notpossible + "</b> with no route");
+      if(s.willdo) parts.push("<b>" + s.willdo + "</b> you will do");
+      var txt = parts.join(", ") + ". ";
+      if(s.no >= 2) txt += "Two or more refusals is itself the finding: raised, and not met.";
+      else if(s.yes === 3) txt += "The conflict has been faced rather than managed around.";
+      else if(s.notpossible >= 2) txt += "Most routes no longer exist. Not a refusal by anyone - but the ceiling is genuinely lower.";
+      else if(s.willdo) txt += "Intentions count nothing in the current odds. They are priced separately in stage 5.";
+      else txt += "Recorded. \u201CNot possible\u201D and \u201CI will do it\u201D both count zero against you.";
+      box.innerHTML = txt;
+    }
+    var strip = $("modeStrip"), m = mode();
+    if(m === "spoken" || (m === "silent" && s.answered === 0)){ strip.hidden = true; }
+    else {
+      strip.hidden = false;
+      var body = {
+        silent:"Nothing has been raised, so stages 3 to 5 ask about what has arrived unasked, and the fork becomes whether you test this at all.",
+        refused:"A refusal is evidence. Stage 3 now asks whether the no is final, and stage 5 forks on whether it holds or reopens.",
+        blocked:"Closed routes are not held against you, but they lower the ceiling. Stage 3 now asks what is recoverable elsewhere, and stage 5 forks on that.",
+        plan:"Stage 3 now asks what you expect back if you act, and stage 5 gains two branches: they deliver, or they don't." + (isRetry() ? " Your earlier no is kept in view - this is a retry, not a fresh start." : "")
+      }[m];
+      strip.innerHTML = "<b>" + cfg().tag + "</b>" + body;
+    }
+    $("mapN3").textContent = cfg().mapN3;
+  }
+
+  function onModeChange(){
+    renderSaidCount(); renderStage3(); renderModeQ(); renderWording(); renderScale(); renderBoard();
+  }
+
+  /* ===================== stage 3, built per mode ===================== */
+  function renderStage3(){
+    var c = cfg(), body = $("s3body");
+    body.innerHTML = "";
+    $("s3title").textContent = c.s3title;
+    $("s3sub").textContent = c.s3sub;
+    $("s3lead").textContent = c.s3lead;
+    $("s3note").textContent = c.s3note;
+
+    /* Q1 - always: which promises went unkept */
+    var q1 = el("div","qblock");
+    q1.appendChild(el("h4","","1. Which promises went unkept?"));
+    q1.appendChild(el("p","qsub", state.rel === "job"
+      ? "Tap all that apply. The more that are broken, the less this is a single fixable slip."
+      : "Tap all that apply - the " + state.rel + " versions of the same unwritten deal."));
+    var pbox = el("div","promises"), pset = promiseSet(state);
+    Object.keys(pset).forEach(function(key){
+      var b = el("button","",pset[key][0]);
+      b.type = "button";
+      b.setAttribute("aria-pressed", state.promises[key] ? "true" : "false");
+      b.addEventListener("click", function(){
+        if(state.promises[key]){ delete state.promises[key]; delete state.forecast[key]; }
+        else state.promises[key] = true;
+        renderStage3(); renderBoard();
+      });
+      pbox.appendChild(b);
+    });
+    q1.appendChild(pbox);
+    body.appendChild(q1);
+
+    /* Q2 - varies by mode */
+    var q2 = el("div","qblock");
+    var keys = Object.keys(state.promises);
+    if(c.q2mode === "delivery" || c.q2mode === "delivery+forecast"){
+      var withForecast = c.q2mode === "delivery+forecast";
+      q2.appendChild(el("h4","", withForecast ? "2. What has landed, and what do you expect?" : "2. What came back on each one?"));
+      q2.appendChild(el("p","qsub", keys.length
+        ? (withForecast
+            ? "Two answers per promise. The first is evidence and counts now; the second is your forecast and only builds the branch columns."
+            : (mode() === "refused"
+                ? "After a no, delivery is the only thing that can contradict it. Mark only what has actually landed."
+                : "One tap per row, by what has actually landed. Leave a row blank if it is genuinely too early to say."))
+        : "Tap a promise above and it will appear here."));
+      keys.forEach(function(key){
+        if(!pset[key]) return;
+        var row = el("div","drow");
+        row.appendChild(el("span","dname",pset[key][0]));
+        row.appendChild(el("span","dhint","Substitutes that would count: " + pset[key][1] + "."));
+        if(withForecast) row.appendChild(el("span","rowlbl","Landed so far"));
+        var opts = el("div","dopts");
+        DELIV.forEach(function(dv){
+          var lbl = dv[0] === "asked" ? (mode() === "refused" ? "Refused, nothing back" : "Asked, nothing back") : dv[1];
+          var b = el("button","",lbl);
+          b.type = "button"; b.dataset.v = dv[0];
+          b.setAttribute("aria-pressed", state.promises[key] === dv[0] ? "true" : "false");
+          b.setAttribute("aria-label", pset[key][0] + ": " + lbl);
+          b.addEventListener("click", function(){
+            state.promises[key] = (state.promises[key] === dv[0]) ? true : dv[0];
+            renderStage3(); renderBoard();
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(opts);
+        if(withForecast){
+          row.appendChild(el("span","rowlbl fc","If you do it, what do you expect back?"));
+          var fopts = el("div","dopts fc");
+          FORECAST.forEach(function(f){
+            var b = el("button","",f[1]);
+            b.type = "button"; b.dataset.f = f[0];
+            b.setAttribute("aria-pressed", state.forecast[key] === f[0] ? "true" : "false");
+            b.setAttribute("aria-label", pset[key][0] + ", expected: " + f[1] + " - " + f[2]);
+            b.addEventListener("click", function(){
+              state.forecast[key] = (state.forecast[key] === f[0]) ? null : f[0];
+              renderStage3(); renderBoard();
+            });
+            fopts.appendChild(b);
+          });
+          row.appendChild(fopts);
+        }
+        body.appendChild(q2.contains(row) ? row : row);
+        q2.appendChild(row);
+      });
+      var tally = el("div","counts");
+      tallyText(tally);
+      q2.appendChild(tally);
+    } else {
+      /* collapsed: one question instead of per-promise rating */
+      var qk = c.q2mode;   /* "unprompted" or "recover" */
+      q2.appendChild(el("h4","", qk === "unprompted"
+        ? "2. Has anything arrived without being asked for?"
+        : "2. Is what you lost recoverable elsewhere?"));
+      q2.appendChild(el("p","qsub", qk === "unprompted"
+        ? "Unprompted delivery is rare and it counts double. Nothing arriving is not a refusal here."
+        : "The thing you were promised - can it be got from someone or somewhere else?"));
+      q2.appendChild(optRow(qk));
+      var cn = el("p","collapsenote", c.collapse);
+      q2.appendChild(cn);
+    }
+    body.appendChild(q2);
+
+    /* Q3 - terms, finality or recover */
+    var q3 = el("div","qblock");
+    q3.appendChild(el("h4","","3. " + c.q3label));
+    q3.appendChild(el("p","qsub",c.q3sub));
+    q3.appendChild(optRow(c.q3));
+    if(c.q3 === "terms"){
+      var det = el("details","detail");
+      det.appendChild(el("summary","","Optional: note the expectations for your own record"));
+      var r = el("div","row"); r.style.marginTop = ".6em";
+      var inp = document.createElement("input");
+      inp.type = "text"; inp.id = "termIn"; inp.placeholder = "e.g. I get first refusal on client-facing projects";
+      inp.setAttribute("aria-label","Note an expectation");
+      var add = el("button","btn ghost","Add note"); add.type = "button";
+      add.addEventListener("click", function(){
+        var v = inp.value.trim();
+        if(!v) return;
+        state.notes = state.notes || [];
+        state.notes.push(v); inp.value = ""; renderStage3();
+      });
+      inp.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); add.click(); } });
+      r.appendChild(inp); r.appendChild(add);
+      det.appendChild(r);
+      var ul = el("ul","notes");
+      (state.notes || []).forEach(function(t,i){
+        var li = el("li");
+        li.appendChild(el("span","",t));
+        var dl = el("button","del","remove"); dl.type = "button";
+        dl.addEventListener("click", function(){ state.notes.splice(i,1); renderStage3(); });
+        li.appendChild(dl); ul.appendChild(li);
+      });
+      det.appendChild(ul);
+      det.appendChild(el("p","","Notes are for you. They don't change the odds - the answer above does."));
+      q3.appendChild(det);
+    }
+    body.appendChild(q3);
+  }
+
+  /* a row of single-select options bound to state[key], from Q[key] */
+  function optRow(key){
+    var box = el("div","opts");
+    (Q[key] || []).forEach(function(o){
+      var b = el("button");
+      b.type = "button";
+      b.dataset.k = (o[3] > 0 ? "yes" : o[3] < 0 ? "no" : "part");
+      b.setAttribute("aria-pressed", state[key === "terms" ? "termState" : key] === o[0] ? "true" : "false");
+      b.appendChild(el("span","",o[1])); b.appendChild(el("small","",o[2]));
+      b.addEventListener("click", function(){
+        var f = key === "terms" ? "termState" : key;
+        state[f] = (state[f] === o[0]) ? null : o[0];
+        renderStage3(); renderScale(); renderBoard();
+      });
+      box.appendChild(b);
+    });
+    return box;
+  }
+
+  function delivery(st){
+    var keys = Object.keys(st.promises), rated = 0, sum = 0, off = 0;
+    keys.forEach(function(k){
+      var v = st.promises[k];
+      if(v === true) return;
+      if(v === "off"){ off++; return; }
+      rated++;
+      DELIV.forEach(function(d){ if(d[0] === v && d[2] !== null) sum += d[2]; });
+    });
+    return {broken:keys.length, rated:rated, off:off, unrated:keys.length - rated - off,
+            ratio: rated ? sum / rated : null};
+  }
+  function forecastOf(st){
+    var keys = Object.keys(st.promises), n = 0, sum = 0;
+    keys.forEach(function(k){
+      var f = st.forecast[k];
+      if(!f) return;
+      n++;
+      FORECAST.forEach(function(x){ if(x[0] === f) sum += x[3]; });
+    });
+    return {n:n, ratio: n ? sum / n : null, missing: keys.length - n};
+  }
+
+  function tallyText(node){
+    var d = delivery(state), s = saidFor(state);
+    if(!d.rated && !d.off){ node.hidden = true; return; }
+    node.hidden = false;
+    var txt = "";
+    if(d.rated){
+      var pct = Math.round(d.ratio * 100);
+      txt += "<b>" + pct + "%</b> delivered across " + d.rated + " rated promise" + (d.rated > 1 ? "s" : "") + ". ";
+      if(pct === 0) txt += s.no > 0
+        ? "Refused, and nothing came anyway. The refusal was the whole answer."
+        : "Asked, and nothing came back - the clearest evidence available that this is a pattern rather than a stumble.";
+      else if(pct < 50) txt += "Partial delivery keeps hope alive without restoring the exchange, which is how resentment becomes chronic.";
+      else if(pct < 100) txt += "Real movement, with something still outstanding.";
+      else txt += "Everything asked for has landed. That is what repair actually looks like.";
+    }
+    if(d.unrated) txt += " " + d.unrated + " left blank, treated as unknown rather than unmet.";
+    if(d.off) txt += " " + d.off + " off the table - not a refusal, but a route that no longer exists, so it lowers the ceiling rather than the odds now.";
+    if(mode() === "plan"){
+      var f = forecastOf(state);
+      if(f.n){
+        txt += " You expect <b>" + Math.round(f.ratio * 100) + "%</b> back if you act";
+        if(f.ratio === 0) txt += " - which is to say you are planning something you do not expect to work. Worth sitting with before you do it.";
+        else txt += ".";
+      }
+      if(f.missing) txt += " " + f.missing + " forecast" + (f.missing > 1 ? "s" : "") + " not set; those are treated as no change in the branch columns.";
+    }
+    node.innerHTML = txt;
+  }
+
+  /* ===================== stage 4 ===================== */
+  function buildOpts(id, key){
+    var box = $(id);
+    box.innerHTML = "";
+    Q[key].forEach(function(o){
+      var b = el("button");
+      b.type = "button"; b.setAttribute("aria-pressed", String(state[key]) === String(o[2]) ? "true" : "false");
+      b.appendChild(el("span","",o[0])); b.appendChild(el("small","",o[1]));
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(box.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+        b.setAttribute("aria-pressed","true");
+        state[key] = (key === "pattern") ? o[2] : Number(o[2]);
+        renderScale(); renderBoard();
+      });
+      box.appendChild(b);
+    });
+  }
+  buildOpts("qStay","stay"); buildOpts("qTax","tax"); buildOpts("qAlt","alt"); buildOpts("qPattern","pattern");
+
+  $("sunkBtn").addEventListener("click", function(){
+    state.sunk = !state.sunk;
+    this.setAttribute("aria-pressed", state.sunk ? "true" : "false");
+    renderScale(); renderBoard();
+  });
+
+  function renderModeQ(){
+    var spec = MODEQ[mode()], box = $("modeQBlock");
+    box.innerHTML = "";
+    if(!spec){ state.modeQ = null; return; }
+    var blk = el("div","qblock");
+    blk.appendChild(el("h4","",spec.q));
+    blk.appendChild(el("p","qsub",spec.sub));
+    var opts = el("div","opts");
+    spec.opts.forEach(function(o){
+      var b = el("button");
+      b.type = "button"; b.setAttribute("aria-pressed", state.modeQ === o[0] ? "true" : "false");
+      b.appendChild(el("span","",o[1])); b.appendChild(el("small","",o[2]));
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(opts.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+        b.setAttribute("aria-pressed","true");
+        state.modeQ = o[0];
+        renderBoard();
+      });
+      opts.appendChild(b);
+    });
+    blk.appendChild(opts);
+    box.appendChild(blk);
+  }
+
+  function labelFor(key, val){
+    var found = null;
+    (Q[key] || []).forEach(function(o){
+      if(key === "stay" || key === "tax" || key === "alt" || key === "pattern"){
+        if(String(o[2]) === String(val)) found = o[0];
+      } else if(String(o[0]) === String(val)) found = o[1];
+    });
+    return found;
+  }
+  function stayEff(st){ return st.stay === null ? null : st.stay * (st.sunk ? 0.7 : 1); }
+
+  function renderScale(){
+    var eff = stayEff(state);
+    $("sumStay").textContent = state.stay === null ? "\u2013" : state.stay + "/10";
+    $("sumTax").textContent = state.tax === null ? "\u2013" : state.tax + "/10";
+    $("sumStayLbl").textContent = state.stay === null ? "What you'd lose" : "What you'd lose \u2014 " + labelFor("stay", state.stay).toLowerCase();
+    $("sumTaxLbl").textContent = state.tax === null ? "What carrying it costs" : "What carrying it costs \u2014 " + labelFor("tax", state.tax).toLowerCase();
+    $("sunkRow").hidden = !(state.sunk && state.stay !== null);
+    if(state.sunk && state.stay !== null) $("sumSunk").textContent = "\u2212" + (state.stay - eff).toFixed(1);
+    $("sumAlt").textContent = state.alt === null ? "\u2013" : (state.alt === 0 ? "none" : state.alt === 1 ? "possible" : "ready");
+    $("sumAltLbl").textContent = state.alt === null ? "Alternative" : "Alternative \u2014 " + labelFor("alt", state.alt).toLowerCase();
+
+    var net = (eff === null || state.tax === null) ? null : eff - state.tax;
+    $("sumNet").textContent = net === null ? "\u2013" : (net > 0 ? "+" : "") + net.toFixed(1);
+    $("netLbl").textContent = net === null ? "Net" : (net > 0 ? "Net \u2014 staying wins" : net < 0 ? "Net \u2014 the cost wins" : "Net \u2014 dead even");
+    $("arm").style.transform = "rotate(" + (net === null ? 0 : clamp(-net * 1.6, -14, 14)) + "deg)";
+
+    var read;
+    if(net === null) read = "Answer questions 1 and 2 and the scale will tip.";
+    else if(Math.abs(net) <= 1) read = "Dead even. This balance won't hold on its own for long.";
+    else if(net <= -4) read = "The cost of carrying this is running the show. Persistent anger is an energy drain whatever the relationship is nominally worth.";
+    else if(net < -1) read = "Carrying the resentment is starting to cost more than the relationship returns.";
+    else if(net >= 4) read = "What you would lose clearly outweighs the grievance.";
+    else read = "Staying still outweighs the grievance, but not by much.";
+    if(state.sunk) read += " And most of the reason to stay is what you already gave - a receipt, not a reason.";
+    if(state.alt === 0) read += " With nothing lined up, exit isn't really on the table: the honest version of disengaging is to stay and stop investing.";
+    if(state.alt === 2) read += " With a concrete option available, leaving is a real choice rather than a threat you can't act on.";
+    if(state.pattern === "pattern") read += " And it is not a one-off: the pattern is the character.";
+    $("beamRead").textContent = read;
+
+    var f = $("s4flag"), missing = [];
+    if(state.stay === null) missing.push("1");
+    if(state.tax === null) missing.push("2");
+    if(state.alt === null) missing.push("3");
+    if(!state.pattern) missing.push("4");
+    if(MODEQ[mode()] && !state.modeQ) missing.push("5");
+    if(missing.length){
+      f.hidden = false; f.className = "flag neutral";
+      f.textContent = "Unanswered: question" + (missing.length > 1 ? "s " : " ") + missing.join(", ") +
+        ". These are judgements rather than events, so the odds stay deliberately vague without them.";
+    } else { f.hidden = true; }
+    $("s4q3s").textContent = cfg().s4q3;
+  }
+
+  function renderWording(){
+    var c = cfg();
+    $("s4title").textContent = c.s4title;
+    $("s4sub").textContent = c.s4sub;
+    $("s4lead").textContent = c.s4lead;
+    $("s5title").textContent = c.s5title;
+    $("s5sub").textContent = c.s5sub;
+    $("s5lead").textContent = c.s5lead;
+    $("branchHead").textContent = isRetry() ? "If the retry lands, or if the no holds" : c.branchHead;
+    $("branchLead").textContent = c.branchLead;
+    $("planHead").textContent = c.planHead;
+  }
+
+  /* ===================== the model ===================== */
+  var MODEQ_W = {
+    nothingyet:["Nothing is stopping it being raised",[0.5,0.3,-0.2,-0.3]],
+    noforum:["No safe forum to raise it in",[-0.6,-0.2,0.6,0.5]],
+    dontwant:["You would rather not know the answer",[-0.9,-0.3,0.5,0.8]],
+    credible:["A credible reason for the no",[1.0,0.5,-0.4,-0.9]],
+    none:["No reason given for the no",[-0.9,-0.3,0.5,0.8]],
+    disbelieved:["A reason you don't believe",[-1.3,-0.5,0.7,1.1]],
+    nothing:["Nothing still depends on them",[-0.3,-0.1,-0.5,1.0]],
+    some:["Some things still depend on them",[0,0,0.3,0.2]],
+    alot:["A lot still depends on them",[0.3,0.2,1.0,-1.0]],
+    answer:["A refusal would settle it",[0,0.4,0.2,0.2]],
+    again:["You would keep at it",[0.3,0,0.3,-0.4]],
+    regret:["Being refused would cost you",[-0.4,-0.2,0.4,0.3]]
+  };
+
+  function drivers(st){
+    var c = countsFor(st), d = [];
+    var eff = stayEff(st);
+    var n = (eff === null || st.tax === null) ? 0 : (eff - st.tax) / 10;
+    var s = c.pct / 100, b = c.beh / 4;
+    var sd = saidFor(st), dl = delivery(st);
+    var m = modeOf(st);
+
+    if(st.pattern === "once")    d.push(["Pattern test: first time", [1.8, 1.2, -0.9, -1.6]]);
+    if(st.pattern === "pattern") d.push(["Pattern test: happened before", [-2.2, -0.9, 1.6, 2.0]]);
+
+    if(Math.abs(n) > 0.001){
+      d.push([(n > 0 ? "Worth of staying exceeds the cost" : "Cost of carrying exceeds the worth") + " (net " + (n*10).toFixed(1) + ")",
+              [3.0*n, 0.9*n, 1.1*n, -3.0*n]]);
+    }
+    if(st.sunk) d.push(["Staying mainly for what was already given", [-0.6, -0.2, 0.3, 0.5]]);
+
+    if(st.alt === 2) d.push(["Alternative: a concrete option is ready", [-0.3, 0.1, -0.9, 1.6]]);
+    if(st.alt === 1) d.push(["Alternative: could find something", [0, 0.1, -0.2, 0.5]]);
+    if(st.alt === 0) d.push(["Alternative: nothing lined up", [0.2, 0.4, 1.4, -1.6]]);
+
+    if(dl.broken > 0){
+      var bb = Math.min(dl.broken, 4) / 4;
+      d.push([dl.broken === 1 ? "One promise broken" : dl.broken + " promises broken",
+              [-1.1*bb, -0.1*bb, 0.7*bb, 1.0*bb]]);
+    }
+    if(dl.rated > 0){
+      var v = 2 * dl.ratio - 1;
+      d.push(["Delivery: " + Math.round(dl.ratio*100) + "% of what was asked", [2.6*v, 0.9*v, -0.7*v, -2.3*v]]);
+    }
+    if(dl.off > 0){
+      var offw = Math.min(dl.off, 3) / 3;
+      d.push([dl.off + " promise" + (dl.off > 1 ? "s" : "") + " off the table", [-0.9*offw, -0.4*offw, 0.7*offw, 0.8*offw]]);
+    }
+
+    if(sd.yes > 0){ var ky = sd.yes / 3; d.push(["Spoken about: " + sd.yes + " yes", [1.4*ky, 0.8*ky, -0.2*ky, -0.7*ky]]); }
+    if(sd.no > 0){ var kn = sd.no / 3; d.push(["Raised and not met: " + sd.no + " no", [-1.6*kn, -0.5*kn, 0.7*kn, 1.1*kn]]); }
+    if(sd.notpossible > 0){ var kp = sd.notpossible / 3; d.push(["No route left: " + sd.notpossible, [-0.7*kp, -0.3*kp, 0.5*kp, 0.6*kp]]); }
+    /* "I will do it" and every forecast contribute nothing here, by design */
+
+    if(st.unprompted === "yes") d.push(["Something arrived unprompted", [1.6, 0.6, -0.4, -1.1]]);
+    if(st.unprompted === "partly") d.push(["A little arrived unprompted", [0.7, 0.3, -0.2, -0.5]]);
+    if(st.unprompted === "no" && m === "silent") d.push(["Nothing has arrived, unasked", [-0.5, -0.1, 0.3, 0.4]]);
+
+    if(st.finality === "renegotiable") d.push(["The no is renegotiable", [0.9, 0.6, -0.4, -0.8]]);
+    if(st.finality === "unclear") d.push(["Nobody has said if the no is final", [0, 0.2, 0.1, 0]]);
+    if(st.finality === "final") d.push(["The no is final", [-1.4, -0.8, 0.8, 1.4]]);
+
+    if(st.recover === "elsewhere") d.push(["The loss is replaceable elsewhere", [-0.6, -0.2, -0.5, 1.3]]);
+    if(st.recover === "partly") d.push(["Partly replaceable elsewhere", [0, 0, 0.2, 0.4]]);
+    if(st.recover === "no") d.push(["It only existed here", [0.4, 0.3, 1.2, -1.3]]);
+
+    if(st.termState === "accepted") d.push(["Expectations explicit and accepted", [1.3, 0.5, -0.3, -0.9]]);
+    if(st.termState === "raised")   d.push(["Expectations raised, not accepted", [-0.3, 0.1, 0.2, 0.3]]);
+    if(st.termState === "unspoken") d.push(["Expectations still assumed", [-0.9, -0.3, 0.5, 0.7]]);
+
+    if(st.modeQ && MODEQ_W[st.modeQ]) d.push([MODEQ_W[st.modeQ][0], MODEQ_W[st.modeQ][1]]);
+
+    if(s > 0) d.push(["Signal intensity " + c.pct + "%", [-1.8*s, 0.6*s, 0.9*s, 1.5*s]]);
+    if(b > 0) d.push([c.beh + " behavioural signal" + (c.beh > 1 ? "s" : ""), [-1.6*b, 0.2*b, 1.1*b, 1.7*b]]);
+    if(c.titfortat) d.push(["Tit-for-tat thinking", [-0.8, -0.2, 0.6, 0.9]]);
+
+    return d;
+  }
+
+  var BASE = [0.2, 0.6, 0.2, 0.0], TEMP = 0.45, FLATTEN = 0.6;
+
+  function confidenceFor(st){
+    var c = countsFor(st), dl = delivery(st), sd = saidFor(st), pts = 0, m = modeOf(st);
+    if(st.pattern) pts += 20;
+    if(st.alt !== null) pts += 14;
+    if(st.stay !== null && st.tax !== null) pts += 16;
+    if(c.n > 0) pts += 12;
+    if(dl.broken) pts += 8;
+    if(m === "silent") { if(st.unprompted) pts += 14; }
+    else if(m === "blocked") { if(st.recover) pts += 14; }
+    else { if(dl.rated && !dl.unrated) pts += 14; else if(dl.rated || dl.off) pts += 7; }
+    if(st.termState || st.finality) pts += 8;
+    if(sd.answered === 3) pts += 8; else if(sd.answered) pts += 4;
+    if(st.modeQ || !MODEQ[m]) pts += 8;
+    return Math.min(pts, 100);
+  }
+
+  function model(st){
+    var d = drivers(st), raw = BASE.slice(), i;
+    d.forEach(function(row){ for(i=0;i<4;i++) raw[i] += row[1][i]; });
+    var scaled = raw.map(function(v){ return v * TEMP; });
+    var mx = Math.max.apply(null, scaled), sum = 0;
+    var ex = scaled.map(function(v){ var e = Math.exp(v - mx); sum += e; return e; });
+    var soft = ex.map(function(e){ return e / sum; });
+    var conf = confidenceFor(st);
+    var a = (100 - conf) / 100 * FLATTEN;
+    return {probs: soft.map(function(x){ return (1 - a) * x + a * 0.25; }),
+            drivers:d, raw:raw, soft:soft, alpha:a, conf:conf};
+  }
+  function repairShare(st){ var m = model(st); return m.probs[0] + m.probs[1]; }
+
+  function cloneState(over){
+    var st = { role:state.role, rel:state.rel, ticked:state.ticked, said:state.said,
+               promises:state.promises, forecast:state.forecast, termState:state.termState,
+               finality:state.finality, recover:state.recover, unprompted:state.unprompted,
+               modeQ:state.modeQ, notes:state.notes,
+               stay:state.stay, tax:state.tax, alt:state.alt, pattern:state.pattern, sunk:state.sunk };
+    Object.keys(over || {}).forEach(function(k){ st[k] = over[k]; });
+    return st;
+  }
+  function stripLane(lane){
+    var t = {};
+    Object.keys(state.ticked).forEach(function(k){ if(state.ticked[k].lane !== lane) t[k] = state.ticked[k]; });
+    return t;
+  }
+  function mapSaid(fn){
+    var s = {};
+    for(var i=0;i<3;i++) s[i] = fn(state.said[i], i);
+    return s;
+  }
+  function allPromises(val){
+    var p = {};
+    Object.keys(state.promises).forEach(function(k){ p[k] = val; });
+    return p;
+  }
+
+  /* ===================== the branches ===================== */
+  /* Each mode forks into its own two futures. Nothing here is a recommendation:
+     both branches are read out, and the gap between them is the information. */
+  function branches(){
+    var m = mode(), s = saidFor(state), out = [];
+    out.push({ key:"now", cls:"now", label:"As things stand",
+               sub:"Only what has already happened", st:cloneState({}) });
+
+    if(m === "silent"){
+      out.push({ key:"raise", cls:"then", label:"If you raise it and it's met",
+                 sub:"The conversations happen and land",
+                 st:cloneState({ said:mapSaid(function(v){ return "yes"; }),
+                                 promises:allPromises("given"), termState:"accepted", unprompted:"yes" }) });
+    } else if(m === "spoken"){
+      out.push({ key:"land", cls:"then", label:"If the open items land",
+                 sub:"Every open item answered at its best",
+                 st:ceilingState() });
+    } else if(m === "refused"){
+      out.push({ key:"reopens", cls:"then", label:"If it reopens",
+                 sub:"The refusal is revisited and met",
+                 st:cloneState({ said:mapSaid(function(v){ return v === "notpossible" ? v : "yes"; }),
+                                 promises:allPromises("given"), termState:"accepted", finality:"renegotiable" }) });
+      out.push({ key:"holds", cls:"bad", label:"If the no holds",
+                 sub:"Nothing further arrives and the door stays shut",
+                 st:cloneState({ promises:hardenPromises(), finality:"final" }) });
+    } else if(m === "blocked"){
+      out.push({ key:"replace", cls:"then", label:"If you replace it elsewhere",
+                 sub:"The loss is met from somewhere else",
+                 st:cloneState({ recover:"elsewhere" }) });
+      out.push({ key:"stuck", cls:"bad", label:"If you can't",
+                 sub:"It only existed here",
+                 st:cloneState({ recover:"no" }) });
+    } else if(m === "plan"){
+      out.push({ key:"deliver", cls:"plan", label:"If they deliver",
+                 sub:"Your own forecast, not a best case",
+                 st:planLandsState() });
+      out.push({ key:"refuse", cls:"bad", label:"If they don't",
+                 sub:"You do it and nothing comes back",
+                 st:cloneState({ said:mapSaid(function(v){ return v === "willdo" ? "no" : v; }),
+                                 promises:hardenPromises(), finality:"final" }) });
+    }
+    return out;
+  }
+
+  /* unrated or partly-given promises become "asked, nothing back" */
+  function hardenPromises(){
+    var p = {};
+    Object.keys(state.promises).forEach(function(k){
+      var v = state.promises[k];
+      p[k] = (v === "off") ? "off" : (v === "given" ? "given" : "asked");
+    });
+    return p;
+  }
+  /* the plan landing exactly as you forecast it */
+  function planLandsState(){
+    var p = {}, f;
+    Object.keys(state.promises).forEach(function(k){
+      f = state.forecast[k];
+      if(state.promises[k] === "off"){ p[k] = "off"; return; }
+      p[k] = f === "full" ? "given" : f === "part" ? "partial" : f === "none" ? "asked" : state.promises[k];
+    });
+    var terms = state.termState === "accepted" ? "accepted" : "raised";
+    return cloneState({ said:mapSaid(function(v){ return v === "willdo" ? "yes" : v; }),
+                        promises:p, termState:terms });
+  }
+  function ceilingState(){
+    return cloneState({ said:mapSaid(function(v){ return v === "notpossible" ? v : "yes"; }),
+                        promises:(function(){
+                          var p = {};
+                          Object.keys(state.promises).forEach(function(k){
+                            p[k] = state.promises[k] === "off" ? "off" : "given";
+                          });
+                          return p;
+                        })(),
+                        termState:"accepted",
+                        unprompted: state.unprompted === "no" ? "partly" : state.unprompted });
+  }
+
+  function outstanding(){
+    var open = [], blocked = [], qs = SAID[state.role], i, m = mode();
+    for(i=0;i<3;i++){
+      var v = state.said[i];
+      if(v === "yes") continue;
+      if(v === "notpossible"){ blocked.push(qs[i][3] + " \u2014 no route to it"); continue; }
+      open.push({ willdo: v === "willdo",
+                  text: qs[i][3] + " \u2014 currently " + (v ? labelYNN(v) : "unanswered") });
+    }
+    var pset = promiseSet(state);
+    Object.keys(state.promises).forEach(function(k){
+      var v = state.promises[k];
+      if(v === "given") return;
+      if(v === "off"){ blocked.push(promiseLabel(state, k) + " \u2014 off the table"); return; }
+      if(m === "silent" || m === "blocked"){
+        open.push({ willdo:false, text:(pset[k] ? pset[k][0] : k) + " \u2014 still unmet" });
+        return;
+      }
+      var cur = v === true ? "unrated" : v === "asked" ? "nothing back" : "partly given";
+      var fc = state.forecast[k];
+      open.push({ willdo:false, text:(pset[k] ? pset[k][0] : k) + " delivered \u2014 currently " + cur +
+        (fc ? "; you expect " + (fc === "full" ? "all of it" : fc === "part" ? "some of it" : "nothing") : "") });
+    });
+    if(cfg().q3 === "terms" && state.termState !== "accepted"){
+      open.push({ willdo:false, text:"Expectations made explicit and accepted \u2014 currently " +
+        (state.termState ? (state.termState === "raised" ? "raised, not accepted" : "still assumed") : "unanswered") });
+    }
+    if(cfg().q3 === "finality" && state.finality === "final"){
+      blocked.push("The no has been called final");
+    }
+    return {open:open, blocked:blocked};
+  }
+
+  /* ===================== stage 5 ===================== */
+  function renderBoard(){
+    var m = model(state), probs = m.probs, d = m.drivers;
+
+    var cards = OUTCOMES.map(function(o,i){
+      var scored = d.map(function(row){
+        var mine = row[1][i], others = 0;
+        for(var j=0;j<4;j++) if(j !== i) others += row[1][j];
+        return {label:row[0], edge: mine - others/3};
+      });
+      scored.sort(function(a,b){ return b.edge - a.edge; });
+      return { o:o, p:probs[i],
+               up: scored.filter(function(x){ return x.edge > 0.12; }).slice(0,2),
+               down: scored.filter(function(x){ return x.edge < -0.12; }).slice(-1) };
+    });
+
+    var leadIdx = probs.indexOf(Math.max.apply(null, probs));
+    var box = $("odds"); box.innerHTML = "";
+    cards.forEach(function(card,i){
+      var e = el("div","odd" + (i === leadIdx ? " lead" : ""));
+      e.dataset.side = card.o.side;
+      var pct = Math.round(card.p * 100);
+      if(i === leadIdx) e.appendChild(el("span","badge","Leading"));
+      e.appendChild(el("h4","",card.o.name));
+      e.appendChild(el("p","pct",pct + "%"));
+      var ob = el("div","obar"), oi = el("i"); oi.style.width = pct + "%"; ob.appendChild(oi);
+      e.appendChild(ob);
+      e.appendChild(el("p","means",card.o.means));
+      var ul = el("ul","why");
+      card.up.forEach(function(x){
+        var li = el("li","up"); li.appendChild(el("b","","+"));
+        li.appendChild(document.createTextNode(x.label)); ul.appendChild(li);
+      });
+      card.down.forEach(function(x){
+        var li = el("li","down"); li.appendChild(el("b","","\u2212"));
+        li.appendChild(document.createTextNode(x.label)); ul.appendChild(li);
+      });
+      e.appendChild(ul);
+      box.appendChild(e);
+    });
+
+    var rep = Math.round((probs[0] + probs[1]) * 100);
+    $("sRep").style.width = rep + "%";
+    $("sExt").style.width = (100 - rep) + "%";
+    $("shareWord").textContent = "Repair " + rep + "% / disengage " + (100 - rep) + "%";
+    $("conf").textContent = "Evidence " + m.conf + "% complete" + (state.pattern ? "" : " \u2014 pattern test unanswered");
+    var sr;
+    if(!state.pattern) sr = "The pattern test in stage 4 is the heaviest input on the page and it is still blank. Answer it before reading anything into this split.";
+    else if(state.alt === null) sr = "Stage 4 question 3 is blank. Whether exit is even available changes this split more than almost anything else.";
+    else if(Math.abs(rep - 50) <= 8) sr = "Genuinely close. A split this tight means the situation is undecided, not that you are indecisive - the next move should buy information, not commitment.";
+    else if(rep > 50) sr = "The weight sits on staying and working it. The two repair options differ only in how long you are willing to wait.";
+    else sr = "The weight sits on disengaging. Containing and exiting differ only in whether you keep the relationship while you withdraw the goodwill.";
+    if(m.conf < 60) sr += " More of the earlier stages answered will sharpen this spread.";
+    $("shareRead").textContent = sr;
+
+    var sorted = probs.map(function(p,i){ return {p:p,i:i}; }).sort(function(a,b){ return b.p - a.p; });
+    var gap = Math.round((sorted[0].p - sorted[1].p) * 100);
+    var note = $("closeNote");
+    var cross = OUTCOMES[sorted[0].i].side !== OUTCOMES[sorted[1].i].side;
+    if(gap <= 8 && cross){
+      note.hidden = false;
+      note.textContent = "Only " + gap + " points separate " + OUTCOMES[sorted[0].i].name.toLowerCase() + " and " + OUTCOMES[sorted[1].i].name.toLowerCase() + ", and they point opposite ways. Repair is reversible; exit mostly isn't. When two options are this close, the reversible one costs least to try first.";
+    } else if(gap <= 8){
+      note.hidden = false;
+      note.textContent = "Only " + gap + " points separate the top two, but both sit on the same side. The direction is clearer than the intensity.";
+    } else if(OUTCOMES[leadIdx].key === "exit" && state.alt === 0){
+      note.hidden = false;
+      note.textContent = "Exit leads, but nothing is lined up. An exit that can't be executed keeps you passive - the Contain column is what that actually looks like until an alternative exists.";
+    } else { note.hidden = true; }
+
+    renderBranches(probs);
+    renderWhatIf(probs);
+
+    $("actHead").textContent = "If you take the leading option \u2014 " + OUTCOMES[leadIdx].name.toLowerCase();
+    var ol = $("acts"); ol.innerHTML = "";
+    ACTIONS[OUTCOMES[leadIdx].key].forEach(function(a){ ol.appendChild(el("li","",a)); });
+
+    var side = OUTCOMES[leadIdx].side;
+    $("vRole").textContent = state.role === "violator"
+      ? (side === "ext"
+        ? "As the one who broke it: you may have changed and still find the well poisoned. Sometimes the only way both parties heal is to end it cleanly so they can start fresh elsewhere - and to say so without making them argue for it."
+        : "As the one who broke it: trust returns at the speed of kept small promises, not at the speed of an apology.")
+      : (side === "ext"
+        ? "As the one it was broken on: persistent anger is an energy drain, and you pay it whether or not they ever acknowledge the breach. Leaving is not conceding the argument."
+        : "As the one it was broken on: whatever gets agreed needs to stay visible and get reviewed out loud. Repair that lives only in your head becomes the next grievance.");
+
+    renderRecap(probs, leadIdx);
+    paintMap(probs, leadIdx);
+    if(!$("fbox").hidden) renderFormula(m);
+  }
+
+  function futRows(container, probs){
+    container.innerHTML = "";
+    OUTCOMES.forEach(function(o,i){
+      var row = el("div","frow"); row.dataset.side = o.side;
+      var pct = Math.round(probs[i]*100);
+      row.appendChild(el("span","fn",["Repair","Deadline","Contain","Exit"][i]));
+      var fb = el("span","fb"), fi = el("i"); fi.style.width = pct + "%"; fb.appendChild(fi);
+      row.appendChild(fb);
+      row.appendChild(el("span","fv",pct + "%"));
+      container.appendChild(row);
+    });
+  }
+
+  function renderBranches(probs){
+    var bs = branches(), box = $("futures"), gaps = $("gaps"), m = mode();
+    box.innerHTML = ""; gaps.innerHTML = "";
+    box.classList.toggle("three", bs.length === 3);
+    var reps = [];
+    bs.forEach(function(br,i){
+      var p = i === 0 ? probs : model(br.st).probs;
+      var rep = Math.round((p[0]+p[1])*100);
+      reps.push(rep);
+      var col = el("div","fut " + br.cls);
+      col.appendChild(el("h4","",br.label));
+      col.appendChild(el("p","sub",br.sub));
+      var rows = el("div"); futRows(rows, p);
+      col.appendChild(rows);
+      col.appendChild(el("p","foot","Repair side " + rep + "%"));
+      box.appendChild(col);
+    });
+
+    var o = outstanding();
+    /* gap 1: the good branch against now.  gap 2: the bad branch, where there is one. */
+    var goodIdx = 1, badIdx = bs.length === 3 ? 2 : -1;
+    var g1 = reps[goodIdx] - reps[0];
+    gaps.appendChild(gapBox(g1, gapCopy(m, "good", g1, o, bs, reps), false));
+    if(badIdx > 0){
+      var g2 = reps[badIdx] - reps[0];
+      gaps.appendChild(gapBox(g2, gapCopy(m, "bad", g2, o, bs, reps), true));
+    }
+
+    var pl = $("plan"); pl.innerHTML = "";
+    if(!o.open.length){
+      pl.appendChild(el("li","done","Nothing open on the evidence recorded."));
+    } else {
+      o.open.forEach(function(it){
+        var li = el("li", it.willdo ? "willdo" : "");
+        li.appendChild(document.createTextNode(it.text + (it.willdo ? " (you said you will)" : "")));
+        pl.appendChild(li);
+      });
+    }
+    var bl = $("blocked"); bl.innerHTML = "";
+    o.blocked.forEach(function(t){ bl.appendChild(el("li","",t + " - excluded from the branches")); });
+  }
+
+  function gapBox(v, copy, second){
+    var b = el("div","gapbox" + (second ? " second" : ""));
+    var n = el("span","gapnum " + (second ? "mid" : (v >= 12 ? "up" : "flat")), (v > 0 ? "+" : "") + v);
+    b.appendChild(n);
+    var wrap = el("div");
+    wrap.appendChild(el("b","",copy[0]));
+    wrap.appendChild(el("p","",copy[1]));
+    b.appendChild(wrap);
+    return b;
+  }
+
+  function gapCopy(m, which, v, o, bs, reps){
+    var f = forecastOf(state);
+    /* in blocked mode the fork is a fact about your world, and you may have
+       already stated it - in which case one branch is simply where you are */
+    if(m === "blocked" && state.recover){
+      var isThis = (which === "good" && state.recover === "elsewhere") ||
+                   (which === "bad" && state.recover === "no");
+      if(isThis) return [which === "good" ? "This is already your answer" : "This is already your answer",
+        "You have said the loss " + (which === "good" ? "is replaceable elsewhere" : "only existed here") +
+        ", so this branch is not a hypothetical - it is where you already stand. The other column is where you would be if that turns out to be wrong."];
+      if(state.recover === "partly") return [which === "good" ? "If it is more replaceable than you think" : "If it is less replaceable than you think",
+        "You answered partly, so both branches are live. This one moves the repair side " + (v > 0 ? "+" : "") + v +
+        " points - the swing between them is how much your read on replaceability is carrying."];
+    }
+    if(which === "good"){
+      if(m === "silent"){
+        if(v >= 25) return ["What raising it could be worth", "Raising it and being met would move the repair side by " + v + " points. That is the value of testing this rather than assuming - and it is currently untested."];
+        if(v >= 12) return ["What raising it could be worth", "Raising it and being met would move the repair side by " + v + " points. Worth a conversation, though it would not settle the question."];
+        return ["Raising it changes little", "Even raised and fully met, the repair side moves only " + v + " points. What is driving these odds is " + dominantFixed() + " - none of which a conversation touches."];
+      }
+      if(m === "refused"){
+        if(v >= 20) return ["What reopening the no is worth", "If the refusal could be revisited and met, the repair side moves " + v + " points. Your answer to question 3 is what decides whether that is realistic or wishful."];
+        return ["Reopening it changes little", "Even reopened and met, the repair side moves only " + v + " points. The refusal is not the main thing driving these odds - " + dominantFixed() + " is."];
+      }
+      if(m === "blocked"){
+        return v <= -8
+          ? ["Replaceable, and that points out", "If you can get this elsewhere, the repair side falls " + Math.abs(v) + " points - staying matters less once the thing you lost is available somewhere else. That is not a loss, it is leverage."]
+          : ["Replaceability barely moves it", "Getting this elsewhere moves the repair side " + v + " points. What holds you here is " + dominantFixed() + " rather than the lost promise itself."];
+      }
+      if(m === "plan"){
+        if(f.n && f.ratio === 0) return ["Your own forecast is nothing", "You expect nothing back, and the column reflects that: " + (v > 0 ? "+" : "") + v + " points. You are planning to do something you do not expect to work, which is worth knowing before you spend the effort."];
+        if(v >= 20) return ["What your plan is worth if it lands", "On your own forecast, executing this moves the repair side " + v + " points. That is real leverage, and it is priced on what you expect rather than on a best case."];
+        if(v >= 8) return ["What your plan is worth if it lands", "On your own forecast, executing this moves the repair side " + v + " points. Modest, but real."];
+        return ["Your plan has little leverage", "Even on your own forecast, executing it moves the repair side only " + v + " points. What is driving these odds is " + dominantFixed() + "."];
+      }
+      if(!o.open.length) return ["You are at the ceiling", "Everything that could land has landed. These odds are not waiting on anyone's next move."];
+      if(v >= 25) return ["The value of repair here", "Doing all of it would move the repair side " + v + " points. The open items are what is holding this question open."];
+      if(v >= 12) return ["The value of repair here", "Doing all of it would move the repair side " + v + " points. Worth attempting, though it would not settle the question."];
+      return ["Repair has little leverage here", "Even with everything landing, the repair side moves only " + v + " points. What is driving these odds is " + dominantFixed() + " - none of which repair touches."];
+    }
+    /* the downside branch */
+    if(m === "refused") return ["If the no holds",
+      "Holding at a final no moves the repair side " + (v > 0 ? "up " : "down ") + Math.abs(v) +
+      " points from where you are. That is the position you are actually in if nothing changes, and it is the one worth planning against - the other column only exists if the door reopens."];
+    if(m === "blocked") return ["If you can't replace it", "Unable to get it elsewhere, the repair side moves " + (v > 0 ? "+" : "") + v + " points - staying looks better only because leaving looks impossible. That is containment, not repair."];
+    if(m === "plan") return ["The cost of asking and being refused", "If you act and nothing comes back, the repair side ends " + Math.abs(v) + " points " + (v < 0 ? "below" : "above") + " where you are now. Acting and being refused is a worse position than never having asked - that is the risk your plan carries, and question 5 is where you priced it."];
+    return ["The downside", "The repair side moves " + (v > 0 ? "+" : "") + v + " points."];
+  }
+
+  function dominantFixed(){
+    var bits = [];
+    if(state.pattern === "pattern") bits.push("the pattern");
+    if(state.tax !== null && state.stay !== null && (stayEff(state) - state.tax) < 0) bits.push("the cost of carrying it");
+    if(state.alt === 2) bits.push("the alternative being ready");
+    if(state.alt === 0) bits.push("having nowhere to go");
+    if(state.sunk) bits.push("the sunk-cost bias");
+    if(counts().beh >= 2) bits.push("the behavioural signals");
+    if(saidFor(state).notpossible >= 2 || delivery(state).off >= 2) bits.push("the routes that no longer exist");
+    if(!bits.length) bits.push("the judgements in stage 4");
+    return bits.join(", ");
+  }
+
+  function renderWhatIf(probs){
+    var base = probs[0] + probs[1], scen = [];
+    function add(label, over){
+      var delta = Math.round((repairShare(cloneState(over)) - base) * 100);
+      if(delta !== 0) scen.push({label:label, delta:delta});
+    }
+    var dl = delivery(state), sd = saidFor(state), m = mode();
+    if(state.pattern !== "once")    add("The pattern turns out to be a first time", {pattern:"once"});
+    if(state.pattern !== "pattern") add("It turns out to have happened before", {pattern:"pattern"});
+    if(dl.broken && dl.ratio !== 1 && m !== "silent" && m !== "blocked") add("Everything asked for gets delivered", {promises:allPromises("given")});
+    if(dl.broken && dl.ratio !== 0 && m !== "silent" && m !== "blocked") add("None of it gets delivered after all", {promises:allPromises("asked")});
+    if(sd.willdo > 0)               add("You do it and they come through", {said:mapSaid(function(v){ return v === "willdo" ? "yes" : v; })});
+    if(sd.willdo > 0)               add("You do it and they refuse", {said:mapSaid(function(v){ return v === "willdo" ? "no" : v; })});
+    if(sd.no > 0 && state.finality !== "final") add("The no turns out to be final", {finality:"final"});
+    if(sd.no > 0 && state.finality !== "renegotiable") add("The no turns out to be renegotiable", {finality:"renegotiable"});
+    if(m === "blocked" && state.recover !== "elsewhere") add("You find it elsewhere", {recover:"elsewhere"});
+    if(m === "silent" && state.unprompted !== "yes") add("Something arrives unprompted", {unprompted:"yes"});
+    if(state.termState && state.termState !== "accepted") add("The expectations get accepted by both sides", {termState:"accepted"});
+    if(state.alt !== 2)             add("A concrete alternative becomes available", {alt:2});
+    if(state.alt !== 0)             add("The alternative falls through", {alt:0});
+    if(state.tax !== null && state.tax > 3) add("Carrying it stops costing so much", {tax:3});
+    if(state.stay !== null && state.stay < 10) add("Staying becomes worth more", {stay:10});
+    if(state.sunk)                  add("Judged on today, not on what was already given", {sunk:false});
+    if(counts().beh > 0)            add("The behavioural signals stop", {ticked:stripLane("beh")});
+    scen.sort(function(a,b){ return Math.abs(b.delta) - Math.abs(a.delta); });
+    var wl = $("whatif"); wl.innerHTML = "";
+    scen.slice(0,5).forEach(function(sc){
+      var li = el("li");
+      li.appendChild(el("span","delta " + (sc.delta > 0 ? "up" : "down"), (sc.delta > 0 ? "+" : "") + sc.delta + " pts"));
+      li.appendChild(el("span","",sc.label));
+      wl.appendChild(li);
+    });
+    var top = scen.length ? Math.abs(scen[0].delta) : 0;
+    if(!scen.length || top <= 3){
+      wl.appendChild(el("li","", scen.length
+        ? "No single change moves this much - the odds are held by several things at once. The branch columns above are what all of them together would be worth."
+        : "Every input is at its limit. There is nothing left to find out."));
+    }
+  }
+
+  function renderRecap(probs, leadIdx){
+    var c = counts(), dl = delivery(state), sd = saidFor(state), f = forecastOf(state), recap = $("recap"), m = mode();
+    recap.innerHTML = "";
+    var broken = Object.keys(state.promises).map(function(k){
+      var v = state.promises[k], lab = promiseLabel(state, k);
+      if(v === true) return lab + " (unrated)";
+      var word = "";
+      DELIV.forEach(function(dv){ if(dv[0] === v) word = dv[1].toLowerCase(); });
+      return lab + " (" + word + ")";
+    });
+    var rows = [
+      ["Mode", MODES[m].tag + (isRetry() ? " - after a refusal" : "")],
+      ["Signal intensity", $("gWord").textContent + " \u2014 " + c.pct + "%"],
+      ["Signals present", c.n ? c.names.join("; ") : "none recorded"],
+      ["What was said", sd.yes + " yes, " + sd.no + " no, " + sd.notpossible + " no route, " + sd.willdo + " intended, " + sd.unanswered + " unanswered"],
+      ["Promises broken", broken.length ? broken.join("; ") : "none recorded"]
+    ];
+    if(m === "silent") rows.push(["Arrived unprompted", state.unprompted ? labelFor("unprompted", state.unprompted) : "unanswered"]);
+    else if(m === "blocked") rows.push(["Recoverable elsewhere", state.recover ? labelFor("recover", state.recover) : "unanswered"]);
+    else rows.push(["Delivery", dl.rated ? Math.round(dl.ratio*100) + "% of what was asked" : "nothing rated"]);
+    if(m === "plan") rows.push(["Your forecast", f.n ? Math.round(f.ratio*100) + "% expected back" : "not set"]);
+    if(cfg().q3 === "finality") rows.push(["Is the no final", state.finality ? labelFor("finality", state.finality) : "unanswered"]);
+    else rows.push(["Expectations", state.termState ? labelFor("terms", state.termState) : "unanswered"]);
+    if(MODEQ[m]) rows.push([MODEQ[m].q.replace(/^5\. /,""), state.modeQ ? (MODEQ_W[state.modeQ] ? MODEQ_W[state.modeQ][0] : state.modeQ) : "unanswered"]);
+    rows = rows.concat([
+      ["What you'd lose", state.stay === null ? "unanswered" : labelFor("stay", state.stay) + " (" + state.stay + "/10)"],
+      ["Cost of carrying it", state.tax === null ? "unanswered" : labelFor("tax", state.tax) + " (" + state.tax + "/10)"],
+      ["Sunk-cost bias", state.sunk ? "flagged \u2014 staying value discounted 30%" : "not flagged"],
+      ["Alternative", state.alt === null ? "unanswered" : labelFor("alt", state.alt)],
+      ["Pattern test", state.pattern ? labelFor("pattern", state.pattern) : "unanswered"],
+      ["Leading outcome", OUTCOMES[leadIdx].name + " at " + Math.round(probs[leadIdx]*100) + "%"]
+    ]);
+    rows.forEach(function(r){
+      var li = el("li");
+      li.appendChild(el("b","",r[0]));
+      li.appendChild(el("span","",r[1]));
+      recap.appendChild(li);
+    });
+  }
+
+  function paintMap(probs, leadIdx){
+    for(var i=1;i<=5;i++){
+      var n = $("n" + i);
+      n.classList.remove("active","done");
+      if(i < state.reached) n.classList.add("done");
+      if(i === state.reached) n.classList.add("active");
+      if(i < 5) $("l" + i).classList.toggle("on", i < state.reached);
+    }
+    var fills = ["#3F6B45","#3F6B45","#A32B1C","#A32B1C"];
+    for(var k=0;k<4;k++){
+      var g = $("o" + k), rect = g.querySelector("rect");
+      var p = probs ? probs[k] : 0;
+      g.classList.toggle("lead", state.reached >= 5 && k === leadIdx);
+      rect.setAttribute("fill", fills[k]);
+      rect.setAttribute("fill-opacity", state.reached >= 5 ? String(0.08 + 0.62 * p) : "0");
+      $("op" + k).textContent = state.reached >= 5 ? Math.round(p * 100) + "%" : "\u2013";
+    }
+  }
+
+  /* ===================== arithmetic ===================== */
+  function renderFormula(m){
+    m = m || model(state);
+    var names = ["Repair","Time-boxed","Contain","Exit"];
+    var bs = branches();
+    var html = '<h4>The shape of it</h4><div class="mono">' +
+      '<p>score[j] = base[j] + &Sigma; driver[i][j]&nbsp;&nbsp;for j in {repair, time-boxed, contain, exit}</p>' +
+      '<p>p[j] = softmax(score[j] &times; ' + TEMP + ')&nbsp;&nbsp;&larr; temperature keeps the spread honest</p>' +
+      '<p>shown[j] = (1 &minus; &alpha;) p[j] + &alpha; &times; 0.25,&nbsp;&nbsp;&alpha; = (100 &minus; evidence) / 100 &times; ' + FLATTEN + '</p>' +
+      '<p>base = [' + BASE.join(", ") + '] &nbsp;&larr; slight prior toward time-boxing</p>' +
+      '<p>branch columns = the same model re-run on a modified answer set; nothing about the weights changes</p>' +
+      '</div><h4>Your drivers, right now</h4>' +
+      '<table class="ftable"><thead><tr><th>Driver (from your evidence)</th>' +
+      names.map(function(n){ return "<th>" + n + "</th>"; }).join("") + '</tr></thead><tbody>';
+    html += '<tr><td>base prior</td>' + BASE.map(function(v){
+      return '<td class="' + (v > 0 ? "pos" : "") + '">' + fmt(v) + '</td>'; }).join("") + '</tr>';
+    m.drivers.forEach(function(row){
+      html += '<tr><td>' + row[0].replace(/</g,"&lt;") + '</td>' + row[1].map(function(v){
+        return '<td class="' + (v > 0.001 ? "pos" : v < -0.001 ? "neg" : "") + '">' + fmt(v) + '</td>'; }).join("") + '</tr>';
+    });
+    html += '<tr class="sumrow"><td>score</td>' + m.raw.map(function(v){ return '<td>' + fmt(v) + '</td>'; }).join("") + '</tr>';
+    html += '<tr><td>softmax at T = ' + TEMP + '</td>' + m.soft.map(function(v){ return '<td>' + Math.round(v*100) + '%</td>'; }).join("") + '</tr>';
+    html += '<tr><td>flattened, &alpha; = ' + m.alpha.toFixed(2) + ' (evidence ' + m.conf + '%)</td>' +
+      m.probs.map(function(v){ return '<td><b>' + Math.round(v*100) + '%</b></td>'; }).join("") + '</tr>';
+    bs.forEach(function(br,i){
+      if(i === 0) return;
+      var p = model(br.st).probs;
+      html += '<tr><td>branch: ' + br.label.toLowerCase() + '</td>' + p.map(function(v){ return '<td>' + Math.round(v*100) + '%</td>'; }).join("") + '</tr>';
+    });
+    html += '</tbody></table>';
+
+    var dl = delivery(state), sd = saidFor(state), f = forecastOf(state), eff = stayEff(state);
+    html += '<h4>Where the inputs came from</h4><div class="mono">' +
+      '<p>mode = ' + mode() + '&nbsp;&nbsp;&larr; set by stage 2; it selects which questions stages 3 to 5 ask and which branches are compared</p>' +
+      '<p>signal intensity = &Sigma; weight(recorded) / ' + MAXW.toFixed(1) + ' = ' + counts().pct + '%&nbsp;&nbsp;(behavioural 1.4&ndash;2.0, cognitive 1.2&ndash;1.6, emotional 1.0&ndash;1.2)</p>' +
+      '<p>said = ' + sd.yes + ' yes / ' + sd.no + ' no / ' + sd.notpossible + ' no route / ' + sd.willdo + ' intended' +
+      '&nbsp;&nbsp;&rarr; yes and no carry opposite weights; no route carries about 45% of a no; intentions carry nothing</p>' +
+      '<p>delivery ratio = mean(asked 0, partly 0.5, fully 1) over ' + dl.rated + ' rated = ' + (dl.ratio === null ? "n/a" : dl.ratio.toFixed(2)) + '&nbsp;&nbsp;&rarr; signed as 2r &minus; 1</p>' +
+      '<p>forecast = ' + (f.n ? f.ratio.toFixed(2) + " over " + f.n + " promises" : "not set") + '&nbsp;&nbsp;&rarr; weight 0 in the current odds; builds the "if they deliver" branch only</p>' +
+      '<p>net worth = staying' + (state.sunk ? " &times; 0.7 (sunk-cost discount)" : "") + ' &minus; cost = ' +
+      (eff === null || state.tax === null ? "n/a" : eff.toFixed(1) + " &minus; " + state.tax + " = " + (eff - state.tax).toFixed(1)) + '&nbsp;&nbsp;&rarr; n = net / 10</p>' +
+      '<p>evidence = pattern 20 + alternative 14 + balance 16 + signals 12 + breach named 8 + delivery or its mode substitute up to 14 + question 3 8 + said up to 8 + question 5 8</p>' +
+      '</div><h4>Health warning</h4><div class="mono"><p>These weights are judgements, not measurements. ' +
+      'They encode five claims worth arguing with: that delivery outweighs stated intention; that a pattern outweighs a single failure; ' +
+      'that exit is not a real option without an alternative; that neither an unanswered question nor a stated intention should count for anything; ' +
+      'and that acting and being refused leaves you worse off than never having asked.</p></div>';
+    $("fbox").innerHTML = html;
+  }
+
+  $("fToggle").addEventListener("click", function(){
+    var box = $("fbox"), open = !box.hidden;
+    box.hidden = open;
+    this.setAttribute("aria-expanded", open ? "false" : "true");
+    this.textContent = open ? "Show the formula" : "Hide the formula";
+    if(!open) renderFormula();
+  });
+
+  /* ===================== review date ===================== */
+  var rv = $("review");
+  rv.value = new Date(Date.now() + 90*864e5).toISOString().slice(0,10);
+  function renderReview(){
+    if(!rv.value){ $("reviewRead").textContent = ""; return; }
+    var days = Math.round((new Date(rv.value + "T12:00:00") - Date.now()) / 864e5);
+    $("reviewRead").textContent = days >= 0
+      ? "Re-run this in " + days + " day" + (days === 1 ? "" : "s") + ". Decide today what visible change would count by then."
+      : "That date has passed. If nothing visible changed, the question has already answered itself.";
+  }
+  rv.addEventListener("change", renderReview);
+
+  /* ===================== flow ===================== */
+  Array.prototype.forEach.call(document.querySelectorAll(".continue"), function(btn){
+    btn.addEventListener("click", function(){
+      var next = $(btn.dataset.next);
+      next.classList.remove("locked");
+      state.reached = Math.max(state.reached, Number(btn.dataset.next.slice(1)));
+      renderBoard();
+      next.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block:"start"
+      });
+    });
+  });
+  $("restart").addEventListener("click", function(){ location.reload(); });
+
+  /* ===================== init ===================== */
+  renderGauge(); renderSaid(); renderStage3(); renderModeQ(); renderWording();
+  renderScale(); renderReview(); renderBoard();
+})();
+
+</script>
+</body>
+</html>
